@@ -1,0 +1,19 @@
+{
+  "servers": {
+    "saiten-mcp": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${workspaceFolder}/src/saiten_mcp",
+        "python",
+        "-m",
+        "saiten_mcp.server"
+      ],
+      "env": {
+        "GITHUB_TOKEN": ""
+      }
+    }
+  }
+}

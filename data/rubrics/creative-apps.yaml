@@ -1,0 +1,49 @@
+track: creative-apps
+track_display_name: "🎨 Creative Apps"
+notes: "Community Vote (10%) は自動採点対象外。残り 90% を按分して 100% とする。"
+
+criteria:
+  - name: "Accuracy & Relevance"
+    weight: 0.222
+    description: "提出物が課題要件を正確に満たしているか。GitHub Copilot の活用度。"
+    scoring_guide:
+      "1-3": "要件の半分以上を満たしていない。Copilot 活用が不明確。"
+      "4-6": "基本要件は満たすが、一部不足。Copilot 活用は限定的。"
+      "7-9": "全要件を満たし、Copilot を効果的に活用。MCP 統合あり。"
+      "10":  "要件を超越。Copilot の革新的活用。複数 MCP 統合。"
+
+  - name: "Reasoning & Multi-step Thinking"
+    weight: 0.222
+    description: "エージェントの推論能力。段階的思考の実装。"
+    scoring_guide:
+      "1-3": "単純な入出力のみ。推論ステップなし。"
+      "4-6": "基本的な条件分岐あり。限定的な多段推論。"
+      "7-9": "明確な推論チェーン。エラーハンドリングを含む多段処理。"
+      "10":  "自己改善ループ。ReAct/CoT 等の高度な推論パターン実装。"
+
+  - name: "Creativity & Originality"
+    weight: 0.167
+    description: "アイデアの独創性。既存ツールにない価値提案。"
+    scoring_guide:
+      "1-3": "既存ツールの単純なラッパー。独自性なし。"
+      "4-6": "一部独自のアプローチ。既知の問題の新しい解法。"
+      "7-9": "ユニークなコンセプト。明確な差別化要素。"
+      "10":  "革新的。新しいカテゴリを創出するレベル。"
+
+  - name: "UX & Presentation"
+    weight: 0.167
+    description: "ユーザー体験の質。デモ・ドキュメントの充実度。"
+    scoring_guide:
+      "1-3": "デモなし。README が不十分。使い方が不明。"
+      "4-6": "スクリーンショットあり。基本的な README。"
+      "7-9": "動画デモあり。詳細な README。セットアップ手順が明確。"
+      "10":  "プロダクション品質の UX。洗練されたデモ。包括的ドキュメント。"
+
+  - name: "Reliability & Safety"
+    weight: 0.222
+    description: "エラーハンドリング。セキュリティ考慮。堅牢性。"
+    scoring_guide:
+      "1-3": "エラーハンドリングなし。API キーがハードコード。"
+      "4-6": "基本的なエラー処理。.env 使用だが不完全。"
+      "7-9": "包括的エラーハンドリング。セキュリティベストプラクティス準拠。"
+      "10":  "プロダクション品質。Rate limiting、リトライ、入力検証完備。"

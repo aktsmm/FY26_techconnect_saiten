@@ -1,0 +1,49 @@
+track: reasoning-agents
+track_display_name: "🧠 Reasoning Agents"
+notes: "全体共通基準をそのまま採用。"
+
+criteria:
+  - name: "Accuracy & Relevance"
+    weight: 0.25
+    description: "提出物がシナリオ要件を正確に満たしているか。Foundry の活用度。コミュニケーションチーム支援としての適合性。"
+    scoring_guide:
+      "1-3": "シナリオ要件を大幅に逸脱。Foundry の活用が最小限。"
+      "4-6": "基本的なシナリオ対応。Foundry を使用しているが活用度は限定的。"
+      "7-9": "シナリオに適切に対応。Foundry のモデル・ツールを効果的に活用。"
+      "10":  "シナリオを超越した価値提供。Foundry の高度な機能を最大限活用。"
+
+  - name: "Reasoning & Multi-step Thinking"
+    weight: 0.25
+    description: "推論能力の質。Chain-of-Thought、ReAct、Self-Reflection 等の推論パターンの実装。"
+    scoring_guide:
+      "1-3": "単一ステップの処理のみ。推論パターン未実装。"
+      "4-6": "基本的な Chain-of-Thought。限定的な多段推論。"
+      "7-9": "複数の推論パターンを組み合わせ。自己修正メカニズムあり。"
+      "10":  "高度な推論パターン完全実装。マルチエージェント構成。評価メトリクス設定済み。"
+
+  - name: "Creativity & Originality"
+    weight: 0.20
+    description: "アイデアの独創性。ソーシャルメディアコンテンツ生成における革新的アプローチ。"
+    scoring_guide:
+      "1-3": "テンプレートベースの単純生成。独自性なし。"
+      "4-6": "一部創造的なアプローチ。カスタマイズされたプロンプト設計。"
+      "7-9": "ユニークなコンテンツ戦略。ブランド特化の高度な生成。"
+      "10":  "革新的なコンテンツ生成パイプライン。業界をリードするアプローチ。"
+
+  - name: "User Experience & Presentation"
+    weight: 0.15
+    description: "ユーザー体験。デモの質。ドキュメントの充実度。"
+    scoring_guide:
+      "1-3": "デモなし。ドキュメント不足。"
+      "4-6": "スクリーンショットあり。基本的な README。"
+      "7-9": "対話的なデモ。詳細なセットアップ手順。サンプル入出力あり。"
+      "10":  "プロダクション品質。包括的ドキュメント。動画デモ。"
+
+  - name: "Technical Implementation"
+    weight: 0.15
+    description: "技術的な完成度。コード品質。エラーハンドリング。グラウンディング。"
+    scoring_guide:
+      "1-3": "最小限の実装。エラーハンドリングなし。"
+      "4-6": "基本的な構成。一部のエラー処理。"
+      "7-9": "堅牢な実装。外部ツール連携。適切なエラーハンドリング。"
+      "10":  "プロダクション品質。モニタリング・安全対策完備。グラウンディング知識統合。"

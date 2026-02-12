@@ -1,0 +1,17 @@
+[project]
+name = "saiten-mcp"
+version = "1.0.0"
+description = "MCP Server for Agents League @ TechConnect scoring"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+saiten-mcp = "saiten_mcp.server:main"

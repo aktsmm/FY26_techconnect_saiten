@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+
+# IDE
+.vscode/*
+!.vscode/mcp.json
+
+# Data (scores are generated, not tracked)
+# data/scores.json  # Uncomment to exclude scores from git
+
+# OS
+.DS_Store
+Thumbs.db

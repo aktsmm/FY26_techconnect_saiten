@@ -1,0 +1,31 @@
+track: enterprise-agents
+track_display_name: "💼 Enterprise Agents"
+notes: "Track 3 独自の評価基準。Technical Implementation, Business Value, Innovation の 3 軸。"
+
+criteria:
+  - name: "Technical Implementation"
+    weight: 0.33
+    description: "M365 Copilot Chat Agent としての実装品質。MCP Server (Read/Write)、OAuth、Adaptive Cards、Connected Agents の活用度。"
+    scoring_guide:
+      "1-3": "M365 Copilot Chat Agent として動作しない、または最小限。MCP 未統合。"
+      "4-6": "M365 Copilot Chat Agent が動作。MCP Server (Read) を統合。基本的な実装。"
+      "7-9": "MCP Server (Read/Write) 統合。OAuth または Adaptive Cards を活用。堅牢な実装。"
+      "10":  "Connected Agents 構成。MCP + OAuth + Adaptive Cards を完全統合。プロダクション品質。"
+
+  - name: "Business Value"
+    weight: 0.33
+    description: "エンタープライズシナリオにおけるビジネス価値。実用性。ROI の明確さ。"
+    scoring_guide:
+      "1-3": "ビジネスシナリオが不明確。実用性が低い。"
+      "4-6": "明確なビジネスシナリオ。基本的な業務改善効果。"
+      "7-9": "高い実用性。定量的な ROI 提示。複数の業務プロセスを改善。"
+      "10":  "変革的なビジネス価値。業界横展開可能。明確な KPI 改善。"
+
+  - name: "Innovation & Creativity"
+    weight: 0.34
+    description: "技術的な革新性。創造的なアプローチ。M365 エコシステムの活用。"
+    scoring_guide:
+      "1-3": "既存のテンプレートをそのまま使用。独自性なし。"
+      "4-6": "一部カスタマイズ。M365 の基本機能を活用。"
+      "7-9": "革新的なアプローチ。M365 エコシステムの深い統合。差別化された UX。"
+      "10":  "業界をリードする革新性。新しい M365 活用パターンの提案。"
