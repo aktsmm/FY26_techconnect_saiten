@@ -25,10 +25,10 @@ GitHub Issue から Agents League @ TechConnect の提出物データを収集�
 
 ## Available Tools
 
-| Tool | Purpose |
-|------|---------|
-| `list_submissions(track?, state?)` | Fetch submission list from GitHub Issues |
-| `get_submission_detail(issue_number)` | Fetch individual submission details |
+| Tool                                  | Purpose                                  |
+| ------------------------------------- | ---------------------------------------- |
+| `list_submissions(track?, state?)`    | Fetch submission list from GitHub Issues |
+| `get_submission_detail(issue_number)` | Fetch individual submission details      |
 
 ---
 
@@ -75,14 +75,14 @@ GitHub Issue から Agents League @ TechConnect の提出物データを収集�
 
 ## Data Validation Rules (Gate)
 
-| Field | Required | Validation |
-|-------|----------|-----------|
-| project_name | Yes | Non-empty, not "_No response_" |
-| track | Yes | Must be a valid track ID |
-| description | Yes | Non-empty |
-| repo_url | Recommended | Valid GitHub URL |
-| has_demo | Recommended | True preferred |
-| technologies | Recommended | Non-empty list |
+| Field        | Required    | Validation                     |
+| ------------ | ----------- | ------------------------------ |
+| project_name | Yes         | Non-empty, not "_No response_" |
+| track        | Yes         | Must be a valid track ID       |
+| description  | Yes         | Non-empty                      |
+| repo_url     | Recommended | Valid GitHub URL               |
+| has_demo     | Recommended | True preferred                 |
+| technologies | Recommended | Non-empty list                 |
 
 ---
 

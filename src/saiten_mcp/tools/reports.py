@@ -80,14 +80,21 @@ def _build_ranking_md(
     top_entries = scores[:top_n]
     lines.append(f"## 🥇 Top {top_n}")
     lines.append("")
-    lines.append("| 順位 | Project | Track | 総合スコア |")
-    lines.append("|------|---------|-------|------------|")
+    lines.append("| 順位 | Project | Track | Submitter | 総合スコア |")
+    lines.append("|------|---------|-------|-----------|------------|")
     for rank, entry in enumerate(top_entries, start=1):
         name = entry.get("project_name", "N/A")
         track = entry.get("track", "")
         emoji = TRACK_EMOJI.get(track, "")
         score = _fmt_score(entry.get("weighted_total", 0))
-        lines.append(f"| {rank} | {name} | {emoji} | {score} |")
+        gh_user = entry.get("github_username") or ""
+        issue_num = entry.get("issue_number", "")
+        issue_url = entry.get("issue_url") or ""
+        # Link project name to Issue
+        name_linked = f"[{name}]({issue_url})" if issue_url else name
+        # Link GitHub username
+        user_linked = f"[@{gh_user}](https://github.com/{gh_user})" if gh_user else "—"
+        lines.append(f"| {rank} | {name_linked} | {emoji} | {user_linked} | {score} |")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -101,14 +108,18 @@ def _build_ranking_md(
         display = TRACK_DISPLAY.get(track_key, track_key)
         lines.append(f"### {emoji} {display}")
         lines.append("")
-        lines.append("| 順位 | Project | 総合スコア |")
-        lines.append("|------|---------|------------|")
+        lines.append("| 順位 | Project | Submitter | 総合スコア |")
+        lines.append("|------|---------|-----------|------------|")
 
         track_scores = [s for s in scores if s.get("track") == track_key]
         for rank, entry in enumerate(track_scores[:3], start=1):
             name = entry.get("project_name", "N/A")
             score = _fmt_score(entry.get("weighted_total", 0))
-            lines.append(f"| {rank} | {name} | {score} |")
+            issue_url = entry.get("issue_url") or ""
+            gh_user = entry.get("github_username") or ""
+            name_linked = f"[{name}]({issue_url})" if issue_url else name
+            user_linked = f"[@{gh_user}](https://github.com/{gh_user})" if gh_user else "—"
+            lines.append(f"| {rank} | {name_linked} | {user_linked} | {score} |")
 
         lines.append("")
 
@@ -118,8 +129,8 @@ def _build_ranking_md(
     # --- 全提出物スコア一覧 ---
     lines.append("## 📊 全提出物スコア一覧")
     lines.append("")
-    lines.append("| # | Issue | Project | Track | Score | 評価日 |")
-    lines.append("|---|-------|---------|-------|-------|--------|")
+    lines.append("| # | Issue | Project | Track | Submitter | Score | 評価日 |")
+    lines.append("|---|-------|---------|-------|-----------|-------|--------|")
 
     for idx, entry in enumerate(scores, start=1):
         issue = entry.get("issue_number", "")
@@ -127,15 +138,18 @@ def _build_ranking_md(
         track = entry.get("track", "")
         emoji = TRACK_EMOJI.get(track, "")
         score = _fmt_score(entry.get("weighted_total", 0))
+        issue_url = entry.get("issue_url") or ""
+        gh_user = entry.get("github_username") or ""
+        name_linked = f"[{name}]({issue_url})" if issue_url else name
+        user_linked = f"[@{gh_user}](https://github.com/{gh_user})" if gh_user else "—"
         scored_at = entry.get("scored_at", "")
         if scored_at:
-            # ISO 形式をシンプルな日付に変換
             try:
                 dt = datetime.fromisoformat(scored_at)
                 scored_at = dt.strftime("%Y-%m-%d")
             except (ValueError, TypeError):
                 pass
-        lines.append(f"| {idx} | #{issue} | {name} | {emoji} | {score} | {scored_at} |")
+        lines.append(f"| {idx} | [#{issue}]({issue_url}) | {name_linked} | {emoji} | {user_linked} | {score} | {scored_at} |")
 
     lines.append("")
     lines.append("---")

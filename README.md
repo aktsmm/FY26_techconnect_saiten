@@ -25,11 +25,13 @@ flowchart TD
     User["👤 User\n@saiten 採点して"]
     
     subgraph Orchestrator["🏆 @saiten (Orchestrator)"]
-        Route["Intent Routing\nUC-01~05 分岐"]
+        Route["Intent Routing\nUC-01~06 分岐"]
         Gate1{"Gate: MCP\n接続確認"}
         Gate2{"Gate: データ\n完全性チェック"}
         Gate3{"Gate: スコア\n妥当性チェック"}
+        Gate4{"Gate: レビュー\nPASS/FLAG?"}
         Integrate["Result Integration\n& User Report"]
+        Handoff["[Handoff]\n💬 Post Feedback"]
     end
 
     subgraph Collector["📥 @saiten-collector"]
@@ -45,10 +47,23 @@ flowchart TD
         S4["save_scores()"]
     end
 
+    subgraph Reviewer["🔍 @saiten-reviewer"]
+        V1["Load scores.json"]
+        V2["Statistical Outlier\nDetection (2σ)"]
+        V3["Rubric Consistency\nCheck"]
+        V4["Bias Detection"]
+    end
+
     subgraph Reporter["📋 @saiten-reporter"]
         R1["generate_ranking_report()"]
         R2["Trend Analysis"]
         R3["Report Validation"]
+    end
+
+    subgraph Commenter["💬 @saiten-commenter"]
+        CM1["Generate Comment\nper Top N"]
+        CM2["User Confirmation\n(Human-in-the-Loop)"]
+        CM3["gh issue comment"]
     end
 
     subgraph MCP["⚡ saiten-mcp (FastMCP Server)"]
@@ -78,21 +93,32 @@ flowchart TD
     S3 -->|PASS| S4
     S3 -->|"FAIL: Re-evaluate"| S2
     S4 --> Gate3
-    Gate3 -->|OK| Reporter
-    
+    Gate3 -->|OK| Reviewer
+
+    V1 --> V2 --> V3 --> V4
+    V4 --> Gate4
+    Gate4 -->|PASS| Reporter
+    Gate4 -->|"FLAG: Re-score"| Scorer
+
     R1 --> R2 --> R3
     R3 --> Integrate --> User
+    Integrate --> Handoff
+    Handoff -->|"User clicks"| Commenter
+    CM1 --> CM2 --> CM3
 
     Collector -.->|MCP| T1 & T2
     Scorer -.->|MCP| T3 & T4
     Reporter -.->|MCP| T5
     T1 & T2 -.-> GH
     T4 & T5 -.-> FS
+    CM3 -.-> GH
 
     style Orchestrator fill:#1a1a2e,stroke:#e94560,color:#fff
     style Collector fill:#16213e,stroke:#0f3460,color:#fff
     style Scorer fill:#16213e,stroke:#0f3460,color:#fff
+    style Reviewer fill:#1a1a2e,stroke:#e94560,color:#fff
     style Reporter fill:#16213e,stroke:#0f3460,color:#fff
+    style Commenter fill:#0f3460,stroke:#533483,color:#fff
     style MCP fill:#0f3460,stroke:#533483,color:#fff
 ```
 
@@ -103,16 +129,19 @@ flowchart TD
 | 🏆 `@saiten` | **Orchestrator** | Intent routing, delegation, result integration | — (delegates all) |
 | 📥 `@saiten-collector` | **Worker** | GitHub Issue data collection & validation | `list_submissions`, `get_submission_detail` |
 | 📊 `@saiten-scorer` | **Worker** | Rubric-based evaluation with quality gate | `get_scoring_rubric`, `save_scores` |
+| 🔍 `@saiten-reviewer` | **Evaluator** | Score consistency review & bias detection | `get_scoring_rubric`, read scores |
 | 📋 `@saiten-reporter` | **Worker** | Ranking report generation & trend analysis | `generate_ranking_report` |
+| 💬 `@saiten-commenter` | **Handoff** | GitHub Issue feedback comments (user-confirmed) | `gh issue comment` |
 
 ### 設計原則の適用
 
 | Principle | How Applied |
 |-----------|-------------|
-| **SRP** | 各エージェントが 1 つの責務のみ担当 |
+| **SRP** | 各エージェントが 1 つの責務のみ担当（6 エージェント × 1 責務） |
 | **Fail Fast** | 各ステップに Gate を設置、異常時は即座に報告 |
 | **SSOT** | スコアデータは `data/scores.json` に一元管理 |
-| **Feedback Loop** | Scorer が自己品質チェック → 不合格なら再評価 |
+| **Feedback Loop** | Scorer → Reviewer → Re-score ループ（Evaluator-Optimizer パターン） |
+| **Human-in-the-Loop** | Commenter は Handoff で明示的なユーザー承認後に実行 |
 | **Transparency** | Todo リストで進捗表示、各 Gate で状況報告 |
 | **Idempotency** | 再採点は上書き方式、何度実行しても安全 |
 | **ISP** | 各サブエージェントに必要なツール・データのみ渡す |
@@ -122,25 +151,27 @@ flowchart TD
 ## システムアーキテクチャ
 
 ```
-┌─────────────────────────────────────────────────────┐
-│  VS Code                                             │
-│                                                      │
-│  ┌────────────────────────────────────────────────┐  │
-│  │ 🏆 @saiten (Orchestrator Agent)                │  │
-│  │    ├── 📥 @saiten-collector (Sub-Agent)        │  │
-│  │    ├── 📊 @saiten-scorer   (Sub-Agent)         │  │
-│  │    └── 📋 @saiten-reporter (Sub-Agent)         │  │
-│  └──────────────┬─────────────────────────────────┘  │
-│                 │ MCP (stdio)                         │
-│  ┌──────────────▼─────────────────────────────────┐  │
-│  │ ⚡ saiten-mcp (FastMCP Server / Python)         │  │
-│  │  ├ list_submissions()     ← gh CLI → GitHub    │  │
-│  │  ├ get_submission_detail() ← gh CLI → GitHub   │  │
-│  │  ├ get_scoring_rubric()   ← YAML files         │  │
-│  │  ├ save_scores()          → data/scores.json   │  │
-│  │  └ generate_ranking_report() → reports/*.md    │  │
-│  └────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────┐
+│  VS Code                                                 │
+│                                                          │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │ 🏆 @saiten (Orchestrator Agent)                    │  │
+│  │    ├── 📥 @saiten-collector (Worker)               │  │
+│  │    ├── 📊 @saiten-scorer   (Worker)                │  │
+│  │    ├── 🔍 @saiten-reviewer (Evaluator)             │  │
+│  │    ├── 📋 @saiten-reporter (Worker)                │  │
+│  │    └── 💬 @saiten-commenter (Handoff)              │  │
+│  └──────────────┬─────────────────────────────────────┘  │
+│                 │ MCP (stdio)                             │
+│  ┌──────────────▼─────────────────────────────────────┐  │
+│  │ ⚡ saiten-mcp (FastMCP Server / Python)             │  │
+│  │  ├ list_submissions()     ← gh CLI → GitHub        │  │
+│  │  ├ get_submission_detail() ← gh CLI → GitHub       │  │
+│  │  ├ get_scoring_rubric()   ← YAML files             │  │
+│  │  ├ save_scores()          → data/scores.json       │  │
+│  │  └ generate_ranking_report() → reports/*.md        │  │
+│  └────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ---
@@ -200,7 +231,9 @@ FY26_techconnect_saiten/
 │   ├── saiten.agent.md               # 🏆 Orchestrator
 │   ├── saiten-collector.agent.md     # 📥 Data Collection Worker
 │   ├── saiten-scorer.agent.md        # 📊 Scoring Worker
-│   └── saiten-reporter.agent.md      # 📋 Report Worker
+│   ├── saiten-reviewer.agent.md      # 🔍 Score Reviewer (Evaluator)
+│   ├── saiten-reporter.agent.md      # 📋 Report Worker
+│   └── saiten-commenter.agent.md     # 💬 Feedback Commenter (Handoff)
 ├── src/saiten_mcp/
 │   ├── server.py                     # MCP Server entrypoint
 │   ├── models.py                     # Pydantic data models

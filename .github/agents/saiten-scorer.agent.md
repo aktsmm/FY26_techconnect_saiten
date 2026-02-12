@@ -26,10 +26,10 @@ tools:
 
 ## Available Tools
 
-| Tool | Purpose |
-|------|---------|
-| `get_scoring_rubric(track)` | Fetch track-specific scoring rubric |
-| `save_scores(scores)` | Save scored results to data/scores.json |
+| Tool                        | Purpose                                 |
+| --------------------------- | --------------------------------------- |
+| `get_scoring_rubric(track)` | Fetch track-specific scoring rubric     |
+| `save_scores(scores)`       | Save scored results to data/scores.json |
 
 ---
 

@@ -358,8 +358,9 @@ async def list_submissions(
 async def get_submission_detail(issue_number: int) -> dict:
     """指定 Issue 番号の提出物詳細を取得する。
 
-    Issue テンプレートの各セクションをパースし、PII (Microsoft Alias,
-    GitHub Username) を除外した採点用データを返す。
+    Issue テンプレートの各セクションをパースし、採点用データを返す。
+    GitHub Username は採点バイアス排除のため採点時は非表示にするが、
+    レポート出力用に github_username フィールドとして保持する。
     repo_url が GitHub リポジトリの場合、README も取得する。
 
     Args:
@@ -401,6 +402,13 @@ async def get_submission_detail(issue_number: int) -> dict:
     team_members_raw = parse_text(sections.get("Team Members (if any)", ""))
     team_members = team_members_raw if team_members_raw and team_members_raw != "_No response_" else None
 
+    # GitHub Username (for report display, NOT for scoring bias)
+    github_username_raw = parse_text(sections.get("GitHub Username", ""))
+    github_username = github_username_raw if github_username_raw and github_username_raw != "_No response_" else None
+
+    # Issue URL for linking
+    issue_url = f"https://github.com/{REPO}/issues/{issue_number}"
+
     # README 取得
     readme_content = await _fetch_readme(repo_url)
 
@@ -411,6 +419,8 @@ async def get_submission_detail(issue_number: int) -> dict:
         "project_name": project_name,
         "description": description,
         "repo_url": repo_url,
+        "issue_url": issue_url,
+        "github_username": github_username,
         "readme_content": readme_content,
         "technologies": technologies,
         "technical_highlights": technical_highlights,

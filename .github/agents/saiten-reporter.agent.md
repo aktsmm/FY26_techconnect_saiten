@@ -4,7 +4,6 @@ description: "採点結果からランキングレポートを生成・出力す
 tools:
   - "saiten-mcp"
   - "read/readFile"
-  - "edit/editFiles"
   - "todo"
 ---
 
@@ -27,10 +26,10 @@ tools:
 
 ## Available Tools
 
-| Tool | Purpose |
-|------|---------|
-| `generate_ranking_report(top_n?)` | Generate ranking Markdown report |
-| `read/readFile` | Read generated report for presentation |
+| Tool                              | Purpose                                |
+| --------------------------------- | -------------------------------------- |
+| `generate_ranking_report(top_n?)` | Generate ranking Markdown report       |
+| `read/readFile`                   | Read generated report for presentation |
 
 ---
 
@@ -69,12 +68,12 @@ tools:
 
 ## Report Sections
 
-| Section | Content |
-|---------|---------|
-| 🥇 Top N | Overall ranking table |
-| 🏅 Track Top 3 | Best per track |
-| 📊 Full List | All submissions sorted |
-| 📋 Summaries | Individual evaluation details |
+| Section        | Content                       |
+| -------------- | ----------------------------- |
+| 🥇 Top N       | Overall ranking table         |
+| 🏅 Track Top 3 | Best per track                |
+| 📊 Full List   | All submissions sorted        |
+| 📋 Summaries   | Individual evaluation details |
 
 ---
 
