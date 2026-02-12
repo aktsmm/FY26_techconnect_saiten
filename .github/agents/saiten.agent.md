@@ -25,13 +25,13 @@ tools:
 
 ## 利用可能なツール (MCP: saiten-mcp)
 
-| ツール | 用途 |
-|--------|------|
-| `list_submissions(track?, state?)` | 提出物一覧を取得 |
-| `get_submission_detail(issue_number)` | 個別提出物の詳細を取得 |
-| `get_scoring_rubric(track)` | トラック別採点基準を取得 |
-| `save_scores(scores)` | 採点結果を保存 |
-| `generate_ranking_report(top_n?)` | ランキングレポートを生成 |
+| ツール                                | 用途                     |
+| ------------------------------------- | ------------------------ |
+| `list_submissions(track?, state?)`    | 提出物一覧を取得         |
+| `get_submission_detail(issue_number)` | 個別提出物の詳細を取得   |
+| `get_scoring_rubric(track)`           | トラック別採点基準を取得 |
+| `save_scores(scores)`                 | 採点結果を保存           |
+| `generate_ranking_report(top_n?)`     | ランキングレポートを生成 |
 
 ---
 

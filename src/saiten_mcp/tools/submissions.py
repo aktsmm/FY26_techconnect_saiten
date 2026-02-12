@@ -168,10 +168,11 @@ def parse_demo(value: str) -> tuple[bool, str]:
 # ---------------------------------------------------------------------------
 # トラック判定
 # ---------------------------------------------------------------------------
-def _detect_track_from_labels(labels: list[dict[str, Any]]) -> str | None:
+def _detect_track_from_labels(labels: list) -> str | None:
     """ラベル一覧からトラック ID を返す。見つからなければ None."""
     for label in labels:
-        name = label.get("name", "")
+        # jq フィルタ済みの場合は文字列、未加工の場合は dict
+        name = label if isinstance(label, str) else label.get("name", "")
         if name in TRACK_LABEL_MAP:
             return TRACK_LABEL_MAP[name]
     return None
@@ -288,6 +289,7 @@ async def list_submissions(
 
     args = [
         "api", f"repos/{REPO}/issues",
+        "--method", "GET",
         "--paginate",
         "-q", jq_filter,
     ]
@@ -299,7 +301,7 @@ async def list_submissions(
         args.extend(["-f", "state=all"])
 
     # per_page を最大に
-    args.extend(["-f", "per_page=100"])
+    args.extend(["-F", "per_page=100"])
 
     raw = await _run_gh(*args)
 
