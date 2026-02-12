@@ -4,35 +4,146 @@
 
 ## 概要
 
-VS Code 上で `@saiten 採点して` と入力するだけで、Agents League @ TechConnect ハッカソンの全提出物を自動採点し、ランキングを生成するシステムです。
+VS Code 上で `@saiten 採点して` と入力するだけで、Agents League @ TechConnect ハッカソンの全提出物を自動採点し、ランキングを生成するマルチエージェントシステムです。
 
-**GitHub Copilot カスタムエージェント** + **MCP (Model Context Protocol) サーバー** を組み合わせ、一貫性のある公平な審査を実現します。
+**Orchestrator-Workers + Prompt Chaining** パターンで設計された 4 つの Copilot カスタムエージェントが、MCP (Model Context Protocol) サーバーを介して GitHub Issue の収集・評価・レポート生成を自律的に実行します。
 
-## アーキテクチャ
+---
+
+## エージェントワークフロー
+
+### 設計パターン
+
+- **Orchestrator-Workers**: `@saiten` が 3 つの専門サブエージェントに委譲
+- **Prompt Chaining**: Collect → Score → Report の順次実行（各ステップに Gate）
+- **SRP (Single Responsibility Principle)**: 1 エージェント = 1 責務
+
+### ワークフロー図
+
+```mermaid
+flowchart TD
+    User["👤 User\n@saiten 採点して"]
+    
+    subgraph Orchestrator["🏆 @saiten (Orchestrator)"]
+        Route["Intent Routing\nUC-01~05 分岐"]
+        Gate1{"Gate: MCP\n接続確認"}
+        Gate2{"Gate: データ\n完全性チェック"}
+        Gate3{"Gate: スコア\n妥当性チェック"}
+        Integrate["Result Integration\n& User Report"]
+    end
+
+    subgraph Collector["📥 @saiten-collector"]
+        C1["list_submissions()"]
+        C2["get_submission_detail()"]
+        C3["Data Validation"]
+    end
+
+    subgraph Scorer["📊 @saiten-scorer"]
+        S1["get_scoring_rubric()"]
+        S2["Rubric-based Evaluation\n1-10 score per criterion"]
+        S3["Quality Self-Check"]
+        S4["save_scores()"]
+    end
+
+    subgraph Reporter["📋 @saiten-reporter"]
+        R1["generate_ranking_report()"]
+        R2["Trend Analysis"]
+        R3["Report Validation"]
+    end
+
+    subgraph MCP["⚡ saiten-mcp (FastMCP Server)"]
+        T1["list_submissions"]
+        T2["get_submission_detail"]
+        T3["get_scoring_rubric"]
+        T4["save_scores"]
+        T5["generate_ranking_report"]
+    end
+
+    subgraph External["External"]
+        GH["GitHub API\n(gh CLI)"]
+        FS["Local Storage\ndata/ & reports/"]
+    end
+
+    User --> Route
+    Route --> Gate1
+    Gate1 -->|OK| Collector
+    Gate1 -->|FAIL| User
+    
+    C1 --> C2 --> C3
+    C3 --> Gate2
+    Gate2 -->|OK| Scorer
+    Gate2 -->|"⚠️ Skip"| Integrate
+    
+    S1 --> S2 --> S3
+    S3 -->|PASS| S4
+    S3 -->|"FAIL: Re-evaluate"| S2
+    S4 --> Gate3
+    Gate3 -->|OK| Reporter
+    
+    R1 --> R2 --> R3
+    R3 --> Integrate --> User
+
+    Collector -.->|MCP| T1 & T2
+    Scorer -.->|MCP| T3 & T4
+    Reporter -.->|MCP| T5
+    T1 & T2 -.-> GH
+    T4 & T5 -.-> FS
+
+    style Orchestrator fill:#1a1a2e,stroke:#e94560,color:#fff
+    style Collector fill:#16213e,stroke:#0f3460,color:#fff
+    style Scorer fill:#16213e,stroke:#0f3460,color:#fff
+    style Reporter fill:#16213e,stroke:#0f3460,color:#fff
+    style MCP fill:#0f3460,stroke:#533483,color:#fff
+```
+
+### エージェント一覧
+
+| Agent | Role | SRP Responsibility | MCP Tools |
+|-------|------|--------------------|-----------|
+| 🏆 `@saiten` | **Orchestrator** | Intent routing, delegation, result integration | — (delegates all) |
+| 📥 `@saiten-collector` | **Worker** | GitHub Issue data collection & validation | `list_submissions`, `get_submission_detail` |
+| 📊 `@saiten-scorer` | **Worker** | Rubric-based evaluation with quality gate | `get_scoring_rubric`, `save_scores` |
+| 📋 `@saiten-reporter` | **Worker** | Ranking report generation & trend analysis | `generate_ranking_report` |
+
+### 設計原則の適用
+
+| Principle | How Applied |
+|-----------|-------------|
+| **SRP** | 各エージェントが 1 つの責務のみ担当 |
+| **Fail Fast** | 各ステップに Gate を設置、異常時は即座に報告 |
+| **SSOT** | スコアデータは `data/scores.json` に一元管理 |
+| **Feedback Loop** | Scorer が自己品質チェック → 不合格なら再評価 |
+| **Transparency** | Todo リストで進捗表示、各 Gate で状況報告 |
+| **Idempotency** | 再採点は上書き方式、何度実行しても安全 |
+| **ISP** | 各サブエージェントに必要なツール・データのみ渡す |
+
+---
+
+## システムアーキテクチャ
 
 ```
-┌─────────────────────────────────────────────┐
-│  VS Code                                     │
-│  ┌──────────────────────────────────────┐    │
-│  │ 🤖 @saiten (Copilot Custom Agent)   │    │
-│  │    saiten.agent.md                   │    │
-│  └──────────┬───────────────────────────┘    │
-│             │ MCP (stdio)                     │
-│  ┌──────────▼───────────────────────────┐    │
-│  │ ⚡ saiten-mcp (FastMCP Server)       │    │
-│  │  ├ list_submissions()                │    │
-│  │  ├ get_submission_detail()           │    │
-│  │  ├ get_scoring_rubric()              │    │
-│  │  ├ save_scores()                     │    │
-│  │  └ generate_ranking_report()         │    │
-│  └──────────────────────────────────────┘    │
-└─────────────────────────────────────────────┘
-         │                    │
-    ┌────▼────┐         ┌────▼────┐
-    │ GitHub  │         │  Local  │
-    │  API    │         │ Storage │
-    └─────────┘         └─────────┘
+┌─────────────────────────────────────────────────────┐
+│  VS Code                                             │
+│                                                      │
+│  ┌────────────────────────────────────────────────┐  │
+│  │ 🏆 @saiten (Orchestrator Agent)                │  │
+│  │    ├── 📥 @saiten-collector (Sub-Agent)        │  │
+│  │    ├── 📊 @saiten-scorer   (Sub-Agent)         │  │
+│  │    └── 📋 @saiten-reporter (Sub-Agent)         │  │
+│  └──────────────┬─────────────────────────────────┘  │
+│                 │ MCP (stdio)                         │
+│  ┌──────────────▼─────────────────────────────────┐  │
+│  │ ⚡ saiten-mcp (FastMCP Server / Python)         │  │
+│  │  ├ list_submissions()     ← gh CLI → GitHub    │  │
+│  │  ├ get_submission_detail() ← gh CLI → GitHub   │  │
+│  │  ├ get_scoring_rubric()   ← YAML files         │  │
+│  │  ├ save_scores()          → data/scores.json   │  │
+│  │  └ generate_ranking_report() → reports/*.md    │  │
+│  └────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
 ```
+
+---
 
 ## セットアップ
 
@@ -65,40 +176,54 @@ gh auth status
 
 `.vscode/mcp.json` が自動で MCP サーバーを設定します。追加設定は不要です。
 
+---
+
 ## 使い方
 
 VS Code のチャットパネルで以下のように入力します:
 
-| コマンド                          | 説明                     |
-| --------------------------------- | ------------------------ |
-| `@saiten 採点して`                | 全提出物を一括採点       |
-| `@saiten #48 を採点して`          | 個別提出物を採点         |
-| `@saiten ランキング出して`        | ランキングレポートを生成 |
-| `@saiten #48 を再採点して`        | 個別提出物を再採点       |
-| `@saiten Creative の採点基準は？` | 採点基準を表示           |
+| コマンド                          | 説明                     | 使用エージェント |
+| --------------------------------- | ------------------------ | ---------------- |
+| `@saiten 採点して`                | 全提出物を一括採点       | collector → scorer → reporter |
+| `@saiten #48 を採点して`          | 個別提出物を採点         | collector → scorer → reporter |
+| `@saiten ランキング出して`        | ランキングレポートを生成 | reporter のみ |
+| `@saiten #48 を再採点して`        | 個別提出物を再採点       | collector → scorer → reporter |
+| `@saiten Creative の採点基準は？` | 採点基準を表示           | 直接応答 (MCP) |
+
+---
 
 ## プロジェクト構成
 
 ```
 FY26_techconnect_saiten/
 ├── .github/agents/
-│   └── saiten.agent.md           # Copilot カスタムエージェント
+│   ├── saiten.agent.md               # 🏆 Orchestrator
+│   ├── saiten-collector.agent.md     # 📥 Data Collection Worker
+│   ├── saiten-scorer.agent.md        # 📊 Scoring Worker
+│   └── saiten-reporter.agent.md      # 📋 Report Worker
 ├── src/saiten_mcp/
-│   ├── server.py                 # MCP Server エントリーポイント
-│   ├── models.py                 # Pydantic データモデル
+│   ├── server.py                     # MCP Server entrypoint
+│   ├── models.py                     # Pydantic data models
 │   └── tools/
-│       ├── submissions.py        # list_submissions, get_submission_detail
-│       ├── rubrics.py            # get_scoring_rubric
-│       ├── scores.py             # save_scores
-│       └── reports.py            # generate_ranking_report
+│       ├── submissions.py            # list_submissions, get_submission_detail
+│       ├── rubrics.py                # get_scoring_rubric
+│       ├── scores.py                 # save_scores
+│       └── reports.py                # generate_ranking_report
 ├── data/
-│   ├── rubrics/                  # トラック別採点基準 (YAML)
-│   └── scores.json               # 採点結果
+│   ├── rubrics/                      # Track-specific scoring rubrics (YAML)
+│   └── scores.json                   # Scoring results (SSOT)
 ├── reports/
-│   └── ranking.md                # 自動生成ランキング
-├── .vscode/mcp.json              # MCP サーバー設定
+│   └── ranking.md                    # Auto-generated ranking report
+├── scripts/
+│   └── run_scoring.py                # CLI scoring pipeline
+├── tests/
+│   └── test_e2e.py                   # E2E test suite
+├── .vscode/mcp.json                  # MCP server config
+├── AGENTS.md                         # Agent registry
 └── pyproject.toml
 ```
+
+---
 
 ## 採点トラック
 
@@ -108,13 +233,20 @@ FY26_techconnect_saiten/
 | 🧠 Reasoning Agents  | 5 基準 | 全体共通基準を採用                |
 | 💼 Enterprise Agents | 3 基準 | 独自の 3 軸評価                   |
 
+---
+
 ## 技術スタック
 
-- **Agent**: VS Code Copilot Custom Agent (`.agent.md`)
-- **MCP Server**: Python 3.10+ / FastMCP
-- **パッケージ管理**: uv
-- **GitHub 連携**: gh CLI / GitHub REST API
-- **データ**: JSON (スコア) / YAML (基準) / Markdown (レポート)
+| Layer | Technology |
+|-------|-----------|
+| **Agent Framework** | VS Code Copilot Custom Agent (`.agent.md`) — Orchestrator-Workers pattern |
+| **MCP Server** | Python 3.10+ / FastMCP (stdio transport) |
+| **Package Manager** | uv |
+| **GitHub Integration** | gh CLI / GitHub REST API |
+| **Data Models** | Pydantic v2 |
+| **Data Storage** | JSON (scores) / YAML (rubrics) / Markdown (reports) |
+
+---
 
 ## ライセンス
 
