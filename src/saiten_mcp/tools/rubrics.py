@@ -1,6 +1,6 @@
-"""Saiten MCP — 採点基準 (Rubrics) ツール.
+"""Saiten MCP — Rubrics tool.
 
-トラック別の YAML 採点基準ファイルを読み込んで返す。
+Loads track-specific YAML scoring rubric files.
 """
 
 from __future__ import annotations
@@ -21,42 +21,42 @@ VALID_TRACKS = {"creative-apps", "reasoning-agents", "enterprise-agents"}
 
 @mcp.tool()
 async def get_scoring_rubric(track: str) -> dict[str, Any]:
-    """指定トラックの採点基準を返す。
+    """Return the scoring rubric for the specified track.
 
-    YAML ファイル ``data/rubrics/{track}.yaml`` を読み込み、
-    採点基準（各項目の名前・重み・説明・スコアリングガイド）を返す。
+    Loads the YAML file ``data/rubrics/{track}.yaml`` and returns
+    the scoring criteria (name, weight, description, scoring_guide).
 
     Args:
-        track: トラック名。``"creative-apps"`` | ``"reasoning-agents"``
+        track: Track name. ``"creative-apps"`` | ``"reasoning-agents"``
             | ``"enterprise-agents"``
 
     Returns:
-        採点基準辞書。track, track_display_name, criteria (リスト),
-        total_weight, score_range, notes を含む。
+        Rubric dict with track, track_display_name, criteria (list),
+        total_weight, score_range, and notes.
 
     Raises:
-        FileNotFoundError: 指定トラックの YAML ファイルが存在しない場合。
-        ValueError: track 名が不正な場合。
+        FileNotFoundError: If the YAML file for the track does not exist.
+        ValueError: If the track name is invalid.
     """
     if track not in VALID_TRACKS:
         available = sorted(VALID_TRACKS)
         raise ValueError(
-            f"不正なトラック名: '{track}'. "
-            f"利用可能なトラック: {available}"
+            f"Invalid track name: '{track}'. "
+            f"Available tracks: {available}"
         )
 
     yaml_path = RUBRICS_DIR / f"{track}.yaml"
     if not yaml_path.exists():
         available_files = [f.stem for f in RUBRICS_DIR.glob("*.yaml")]
         raise FileNotFoundError(
-            f"採点基準ファイルが見つかりません: {yaml_path}\n"
-            f"利用可能なファイル: {available_files}"
+            f"Rubric file not found: {yaml_path}\n"
+            f"Available files: {available_files}"
         )
 
     with open(yaml_path, "r", encoding="utf-8") as f:
         data: dict[str, Any] = yaml.safe_load(f)
 
-    # 重みの合計を計算
+    # Calculate total weight
     criteria = data.get("criteria", [])
     total_weight = sum(c.get("weight", 0.0) for c in criteria)
 
@@ -69,5 +69,5 @@ async def get_scoring_rubric(track: str) -> dict[str, Any]:
         "notes": data.get("notes", ""),
     }
 
-    logger.info("get_scoring_rubric: track=%s, criteria=%d 件", track, len(criteria))
+    logger.info("get_scoring_rubric: track=%s, criteria=%d", track, len(criteria))
     return result

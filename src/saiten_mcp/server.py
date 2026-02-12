@@ -1,6 +1,6 @@
 """Saiten MCP — Server entry point.
 
-FastMCP サーバーを生成し、各ツールモジュールを登録して起動する。
+Creates the FastMCP server, registers tool modules, and starts the server.
 """
 
 from __future__ import annotations
@@ -10,27 +10,27 @@ import pathlib
 from mcp.server.fastmcp import FastMCP
 
 # ---------------------------------------------------------------------------
-# パス解決  — すべてのファイルパスはプロジェクトルート基準
+# Path resolution — all file paths are relative to project root
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 REPORTS_DIR = PROJECT_ROOT / "reports"
 
-# 必要なディレクトリを事前作成
+# Ensure required directories exist
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 (DATA_DIR / "rubrics").mkdir(exist_ok=True)
 
 # ---------------------------------------------------------------------------
-# FastMCP インスタンス
+# FastMCP instance
 # ---------------------------------------------------------------------------
 mcp = FastMCP(
     name="saiten-mcp",
-    instructions="Agents League @ TechConnect 採点エージェント用 MCP サーバー",
+    instructions="MCP server for the Agents League @ TechConnect scoring agent",
 )
 
 # ---------------------------------------------------------------------------
-# ツール登録  — 各モジュール import 時に @mcp.tool() で自動登録
+# Tool registration — auto-registered via @mcp.tool() on import
 # ---------------------------------------------------------------------------
 from saiten_mcp.tools import submissions  # noqa: E402, F401
 from saiten_mcp.tools import rubrics      # noqa: E402, F401
@@ -39,7 +39,7 @@ from saiten_mcp.tools import reports      # noqa: E402, F401
 
 
 def main() -> None:
-    """MCP サーバーを stdio transport で起動する."""
+    """Start the MCP server with stdio transport."""
     mcp.run(transport="stdio")
 
 

@@ -1,49 +1,135 @@
 track: creative-apps
 track_display_name: "🎨 Creative Apps"
-notes: "Community Vote (10%) は自動採点対象外。残り 90% を按分して 100% とする。"
+notes: "Community Vote (10%) is excluded from automated scoring. Remaining 90% is prorated to 100%."
+
+# === Scoring Enhancement: Evidence-Anchored Evaluation ===
+# Scorers MUST cite specific evidence from the submission for each criterion.
+# Generic statements like 'Comprehensive README' are NOT acceptable.
+# Each score justification must reference concrete features, code patterns, or demos.
+
+scoring_policy:
+  evidence_required: true
+  min_evidence_per_criterion: 1
+  differentiation_rules:
+    - "Score 8+ requires citing specific technical implementation details from README or code"
+    - "Score 9+ requires evidence of production-readiness or innovation beyond the basics"
+    - "Score 5-6 is the DEFAULT when evidence is ambiguous — do NOT default to 7+"
+    - "If two submissions have similar features, their scores MUST still differ based on depth/quality"
+  red_flags:
+    - signal: "No README or empty README"
+      max_ux_score: 4
+    - signal: "API keys or secrets visible in screenshots or code"
+      max_safety_score: 3
+    - signal: "No working demo and no clear setup instructions"
+      max_ux_score: 5
+    - signal: "Repository is private or inaccessible"
+      max_accuracy_score: 5
+    - signal: "Description is copy-paste from template with no customization"
+      max_creativity_score: 4
+  bonus_signals:
+    - signal: "Working deployed URL or live demo"
+      bonus_criteria: "UX & Presentation"
+      min_score: 7
+    - signal: "Automated tests present in repository"
+      bonus_criteria: "Reliability & Safety"
+      min_score: 7
+    - signal: "Multi-agent or MCP server architecture clearly documented"
+      bonus_criteria: "Accuracy & Relevance"
+      min_score: 7
 
 criteria:
   - name: "Accuracy & Relevance"
     weight: 0.222
-    description: "提出物が課題要件を正確に満たしているか。GitHub Copilot の活用度。"
+    description: "Does the submission accurately meet challenge requirements? Degree of GitHub Copilot utilization."
     scoring_guide:
-      "1-3": "要件の半分以上を満たしていない。Copilot 活用が不明確。"
-      "4-6": "基本要件は満たすが、一部不足。Copilot 活用は限定的。"
-      "7-9": "全要件を満たし、Copilot を効果的に活用。MCP 統合あり。"
-      "10": "要件を超越。Copilot の革新的活用。複数 MCP 統合。"
+      "1-3": "Fails to meet more than half the requirements. Copilot usage unclear."
+      "4-6": "Meets basic requirements but partially incomplete. Copilot usage is limited."
+      "7-9": "Meets all requirements with effective Copilot usage. MCP integration present."
+      "10": "Exceeds requirements. Innovative Copilot usage. Multiple MCP integrations."
+    evidence_signals:
+      positive:
+        - "MCP server implementation found in code"
+        - "Copilot usage documented with specific examples"
+        - "All challenge requirements addressed with working features"
+        - "Multiple tool/MCP integrations visible in architecture"
+      negative:
+        - "Missing required features from challenge spec"
+        - "No evidence of Copilot usage"
+        - "Repository contains only boilerplate/template code"
 
   - name: "Reasoning & Multi-step Thinking"
     weight: 0.222
-    description: "エージェントの推論能力。段階的思考の実装。"
+    description: "Agent reasoning capability. Implementation of step-by-step thinking."
     scoring_guide:
-      "1-3": "単純な入出力のみ。推論ステップなし。"
-      "4-6": "基本的な条件分岐あり。限定的な多段推論。"
-      "7-9": "明確な推論チェーン。エラーハンドリングを含む多段処理。"
-      "10": "自己改善ループ。ReAct/CoT 等の高度な推論パターン実装。"
+      "1-3": "Simple input/output only. No reasoning steps."
+      "4-6": "Basic conditional branching. Limited multi-step reasoning."
+      "7-9": "Clear reasoning chain. Multi-step processing with error handling."
+      "10": "Self-improvement loop. Advanced reasoning patterns (ReAct/CoT) implemented."
+    evidence_signals:
+      positive:
+        - "Multi-step workflow visible in code or architecture diagram"
+        - "Error recovery or retry logic implemented"
+        - "Chain-of-Thought or ReAct pattern documented"
+        - "Agent decides next action based on previous results"
+      negative:
+        - "Single API call with no chaining"
+        - "Hardcoded responses without dynamic reasoning"
+        - "No error handling between steps"
 
   - name: "Creativity & Originality"
     weight: 0.167
-    description: "アイデアの独創性。既存ツールにない価値提案。"
+    description: "Originality of the idea. Value proposition beyond existing tools."
     scoring_guide:
-      "1-3": "既存ツールの単純なラッパー。独自性なし。"
-      "4-6": "一部独自のアプローチ。既知の問題の新しい解法。"
-      "7-9": "ユニークなコンセプト。明確な差別化要素。"
-      "10": "革新的。新しいカテゴリを創出するレベル。"
+      "1-3": "Simple wrapper around existing tools. No originality."
+      "4-6": "Some unique approaches. New solutions to known problems."
+      "7-9": "Unique concept. Clear differentiating factors."
+      "10": "Innovative. Creates a new category."
+    evidence_signals:
+      positive:
+        - "Novel combination of technologies not seen in other submissions"
+        - "Unique problem domain or approach"
+        - "Custom algorithms or processing pipelines"
+        - "Clear differentiator articulated in description"
+      negative:
+        - "Nearly identical to a common tutorial or template"
+        - "Problem already well-solved by existing tools"
+        - "No unique selling point identifiable"
 
   - name: "UX & Presentation"
     weight: 0.167
-    description: "ユーザー体験の質。デモ・ドキュメントの充実度。"
+    description: "User experience quality. Demo and documentation completeness."
     scoring_guide:
-      "1-3": "デモなし。README が不十分。使い方が不明。"
-      "4-6": "スクリーンショットあり。基本的な README。"
-      "7-9": "動画デモあり。詳細な README。セットアップ手順が明確。"
-      "10": "プロダクション品質の UX。洗練されたデモ。包括的ドキュメント。"
+      "1-3": "No demo. Insufficient README. Usage unclear."
+      "4-6": "Screenshots provided. Basic README."
+      "7-9": "Video demo. Detailed README. Clear setup instructions."
+      "10": "Production-quality UX. Polished demo. Comprehensive documentation."
+    evidence_signals:
+      positive:
+        - "Video walkthrough showing actual usage"
+        - "Step-by-step setup guide that a new user can follow"
+        - "Architecture diagram included"
+        - "Error states and edge cases shown in demo"
+      negative:
+        - "README is auto-generated or default template"
+        - "Screenshots show only a terminal with no context"
+        - "No installation or setup instructions"
 
   - name: "Reliability & Safety"
     weight: 0.222
-    description: "エラーハンドリング。セキュリティ考慮。堅牢性。"
+    description: "Error handling. Security considerations. Robustness."
     scoring_guide:
-      "1-3": "エラーハンドリングなし。API キーがハードコード。"
-      "4-6": "基本的なエラー処理。.env 使用だが不完全。"
-      "7-9": "包括的エラーハンドリング。セキュリティベストプラクティス準拠。"
-      "10": "プロダクション品質。Rate limiting、リトライ、入力検証完備。"
+      "1-3": "No error handling. API keys hardcoded."
+      "4-6": "Basic error handling. .env used but incomplete."
+      "7-9": "Comprehensive error handling. Security best practices followed."
+      "10": "Production quality. Rate limiting, retries, input validation complete."
+    evidence_signals:
+      positive:
+        - "Try/catch blocks around external API calls"
+        - ".env.example file with documented variables"
+        - "Input validation visible in code"
+        - "Rate limiting or retry logic implemented"
+        - "Automated tests present"
+      negative:
+        - "API keys visible in code or screenshots"
+        - "No .gitignore or secrets management"
+        - "Crashes on invalid input per demo"

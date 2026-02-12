@@ -1,31 +1,90 @@
 track: enterprise-agents
 track_display_name: "💼 Enterprise Agents"
-notes: "Track 3 独自の評価基準。Technical Implementation, Business Value, Innovation の 3 軸。"
+notes: "Track 3 specific criteria. Evaluated on 3 axes: Technical Implementation, Business Value, Innovation."
+
+scoring_policy:
+  evidence_required: true
+  min_evidence_per_criterion: 1
+  differentiation_rules:
+    - "Score 8+ requires evidence of MCP Read/Write + at least one of OAuth, Adaptive Cards, or Connected Agents"
+    - "Score 9+ requires production-quality implementation with multiple M365 integrations"
+    - "Score 5-6 is the DEFAULT when evidence is ambiguous — do NOT default to 7+"
+    - "Business Value 7+ requires quantitative claims or measurable improvement described"
+  red_flags:
+    - signal: "No M365 Copilot Chat Agent functionality"
+      max_technical_score: 3
+    - signal: "No MCP integration at all"
+      max_technical_score: 4
+    - signal: "Business scenario not described or generic"
+      max_business_score: 4
+    - signal: "Repository is private or inaccessible"
+      max_technical_score: 5
+  bonus_signals:
+    - signal: "Connected Agents architecture with role separation"
+      bonus_criteria: "Technical Implementation"
+      min_score: 8
+    - signal: "Quantitative ROI or KPI metrics provided"
+      bonus_criteria: "Business Value"
+      min_score: 7
+    - signal: "Adaptive Cards with dynamic data binding"
+      bonus_criteria: "Innovation & Creativity"
+      min_score: 7
 
 criteria:
   - name: "Technical Implementation"
     weight: 0.33
-    description: "M365 Copilot Chat Agent としての実装品質。MCP Server (Read/Write)、OAuth、Adaptive Cards、Connected Agents の活用度。"
+    description: "Implementation quality as an M365 Copilot Chat Agent. Utilization of MCP Server (Read/Write), OAuth, Adaptive Cards, Connected Agents."
     scoring_guide:
-      "1-3": "M365 Copilot Chat Agent として動作しない、または最小限。MCP 未統合。"
-      "4-6": "M365 Copilot Chat Agent が動作。MCP Server (Read) を統合。基本的な実装。"
-      "7-9": "MCP Server (Read/Write) 統合。OAuth または Adaptive Cards を活用。堅牢な実装。"
-      "10": "Connected Agents 構成。MCP + OAuth + Adaptive Cards を完全統合。プロダクション品質。"
+      "1-3": "Does not function as M365 Copilot Chat Agent, or minimal. No MCP integration."
+      "4-6": "M365 Copilot Chat Agent works. MCP Server (Read) integrated. Basic implementation."
+      "7-9": "MCP Server (Read/Write) integrated. OAuth or Adaptive Cards utilized. Robust implementation."
+      "10": "Connected Agents architecture. Full MCP + OAuth + Adaptive Cards integration. Production quality."
+    evidence_signals:
+      positive:
+        - "MCP Server manifest or configuration visible in code"
+        - "OAuth flow implementation (token exchange, consent)"
+        - "Adaptive Cards JSON templates with dynamic bindings"
+        - "Connected Agents pattern with declarative agent definitions"
+        - "M365 Copilot Chat Agent declarative manifest present"
+      negative:
+        - "No M365-specific code or configuration"
+        - "Only MCP Read with no Write capability"
+        - "Hardcoded responses without real M365 data integration"
 
   - name: "Business Value"
     weight: 0.33
-    description: "エンタープライズシナリオにおけるビジネス価値。実用性。ROI の明確さ。"
+    description: "Business value in enterprise scenarios. Practicality. Clarity of ROI."
     scoring_guide:
-      "1-3": "ビジネスシナリオが不明確。実用性が低い。"
-      "4-6": "明確なビジネスシナリオ。基本的な業務改善効果。"
-      "7-9": "高い実用性。定量的な ROI 提示。複数の業務プロセスを改善。"
-      "10": "変革的なビジネス価値。業界横展開可能。明確な KPI 改善。"
+      "1-3": "Business scenario unclear. Low practicality."
+      "4-6": "Clear business scenario. Basic operational improvement."
+      "7-9": "High practicality. Quantitative ROI presented. Improves multiple business processes."
+      "10": "Transformative business value. Scalable across industries. Clear KPI improvement."
+    evidence_signals:
+      positive:
+        - "Specific enterprise pain point identified and addressed"
+        - "ROI calculation or time-saving metrics provided"
+        - "Multi-process improvement described with examples"
+        - "Scalability to other departments/industries discussed"
+      negative:
+        - "Business value is vague or aspirational only"
+        - "No concrete use case described"
+        - "Solution solves a trivial problem"
 
   - name: "Innovation & Creativity"
     weight: 0.34
-    description: "技術的な革新性。創造的なアプローチ。M365 エコシステムの活用。"
+    description: "Technical innovation. Creative approach. M365 ecosystem utilization."
     scoring_guide:
-      "1-3": "既存のテンプレートをそのまま使用。独自性なし。"
-      "4-6": "一部カスタマイズ。M365 の基本機能を活用。"
-      "7-9": "革新的なアプローチ。M365 エコシステムの深い統合。差別化された UX。"
-      "10": "業界をリードする革新性。新しい M365 活用パターンの提案。"
+      "1-3": "Uses existing templates as-is. No originality."
+      "4-6": "Some customization. Utilizes basic M365 features."
+      "7-9": "Innovative approach. Deep M365 ecosystem integration. Differentiated UX."
+      "10": "Industry-leading innovation. Proposes new M365 usage patterns."
+    evidence_signals:
+      positive:
+        - "Novel use of M365 APIs or Graph API beyond standard patterns"
+        - "Creative UX combining Adaptive Cards with conversational flow"
+        - "Integration across multiple M365 services (Teams, SharePoint, Outlook)"
+        - "New workflow pattern not seen in M365 documentation"
+      negative:
+        - "Direct copy of M365 sample/template with minimal changes"
+        - "Uses only one M365 service with basic queries"
+        - "No creative differentiation from existing solutions"

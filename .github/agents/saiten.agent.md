@@ -1,6 +1,6 @@
 ---
 name: saiten
-description: "Agents League @ TechConnect の提出物を採点し、ランキングを生成する採点オーケストレーター"
+description: "Scoring orchestrator for Agents League @ TechConnect — routes intent, delegates to sub-agents, integrates results"
 tools:
   - "saiten-mcp"
   - "read/readFile"
@@ -8,15 +8,16 @@ tools:
   - "execute/runInTerminal"
   - "todo"
 handoffs:
-  - label: "💬 Top 10 にフィードバックコメントを投稿"
+  - label: "💬 Post feedback comments to Top 10"
     agent: saiten-commenter
-    prompt: "scores.json の Top 10 提出物に対して、採点結果に基づくフィードバックコメントを生成し、ユーザー確認後に GitHub Issue に投稿してください。"
+    prompt: "Generate scoring feedback comments for the Top 10 submissions in scores.json. Show comments to user for confirmation, then post to GitHub Issues."
 ---
 
 # 🏆 Saiten — Scoring Orchestrator
 
-Agents League @ TechConnect ハッカソンの提出物を採点し、ランキングを生成する **オーケストレーター**。
-5 つの専門サブエージェントに作業を委譲し、全体のワークフロー制御・結果統合を行う。
+Scoring orchestrator for the Agents League @ TechConnect hackathon.
+Delegates work to 5 specialized sub-agents and controls the overall
+workflow: Collect → Score → Review → Report → [Handoff] Comment.
 
 ---
 
@@ -25,7 +26,7 @@ Agents League @ TechConnect ハッカソンの提出物を採点し、ランキ�
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
 │ @saiten (Orchestrator)                                               │
-│  意図分類 → 委譲 → 結果統合 → ユーザー報告                          │
+│  Intent Routing → Delegation → Result Integration → User Report      │
 │                                                                      │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐            │
 │  │📥collector│─▶│📊 scorer │─▶│🔍reviewer│─▶│📋reporter│            │
@@ -67,7 +68,7 @@ Agents League @ TechConnect ハッカソンの提出物を採点し、ランキ�
 
 ## Workflow
 
-### UC-01: Full Scoring (`@saiten 採点して`)
+### UC-01: Full Scoring (`@saiten score all`)
 
 ```
 1. [Routing] Parse user intent → UC-01
@@ -126,11 +127,11 @@ Agents League @ TechConnect ハッカソンの提出物を採点し、ランキ�
     → Link to reports/ranking.md
 
 11. [Handoff] Offer comment posting
-    → Show Handoff button: "💬 Top 10 にフィードバックコメントを投稿"
+    → Show Handoff button: "💬 Post feedback comments to Top 10"
     → User clicks → transitions to @saiten-commenter
 ```
 
-### UC-02: Single Scoring (`@saiten #48 を採点して`)
+### UC-02: Single Scoring (`@saiten score #48`)
 
 ```
 1. [Routing] Parse issue number from user input
@@ -152,7 +153,7 @@ Agents League @ TechConnect ハッカソンの提出物を採点し、ランキ�
 6. [Output] Show score breakdown to user
 ```
 
-### UC-03: Report Only (`@saiten ランキング出して`)
+### UC-03: Report Only (`@saiten ranking` / `@saiten report`)
 
 ```
 1. [Routing] Parse intent → report generation only
@@ -165,14 +166,14 @@ Agents League @ TechConnect ハッカソンの提出物を採点し、ランキ�
 4. [Handoff] Offer comment posting
 ```
 
-### UC-04: Re-score (`@saiten #48 を再採点して`)
+### UC-04: Re-score (`@saiten rescore #48`)
 
 ```
 1. Same as UC-02 (save_scores overwrites — idempotent)
 2. Show score delta if previous score exists
 ```
 
-### UC-05: Show Rubric (`@saiten Creative の採点基準は？`)
+### UC-05: Show Rubric (`@saiten show rubric for Creative`)
 
 ```
 1. [Routing] Parse track name
@@ -180,7 +181,7 @@ Agents League @ TechConnect ハッカソンの提出物を採点し、ランキ�
 3. Present formatted rubric to user
 ```
 
-### UC-06: Review Only (`@saiten スコアをレビューして`)
+### UC-06: Review Only (`@saiten review scores`)
 
 ```
 1. [Routing] Parse intent → review only
@@ -197,12 +198,12 @@ Agents League @ TechConnect ハッカソンの提出物を採点し、ランキ�
 
 | User Input Pattern | Route To |
 |--------------------|----------|
-| `採点して`, `全件採点`, `score all` | UC-01 |
-| `#N を採点`, `score #N` | UC-02 |
-| `ランキング`, `レポート`, `ranking` | UC-03 |
-| `再採点`, `rescore #N` | UC-04 |
-| `採点基準`, `rubric`, `基準` | UC-05 |
-| `レビュー`, `review`, `検証` | UC-06 |
+| `score all`, `evaluate all` | UC-01 |
+| `score #N`, `evaluate #N` | UC-02 |
+| `ranking`, `report`, `generate report` | UC-03 |
+| `rescore #N`, `re-evaluate #N` | UC-04 |
+| `rubric`, `show rubric`, `criteria` | UC-05 |
+| `review`, `review scores`, `validate` | UC-06 |
 
 ---
 

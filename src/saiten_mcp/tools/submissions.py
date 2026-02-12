@@ -1,7 +1,7 @@
-"""Saiten MCP — 提出物 (Submissions) ツール.
+"""Saiten MCP — Submissions tool.
 
-GitHub Issues から Agents League @ TechConnect の提出物情報を取得・パースする。
-gh CLI を asyncio.create_subprocess_exec 経由で呼び出す。
+Fetches and parses Agents League @ TechConnect submission data
+from GitHub Issues via gh CLI (asyncio.create_subprocess_exec).
 """
 
 from __future__ import annotations
@@ -18,10 +18,10 @@ from saiten_mcp.server import mcp
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
-# 定数
+# Constants
 # ---------------------------------------------------------------------------
 REPO = "microsoft/agentsleague-techconnect"
-MIN_ISSUE_NUMBER = 10  # #1〜#9 はリポジトリ管理用
+MIN_ISSUE_NUMBER = 10  # #1-#9 are reserved for repository management
 
 TRACK_LABEL_MAP: dict[str, str] = {
     "Creative Apps": "creative-apps",
@@ -38,7 +38,7 @@ TRACK_BODY_MAP: dict[str, str] = {
     "Enterprise Agents - M365 Agents Toolkit": "enterprise-agents",
 }
 
-# Issue 本文のセクション定義（パーサー関数のマッピング）
+# Issue body section definitions (parser function mapping)
 SECTION_PARSERS: dict[str, str] = {
     "Track": "parse_track",
     "Project Name": "parse_text",
@@ -57,10 +57,10 @@ SECTION_PARSERS: dict[str, str] = {
 
 
 # ---------------------------------------------------------------------------
-# gh CLI ヘルパー
+# gh CLI helpers
 # ---------------------------------------------------------------------------
 async def _run_gh(*args: str) -> str:
-    """gh コマンドを実行し stdout を返す。失敗時は例外を送出する (Fail Fast)."""
+    """Execute a gh command and return stdout. Raises an exception on failure (Fail Fast)."""
     proc = await asyncio.create_subprocess_exec(
         "gh", *args,
         stdout=asyncio.subprocess.PIPE,
@@ -70,16 +70,16 @@ async def _run_gh(*args: str) -> str:
     if proc.returncode != 0:
         err_msg = stderr.decode().strip() if stderr else "unknown error"
         raise RuntimeError(
-            f"gh コマンド失敗 (exit={proc.returncode}): gh {' '.join(args)}\n{err_msg}"
+            f"gh command failed (exit={proc.returncode}): gh {' '.join(args)}\n{err_msg}"
         )
     return stdout.decode()
 
 
 # ---------------------------------------------------------------------------
-# パーサーヘルパー
+# Parser helpers
 # ---------------------------------------------------------------------------
 def _parse_sections(body: str) -> dict[str, str]:
-    """Issue 本文を ``### セクション名`` で分割し {セクション名: 内容} を返す."""
+    """Split Issue body by ``### Section Name`` headers and return {section_name: content}."""
     sections: dict[str, str] = {}
     current_key: str | None = None
     lines: list[str] = []
@@ -94,7 +94,7 @@ def _parse_sections(body: str) -> dict[str, str]:
         else:
             lines.append(line)
 
-    # 最後のセクション
+    # Last section
     if current_key is not None:
         sections[current_key] = "\n".join(lines).strip()
 
@@ -102,24 +102,24 @@ def _parse_sections(body: str) -> dict[str, str]:
 
 
 def parse_text(value: str) -> str:
-    """テキストをそのまま返す（前後空白除去済み）."""
+    """Return text as-is (with leading/trailing whitespace stripped)."""
     return value.strip()
 
 
 def parse_url(value: str) -> str | None:
-    """URL を抽出する。見つからなければ None."""
+    """Extract a URL. Returns None if not found."""
     value = value.strip()
     match = re.search(r"https?://[^\s\)>]+", value)
     return match.group(0) if match else (value if value.startswith("http") else None)
 
 
 def parse_track(value: str) -> str:
-    """Track セクションの値からトラック ID を判定する."""
+    """Determine a track ID from the Track section value."""
     value_stripped = value.strip()
     for body_key, track_id in TRACK_BODY_MAP.items():
         if body_key in value_stripped:
             return track_id
-    # フォールバック: ラベルマップのキーも試す
+    # Fallback: also try label map keys
     for label_key, track_id in TRACK_LABEL_MAP.items():
         if label_key in value_stripped:
             return track_id
@@ -127,13 +127,13 @@ def parse_track(value: str) -> str:
 
 
 def parse_list(value: str) -> list[str]:
-    """カンマ区切り・改行区切りのリストをパースする."""
+    """Parse a comma-separated or newline-separated list."""
     items: list[str] = []
     for line in value.splitlines():
         line = line.strip().lstrip("-").lstrip("*").strip()
         if not line or line == "_No response_":
             continue
-        # カンマ区切りも展開
+        # Also expand comma-separated values
         for part in line.split(","):
             part = part.strip()
             if part:
@@ -142,7 +142,7 @@ def parse_list(value: str) -> list[str]:
 
 
 def parse_checklist(value: str) -> dict[str, bool]:
-    """チェックリスト (``- [x]`` / ``- [ ]``) をパースする."""
+    """Parse a checklist (``- [x]`` / ``- [ ]``)."""
     result: dict[str, bool] = {}
     for line in value.splitlines():
         match = re.match(r"^\s*-\s*\[([ xX])\]\s*(.+)$", line)
@@ -154,11 +154,11 @@ def parse_checklist(value: str) -> dict[str, bool]:
 
 
 def parse_demo(value: str) -> tuple[bool, str]:
-    """Demo セクションから (has_demo, description) を返す."""
+    """Return (has_demo, description) from the Demo section."""
     stripped = value.strip()
     if not stripped or stripped == "_No response_":
         return False, ""
-    # URL やイメージリンクが含まれていれば has_demo=True
+    # If URLs or image links are present, has_demo=True
     has_url = bool(re.search(r"https?://[^\s]+", stripped))
     has_image = bool(re.search(r"!\[.*?\]\(.*?\)", stripped))
     has_demo = has_url or has_image
@@ -166,12 +166,12 @@ def parse_demo(value: str) -> tuple[bool, str]:
 
 
 # ---------------------------------------------------------------------------
-# トラック判定
+# Track detection
 # ---------------------------------------------------------------------------
 def _detect_track_from_labels(labels: list) -> str | None:
-    """ラベル一覧からトラック ID を返す。見つからなければ None."""
+    """Return the track ID from labels. Returns None if not found."""
     for label in labels:
-        # jq フィルタ済みの場合は文字列、未加工の場合は dict
+        # String if already filtered by jq, dict if raw
         name = label if isinstance(label, str) else label.get("name", "")
         if name in TRACK_LABEL_MAP:
             return TRACK_LABEL_MAP[name]
@@ -179,14 +179,14 @@ def _detect_track_from_labels(labels: list) -> str | None:
 
 
 def _detect_track_from_body(body: str) -> str:
-    """Issue 本文の Track セクションからトラック ID を返す."""
+    """Return the track ID from the Issue body's Track section."""
     sections = _parse_sections(body)
     track_value = sections.get("Track", "")
     return parse_track(track_value)
 
 
 def _detect_track(issue: dict[str, Any]) -> str:
-    """ラベル優先 → 本文フォールバックでトラック ID を返す."""
+    """Return the track ID with label priority, falling back to body detection."""
     labels = issue.get("labels", [])
     track = _detect_track_from_labels(labels)
     if track:
@@ -196,10 +196,10 @@ def _detect_track(issue: dict[str, Any]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# README 取得
+# README fetching
 # ---------------------------------------------------------------------------
 async def _fetch_readme(repo_url: str | None) -> str | None:
-    """GitHub リポジトリの README を取得する。失敗時は None."""
+    """Fetch the README from a GitHub repository. Returns None on failure."""
     if not repo_url:
         return None
 
@@ -215,20 +215,20 @@ async def _fetch_readme(repo_url: str | None) -> str | None:
         )
         content_b64 = raw.strip().replace("\n", "")
         content = base64.b64decode(content_b64).decode("utf-8", errors="replace")
-        # 最大 10,000 文字にトリム
+        # Trim to a maximum of 10,000 characters
         if len(content) > 10_000:
-            content = content[:10_000] + "\n\n... (10,000 文字でトリム)"
+            content = content[:10_000] + "\n\n... (trimmed to 10,000 characters)"
         return content
     except Exception:
-        logger.warning("README 取得失敗: %s/%s", owner, repo, exc_info=True)
+        logger.warning("Failed to fetch README: %s/%s", owner, repo, exc_info=True)
         return None
 
 
 # ---------------------------------------------------------------------------
-# プロジェクト名抽出ヘルパー
+# Project name extraction helper
 # ---------------------------------------------------------------------------
 def _extract_project_name(issue: dict[str, Any]) -> str:
-    """Issue 本文から Project Name を抽出する。なければ title を返す."""
+    """Extract the Project Name from Issue body. Falls back to Issue title."""
     body = issue.get("body") or ""
     sections = _parse_sections(body)
     name = sections.get("Project Name", "").strip()
@@ -238,10 +238,10 @@ def _extract_project_name(issue: dict[str, Any]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# has_demo 判定ヘルパー
+# has_demo detection helper
 # ---------------------------------------------------------------------------
 def _extract_has_demo(issue: dict[str, Any]) -> bool:
-    """Issue 本文の Demo セクションから has_demo を判定する."""
+    """Determine has_demo from the Demo section of the Issue body."""
     body = issue.get("body") or ""
     sections = _parse_sections(body)
     demo_value = sections.get("Demo Video or Screenshots", "")
@@ -250,10 +250,10 @@ def _extract_has_demo(issue: dict[str, Any]) -> bool:
 
 
 # ---------------------------------------------------------------------------
-# repo_url 抽出ヘルパー
+# repo_url extraction helper
 # ---------------------------------------------------------------------------
 def _extract_repo_url(issue: dict[str, Any]) -> str | None:
-    """Issue 本文から Repository URL を抽出する."""
+    """Extract the Repository URL from the Issue body."""
     body = issue.get("body") or ""
     sections = _parse_sections(body)
     url_value = sections.get("Repository URL", "")
@@ -261,28 +261,29 @@ def _extract_repo_url(issue: dict[str, Any]) -> str | None:
 
 
 # ---------------------------------------------------------------------------
-# ツール: list_submissions
+# Tool: list_submissions
 # ---------------------------------------------------------------------------
 @mcp.tool()
 async def list_submissions(
     track: str | None = None,
     state: str = "all",
 ) -> list[dict]:
-    """Agents League の提出物一覧を取得する。
+    """Fetch the list of Agents League submissions.
 
     Args:
-        track: フィルタするトラック名。
-            ``"creative-apps"`` | ``"reasoning-agents"`` | ``"enterprise-agents"`` | None (全件)
-        state: Issue の状態。``"open"`` | ``"closed"`` | ``"all"``
+        track: Track name to filter by.
+            ``"creative-apps"`` | ``"reasoning-agents"`` | ``"enterprise-agents"`` | None (all)
+        state: Issue state. ``"open"`` | ``"closed"`` | ``"all"``
 
     Returns:
-        提出物サマリーのリスト。各要素は issue_number, title, track,
-        project_name, repo_url, created_at, has_demo を含む辞書。
+        A list of submission summaries. Each element is a dictionary
+        containing issue_number, title, track, project_name, repo_url,
+        created_at, has_demo.
 
     Raises:
-        RuntimeError: gh コマンド実行失敗時。
+        RuntimeError: When gh command execution fails.
     """
-    # jq フィルタ: 必要なフィールドだけ抽出
+    # jq filter: extract only required fields
     jq_filter = (
         "[.[] | {number, title, body, labels: [.labels[].name], created_at}]"
     )
@@ -294,18 +295,18 @@ async def list_submissions(
         "-q", jq_filter,
     ]
 
-    # state パラメータ
+    # state parameter
     if state in ("open", "closed"):
         args.extend(["-f", f"state={state}"])
     else:
         args.extend(["-f", "state=all"])
 
-    # per_page を最大に
+    # Maximize per_page
     args.extend(["-F", "per_page=100"])
 
     raw = await _run_gh(*args)
 
-    # --paginate は JSON 配列を複数返すことがあるため結合
+    # --paginate may return multiple JSON arrays, so concatenate them
     all_issues: list[dict[str, Any]] = []
     for chunk in _split_json_arrays(raw):
         try:
@@ -315,7 +316,7 @@ async def list_submissions(
             else:
                 all_issues.append(parsed)
         except json.JSONDecodeError as exc:
-            logger.warning("JSON パース失敗 (スキップ): %s", exc)
+            logger.warning("JSON parse failed (skipping): %s", exc)
 
     results: list[dict[str, Any]] = []
     for issue in all_issues:
@@ -325,7 +326,7 @@ async def list_submissions(
 
         detected_track = _detect_track(issue)
 
-        # トラックフィルタ
+        # Track filter
         if track is not None and detected_track != track:
             continue
 
@@ -342,35 +343,35 @@ async def list_submissions(
             results.append(entry)
         except Exception:
             logger.warning(
-                "Issue #%d のパースに失敗しました。スキップします。",
+                "Failed to parse Issue #%d. Skipping.",
                 issue_number,
                 exc_info=True,
             )
 
-    logger.info("list_submissions: %d 件取得 (track=%s, state=%s)", len(results), track, state)
+    logger.info("list_submissions: fetched %d entries (track=%s, state=%s)", len(results), track, state)
     return results
 
 
 # ---------------------------------------------------------------------------
-# ツール: get_submission_detail
+# Tool: get_submission_detail
 # ---------------------------------------------------------------------------
 @mcp.tool()
 async def get_submission_detail(issue_number: int) -> dict:
-    """指定 Issue 番号の提出物詳細を取得する。
+    """Fetch detailed submission data for the specified Issue number.
 
-    Issue テンプレートの各セクションをパースし、採点用データを返す。
-    GitHub Username は採点バイアス排除のため採点時は非表示にするが、
-    レポート出力用に github_username フィールドとして保持する。
-    repo_url が GitHub リポジトリの場合、README も取得する。
+    Parses each section of the Issue template and returns scoring data.
+    GitHub Username is hidden during scoring to eliminate bias, but
+    retained as the github_username field for report output.
+    If repo_url points to a GitHub repository, the README is also fetched.
 
     Args:
-        issue_number: 取得する Issue 番号。
+        issue_number: The Issue number to fetch.
 
     Returns:
-        提出物の詳細情報を含む辞書。
+        A dictionary containing detailed submission information.
 
     Raises:
-        RuntimeError: gh コマンド実行失敗時。
+        RuntimeError: When gh command execution fails.
     """
     raw = await _run_gh(
         "api", f"repos/{REPO}/issues/{issue_number}",
@@ -380,10 +381,10 @@ async def get_submission_detail(issue_number: int) -> dict:
     body = issue.get("body") or ""
     sections = _parse_sections(body)
 
-    # トラック判定
+    # Detect track
     track_id = _detect_track(issue)
 
-    # 各セクションをパース
+    # Parse each section
     project_name = parse_text(sections.get("Project Name", ""))
     if not project_name or project_name == "_No response_":
         project_name = issue.get("title", "")
@@ -409,7 +410,7 @@ async def get_submission_detail(issue_number: int) -> dict:
     # Issue URL for linking
     issue_url = f"https://github.com/{REPO}/issues/{issue_number}"
 
-    # README 取得
+    # Fetch README
     readme_content = await _fetch_readme(repo_url)
 
     result: dict[str, Any] = {
@@ -441,13 +442,13 @@ async def get_submission_detail(issue_number: int) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# ユーティリティ
+# Utilities
 # ---------------------------------------------------------------------------
 def _split_json_arrays(raw: str) -> list[str]:
-    """``--paginate`` が返す連結 JSON 配列を分割する.
+    """Split concatenated JSON arrays returned by ``--paginate``.
 
-    gh の ``--paginate`` は複数の JSON 配列を改行区切りで返すことがあるため、
-    ブラケットの深さを追跡して個別の配列に分割する。
+    gh's ``--paginate`` may return multiple JSON arrays separated by newlines,
+    so we track bracket depth to split them into individual arrays.
     """
     chunks: list[str] = []
     depth = 0
@@ -464,7 +465,7 @@ def _split_json_arrays(raw: str) -> list[str]:
                 chunks.append(raw[start : i + 1])
                 start = -1
 
-    # JSON 配列が見つからなかった場合は raw 全体を返す
+    # If no JSON arrays found, return the entire raw string
     if not chunks and raw.strip():
         chunks.append(raw.strip())
 

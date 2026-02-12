@@ -1,49 +1,129 @@
 track: reasoning-agents
 track_display_name: "🧠 Reasoning Agents"
-notes: "全体共通基準をそのまま採用。"
+notes: "Uses the common overall criteria directly."
+
+scoring_policy:
+  evidence_required: true
+  min_evidence_per_criterion: 1
+  differentiation_rules:
+    - "Score 8+ requires citing specific reasoning patterns (CoT, ReAct, etc.) with code evidence"
+    - "Score 9+ requires demonstrable self-correction or multi-agent coordination"
+    - "Score 5-6 is the DEFAULT when evidence is ambiguous — do NOT default to 7+"
+    - "Foundry utilization depth matters: basic API call = 4-6, advanced features = 7+"
+  red_flags:
+    - signal: "No reasoning chain visible — just single prompt-response"
+      max_reasoning_score: 4
+    - signal: "No Foundry usage evidence"
+      max_accuracy_score: 4
+    - signal: "Repository is private or inaccessible"
+      max_accuracy_score: 5
+    - signal: "Hardcoded responses or mock data only"
+      max_accuracy_score: 3
+  bonus_signals:
+    - signal: "Self-reflection or evaluation loop implemented"
+      bonus_criteria: "Reasoning & Multi-step Thinking"
+      min_score: 8
+    - signal: "Multi-agent architecture with clear role separation"
+      bonus_criteria: "Technical Implementation"
+      min_score: 7
+    - signal: "Grounding with external knowledge sources"
+      bonus_criteria: "Accuracy & Relevance"
+      min_score: 7
 
 criteria:
   - name: "Accuracy & Relevance"
     weight: 0.25
-    description: "提出物がシナリオ要件を正確に満たしているか。Foundry の活用度。コミュニケーションチーム支援としての適合性。"
+    description: "Does the submission accurately meet scenario requirements? Degree of Foundry utilization. Suitability as a communication team support agent."
     scoring_guide:
-      "1-3": "シナリオ要件を大幅に逸脱。Foundry の活用が最小限。"
-      "4-6": "基本的なシナリオ対応。Foundry を使用しているが活用度は限定的。"
-      "7-9": "シナリオに適切に対応。Foundry のモデル・ツールを効果的に活用。"
-      "10": "シナリオを超越した価値提供。Foundry の高度な機能を最大限活用。"
+      "1-3": "Significantly deviates from scenario requirements. Minimal Foundry usage."
+      "4-6": "Basic scenario coverage. Foundry is used but utilization is limited."
+      "7-9": "Appropriately addresses the scenario. Effectively uses Foundry models and tools."
+      "10": "Delivers value beyond the scenario. Maximizes advanced Foundry capabilities."
+    evidence_signals:
+      positive:
+        - "Foundry model deployment or API calls visible in code"
+        - "Scenario requirements mapped to implemented features"
+        - "Communication team use case clearly addressed"
+        - "Grounding with real data sources"
+      negative:
+        - "Scenario requirements not addressed"
+        - "Generic chatbot with no Foundry integration"
+        - "Only placeholder or mock responses"
 
   - name: "Reasoning & Multi-step Thinking"
     weight: 0.25
-    description: "推論能力の質。Chain-of-Thought、ReAct、Self-Reflection 等の推論パターンの実装。"
+    description: "Quality of reasoning. Implementation of reasoning patterns such as Chain-of-Thought, ReAct, Self-Reflection."
     scoring_guide:
-      "1-3": "単一ステップの処理のみ。推論パターン未実装。"
-      "4-6": "基本的な Chain-of-Thought。限定的な多段推論。"
-      "7-9": "複数の推論パターンを組み合わせ。自己修正メカニズムあり。"
-      "10": "高度な推論パターン完全実装。マルチエージェント構成。評価メトリクス設定済み。"
+      "1-3": "Single-step processing only. No reasoning patterns implemented."
+      "4-6": "Basic Chain-of-Thought. Limited multi-step reasoning."
+      "7-9": "Combines multiple reasoning patterns. Self-correction mechanism present."
+      "10": "Advanced reasoning patterns fully implemented. Multi-agent architecture. Evaluation metrics configured."
+    evidence_signals:
+      positive:
+        - "CoT prompting with explicit reasoning steps in output"
+        - "ReAct loop: observe → think → act cycle in code"
+        - "Self-reflection: agent reviews and corrects own output"
+        - "Multi-step workflow with intermediate state management"
+        - "Evaluation metrics (accuracy, relevance scores) tracked"
+      negative:
+        - "Single API call returning final answer directly"
+        - "No visible reasoning chain in agent logic"
+        - "Hardcoded decision trees without LLM reasoning"
 
   - name: "Creativity & Originality"
     weight: 0.20
-    description: "アイデアの独創性。ソーシャルメディアコンテンツ生成における革新的アプローチ。"
+    description: "Originality of the idea. Innovative approach to social media content generation."
     scoring_guide:
-      "1-3": "テンプレートベースの単純生成。独自性なし。"
-      "4-6": "一部創造的なアプローチ。カスタマイズされたプロンプト設計。"
-      "7-9": "ユニークなコンテンツ戦略。ブランド特化の高度な生成。"
-      "10": "革新的なコンテンツ生成パイプライン。業界をリードするアプローチ。"
+      "1-3": "Template-based simple generation. No originality."
+      "4-6": "Some creative approaches. Customized prompt design."
+      "7-9": "Unique content strategy. Brand-specific advanced generation."
+      "10": "Innovative content generation pipeline. Industry-leading approach."
+    evidence_signals:
+      positive:
+        - "Novel approach not seen in other submissions"
+        - "Custom content strategy tailored to specific brand/use case"
+        - "Unique data pipeline or processing architecture"
+        - "Original combination of reasoning techniques"
+      negative:
+        - "Standard tutorial-level implementation"
+        - "Nearly identical approach to another submission"
+        - "No differentiation from basic Foundry quickstart"
 
   - name: "User Experience & Presentation"
     weight: 0.15
-    description: "ユーザー体験。デモの質。ドキュメントの充実度。"
+    description: "User experience. Demo quality. Documentation completeness."
     scoring_guide:
-      "1-3": "デモなし。ドキュメント不足。"
-      "4-6": "スクリーンショットあり。基本的な README。"
-      "7-9": "対話的なデモ。詳細なセットアップ手順。サンプル入出力あり。"
-      "10": "プロダクション品質。包括的ドキュメント。動画デモ。"
+      "1-3": "No demo. Insufficient documentation."
+      "4-6": "Screenshots provided. Basic README."
+      "7-9": "Interactive demo. Detailed setup instructions. Sample inputs/outputs provided."
+      "10": "Production quality. Comprehensive documentation. Video demo."
+    evidence_signals:
+      positive:
+        - "Sample input/output pairs showing reasoning process"
+        - "Architecture diagram showing agent flow"
+        - "Video demonstrating multi-step reasoning"
+        - "Clear setup guide with prerequisites listed"
+      negative:
+        - "No demo or only static screenshots"
+        - "README lacks setup instructions"
+        - "No sample inputs/outputs provided"
 
   - name: "Technical Implementation"
     weight: 0.15
-    description: "技術的な完成度。コード品質。エラーハンドリング。グラウンディング。"
+    description: "Technical completeness. Code quality. Error handling. Grounding."
     scoring_guide:
-      "1-3": "最小限の実装。エラーハンドリングなし。"
-      "4-6": "基本的な構成。一部のエラー処理。"
-      "7-9": "堅牢な実装。外部ツール連携。適切なエラーハンドリング。"
-      "10": "プロダクション品質。モニタリング・安全対策完備。グラウンディング知識統合。"
+      "1-3": "Minimal implementation. No error handling."
+      "4-6": "Basic setup. Some error handling."
+      "7-9": "Robust implementation. External tool integration. Proper error handling."
+      "10": "Production quality. Monitoring and safety measures complete. Grounding knowledge integrated."
+    evidence_signals:
+      positive:
+        - "Clean code structure with separation of concerns"
+        - "External tool/API integration beyond basic LLM calls"
+        - "Error handling with graceful fallbacks"
+        - "Monitoring, logging, or observability setup"
+        - "Automated tests present"
+      negative:
+        - "Single-file implementation with no structure"
+        - "No error handling around API calls"
+        - "Hardcoded credentials or configuration"

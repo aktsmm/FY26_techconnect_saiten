@@ -9,11 +9,11 @@ from pydantic import BaseModel, Field
 
 
 # ---------------------------------------------------------------------------
-# Rubric (採点基準) models
+# Rubric models
 # ---------------------------------------------------------------------------
 
 class ScoringCriteria(BaseModel):
-    """1 つの採点基準項目."""
+    """A single scoring criterion."""
 
     name: str
     weight: float = Field(ge=0.0, le=1.0)
@@ -22,7 +22,7 @@ class ScoringCriteria(BaseModel):
 
 
 class Rubric(BaseModel):
-    """トラック別採点基準."""
+    """Track-specific scoring rubric."""
 
     track: str
     track_display_name: str
@@ -31,11 +31,11 @@ class Rubric(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Submission (提出物) models
+# Submission models
 # ---------------------------------------------------------------------------
 
 class Submission(BaseModel):
-    """Issue 一覧用の提出物サマリー."""
+    """Submission summary for Issue listing."""
 
     issue_number: int
     title: str
@@ -47,7 +47,7 @@ class Submission(BaseModel):
 
 
 class SubmissionDetail(BaseModel):
-    """Issue 詳細情報 (採点対象)."""
+    """Detailed submission info (scoring target)."""
 
     issue_number: int
     title: str
@@ -66,11 +66,11 @@ class SubmissionDetail(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# Score (採点結果) models
+# Score models
 # ---------------------------------------------------------------------------
 
 class CriteriaScore(BaseModel):
-    """個別基準のスコア."""
+    """Score for an individual criterion."""
 
     name: str
     score: int = Field(ge=1, le=10)
@@ -78,7 +78,7 @@ class CriteriaScore(BaseModel):
 
 
 class SubmissionScore(BaseModel):
-    """1 提出物の採点結果."""
+    """Scoring result for a single submission."""
 
     issue_number: int
     project_name: str
@@ -92,7 +92,7 @@ class SubmissionScore(BaseModel):
 
 
 class ScoreMetadata(BaseModel):
-    """scores.json のメタデータ."""
+    """Metadata for scores.json."""
 
     last_updated: str
     version: str = "1.0"
@@ -101,7 +101,7 @@ class ScoreMetadata(BaseModel):
 
 
 class ScoreStore(BaseModel):
-    """scores.json 全体."""
+    """Top-level scores.json structure."""
 
     metadata: ScoreMetadata
     scores: list[SubmissionScore] = Field(default_factory=list)

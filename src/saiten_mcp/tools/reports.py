@@ -1,7 +1,7 @@
-"""Saiten MCP — レポート生成 (Reports) ツール.
+"""Saiten MCP — Reports tool.
 
-data/scores.json の採点結果から Markdown ランキングレポートを生成し、
-reports/ ディレクトリに出力する。
+Generates Markdown ranking reports from data/scores.json
+and outputs them to the reports/ directory.
 """
 
 from __future__ import annotations
@@ -31,27 +31,27 @@ TRACK_DISPLAY: dict[str, str] = {
 
 
 def _load_scores() -> dict[str, Any]:
-    """scores.json を読み込む。存在しない・空の場合は空ストアを返す."""
+    """Load scores.json. Returns an empty store if file is missing or empty."""
     if not SCORES_FILE.exists():
-        logger.warning("scores.json が見つかりません: %s", SCORES_FILE)
+        logger.warning("scores.json not found: %s", SCORES_FILE)
         return {"metadata": {}, "scores": []}
 
     try:
         with open(SCORES_FILE, "r", encoding="utf-8") as f:
             data = json.load(f)
     except (json.JSONDecodeError, OSError) as exc:
-        logger.error("scores.json の読み込みに失敗しました: %s", exc)
+        logger.error("Failed to load scores.json: %s", exc)
         return {"metadata": {}, "scores": []}
 
     if not isinstance(data, dict):
-        logger.warning("scores.json のフォーマットが不正です")
+        logger.warning("scores.json has invalid format")
         return {"metadata": {}, "scores": []}
 
     return data
 
 
 def _fmt_score(score: float | int) -> str:
-    """スコアを小数第 1 位までフォーマットする."""
+    """Format a score to 1 decimal place."""
     return f"{float(score):.1f}"
 
 
@@ -60,18 +60,18 @@ def _build_ranking_md(
     metadata: dict[str, Any],
     top_n: int,
 ) -> str:
-    """Markdown ランキングレポートを組み立てる."""
+    """Build a Markdown ranking report."""
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     scored_count = metadata.get("scored_count", len(scores))
     total_submissions = metadata.get("total_submissions", len(scores))
 
     lines: list[str] = []
 
-    # --- ヘッダー ---
-    lines.append("# 🏆 Agents League @ TechConnect — 採点ランキング")
+    # --- Header ---
+    lines.append("# 🏆 Agents League @ TechConnect — Scoring Ranking")
     lines.append("")
-    lines.append(f"> 自動生成: {timestamp}")
-    lines.append(f"> 採点済み: {scored_count} / {total_submissions} 件")
+    lines.append(f"> Auto-generated: {timestamp}")
+    lines.append(f"> Scored: {scored_count} / {total_submissions} submissions")
     lines.append("")
     lines.append("---")
     lines.append("")
@@ -80,8 +80,8 @@ def _build_ranking_md(
     top_entries = scores[:top_n]
     lines.append(f"## 🥇 Top {top_n}")
     lines.append("")
-    lines.append("| 順位 | Project | Track | Submitter | 総合スコア |")
-    lines.append("|------|---------|-------|-----------|------------|")
+    lines.append("| Rank | Project | Track | Submitter | Score |")
+    lines.append("|------|---------|-------|-----------|-------|")
     for rank, entry in enumerate(top_entries, start=1):
         name = entry.get("project_name", "N/A")
         track = entry.get("track", "")
@@ -99,8 +99,8 @@ def _build_ranking_md(
     lines.append("---")
     lines.append("")
 
-    # --- トラック別 Top 3 ---
-    lines.append("## 🏅 トラック別 Top 3")
+    # --- Track Top 3 ---
+    lines.append("## 🏅 Track Top 3")
     lines.append("")
 
     for track_key in ["creative-apps", "reasoning-agents", "enterprise-agents"]:
@@ -108,8 +108,8 @@ def _build_ranking_md(
         display = TRACK_DISPLAY.get(track_key, track_key)
         lines.append(f"### {emoji} {display}")
         lines.append("")
-        lines.append("| 順位 | Project | Submitter | 総合スコア |")
-        lines.append("|------|---------|-----------|------------|")
+        lines.append("| Rank | Project | Submitter | Score |")
+        lines.append("|------|---------|-----------|-------|")
 
         track_scores = [s for s in scores if s.get("track") == track_key]
         for rank, entry in enumerate(track_scores[:3], start=1):
@@ -126,11 +126,11 @@ def _build_ranking_md(
     lines.append("---")
     lines.append("")
 
-    # --- 全提出物スコア一覧 ---
-    lines.append("## 📊 全提出物スコア一覧")
+    # --- Full Score List ---
+    lines.append("## 📊 All Submissions")
     lines.append("")
-    lines.append("| # | Issue | Project | Track | Submitter | Score | 評価日 |")
-    lines.append("|---|-------|---------|-------|-----------|-------|--------|")
+    lines.append("| # | Issue | Project | Track | Submitter | Score | Scored At |")
+    lines.append("|---|-------|---------|-------|-----------|-------|-----------|")
 
     for idx, entry in enumerate(scores, start=1):
         issue = entry.get("issue_number", "")
@@ -155,8 +155,8 @@ def _build_ranking_md(
     lines.append("---")
     lines.append("")
 
-    # --- 個別評価サマリー ---
-    lines.append("## 📋 個別評価サマリー")
+    # --- Individual Evaluation Summaries ---
+    lines.append("## 📋 Individual Evaluation Summaries")
     lines.append("")
 
     for entry in scores:
@@ -171,15 +171,15 @@ def _build_ranking_md(
         improvements_list: list[str] = entry.get("improvements", [])
         summary = entry.get("summary", "")
 
-        strengths = "、".join(strengths_list) if strengths_list else "—"
-        improvements = "、".join(improvements_list) if improvements_list else "—"
+        strengths = ", ".join(strengths_list) if strengths_list else "—"
+        improvements = ", ".join(improvements_list) if improvements_list else "—"
 
         lines.append(f"### #{issue}: {name}")
-        lines.append(f"- **トラック**: {emoji} {display}")
-        lines.append(f"- **スコア**: {score}/100")
-        lines.append(f"- **強み**: {strengths}")
-        lines.append(f"- **改善点**: {improvements}")
-        lines.append(f"- **総評**: {summary}")
+        lines.append(f"- **Track**: {emoji} {display}")
+        lines.append(f"- **Score**: {score}/100")
+        lines.append(f"- **Strengths**: {strengths}")
+        lines.append(f"- **Improvements**: {improvements}")
+        lines.append(f"- **Summary**: {summary}")
         lines.append("")
 
     return "\n".join(lines)
@@ -189,40 +189,41 @@ def _build_ranking_md(
 async def generate_ranking_report(
     top_n: int = 10,
 ) -> dict[str, Any]:
-    """ランキングレポートを Markdown で生成し reports/ranking.md に出力する。
+    """Generate a Markdown ranking report and save to reports/ranking.md.
 
-    data/scores.json の採点結果を読み込み、総合順位・トラック別順位・
-    個別評価サマリーを含むレポートを自動生成する。
+    Reads scoring results from data/scores.json and produces a report
+    containing overall ranking, per-track ranking, and individual
+    evaluation summaries.
 
     Args:
-        top_n: 上位何件を Top セクションに強調表示するか（デフォルト: 10）。
+        top_n: Number of top entries to highlight (default: 10).
 
     Returns:
-        生成結果の辞書 (report_path, total_scored, top_n, top_entries)。
+        Result dict (report_path, total_scored, top_n, top_entries).
     """
     store = _load_scores()
     scores: list[dict[str, Any]] = store.get("scores", [])
     metadata: dict[str, Any] = store.get("metadata", {})
 
     if not scores:
-        logger.info("採点データがありません。空のレポートを生成します。")
+        logger.info("No scoring data found. Generating empty report.")
 
-    # weighted_total で降順ソート（保険: 保存時にもソート済み）
+    # Sort by weighted_total descending (insurance: already sorted on save)
     scores.sort(key=lambda x: x.get("weighted_total", 0), reverse=True)
 
-    # Markdown 生成
+    # Generate Markdown
     md_content = _build_ranking_md(scores, metadata, top_n)
 
-    # ファイル出力
+    # Write to file
     report_path = REPORTS_DIR / "ranking.md"
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(md_content)
 
-    logger.info("ランキングレポートを生成しました: %s", report_path)
+    logger.info("Ranking report generated: %s", report_path)
 
-    # Top N サマリーを返却用に構築
+    # Build top N summary for return value
     top_entries: list[dict[str, Any]] = []
     for rank, entry in enumerate(scores[:top_n], start=1):
         top_entries.append(

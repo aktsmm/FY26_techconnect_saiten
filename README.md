@@ -1,35 +1,37 @@
-# Saiten — Agents League @ TechConnect 採点エージェント
+# Saiten — Agents League @ TechConnect Scoring Agent
 
-> **提出トラック**: 🎨 Creative Apps — GitHub Copilot
+> **Submission Track**: 🎨 Creative Apps — GitHub Copilot
 
-## 概要
+## Overview
 
-VS Code 上で `@saiten 採点して` と入力するだけで、Agents League @ TechConnect ハッカソンの全提出物を自動採点し、ランキングを生成するマルチエージェントシステムです。
+A multi-agent system that automatically scores all Agents League @ TechConnect hackathon submissions and generates ranking reports — just type `@saiten score all` in VS Code.
 
-**Orchestrator-Workers + Prompt Chaining** パターンで設計された 4 つの Copilot カスタムエージェントが、MCP (Model Context Protocol) サーバーを介して GitHub Issue の収集・評価・レポート生成を自律的に実行します。
+Designed with **Orchestrator-Workers + Prompt Chaining + Evaluator-Optimizer** patterns, 6 Copilot custom agents autonomously collect GitHub Issue submissions, evaluate them against track-specific rubrics, validate scoring consistency, and generate reports via an MCP (Model Context Protocol) server.
 
 ---
 
-## エージェントワークフロー
+## Agent Workflow
 
-### 設計パターン
+### Design Patterns
 
-- **Orchestrator-Workers**: `@saiten` が 3 つの専門サブエージェントに委譲
-- **Prompt Chaining**: Collect → Score → Report の順次実行（各ステップに Gate）
-- **SRP (Single Responsibility Principle)**: 1 エージェント = 1 責務
+- **Orchestrator-Workers**: `@saiten` delegates to 5 specialized sub-agents
+- **Prompt Chaining**: Collect → Score → Review → Report with Gates at each step
+- **Evaluator-Optimizer**: Reviewer validates scores, triggers re-scoring on FLAG
+- **Handoff**: Commenter posts feedback only after explicit user confirmation
+- **SRP (Single Responsibility Principle)**: 1 agent = 1 responsibility
 
-### ワークフロー図
+### Workflow Diagram
 
 ```mermaid
 flowchart TD
-    User["👤 User\n@saiten 採点して"]
+    User["👤 User\n@saiten score all"]
     
     subgraph Orchestrator["🏆 @saiten (Orchestrator)"]
-        Route["Intent Routing\nUC-01~06 分岐"]
-        Gate1{"Gate: MCP\n接続確認"}
-        Gate2{"Gate: データ\n完全性チェック"}
-        Gate3{"Gate: スコア\n妥当性チェック"}
-        Gate4{"Gate: レビュー\nPASS/FLAG?"}
+        Route["Intent Routing\nUC-01~06"]
+        Gate1{"Gate: MCP\nConnectivity"}
+        Gate2{"Gate: Data\nCompleteness"}
+        Gate3{"Gate: Score\nValidity"}
+        Gate4{"Gate: Review\nPASS/FLAG?"}
         Integrate["Result Integration\n& User Report"]
         Handoff["[Handoff]\n💬 Post Feedback"]
     end
@@ -122,7 +124,7 @@ flowchart TD
     style MCP fill:#0f3460,stroke:#533483,color:#fff
 ```
 
-### エージェント一覧
+### Agent Roster
 
 | Agent | Role | SRP Responsibility | MCP Tools |
 |-------|------|--------------------|-----------|
@@ -133,22 +135,22 @@ flowchart TD
 | 📋 `@saiten-reporter` | **Worker** | Ranking report generation & trend analysis | `generate_ranking_report` |
 | 💬 `@saiten-commenter` | **Handoff** | GitHub Issue feedback comments (user-confirmed) | `gh issue comment` |
 
-### 設計原則の適用
+### Design Principles Applied
 
 | Principle | How Applied |
 |-----------|-------------|
-| **SRP** | 各エージェントが 1 つの責務のみ担当（6 エージェント × 1 責務） |
-| **Fail Fast** | 各ステップに Gate を設置、異常時は即座に報告 |
-| **SSOT** | スコアデータは `data/scores.json` に一元管理 |
-| **Feedback Loop** | Scorer → Reviewer → Re-score ループ（Evaluator-Optimizer パターン） |
-| **Human-in-the-Loop** | Commenter は Handoff で明示的なユーザー承認後に実行 |
-| **Transparency** | Todo リストで進捗表示、各 Gate で状況報告 |
-| **Idempotency** | 再採点は上書き方式、何度実行しても安全 |
-| **ISP** | 各サブエージェントに必要なツール・データのみ渡す |
+| **SRP** | Each agent handles exactly 1 responsibility (6 agents × 1 duty) |
+| **Fail Fast** | Gates at every step; anomalies reported immediately |
+| **SSOT** | All score data centralized in `data/scores.json` |
+| **Feedback Loop** | Scorer → Reviewer → Re-score loop (Evaluator-Optimizer pattern) |
+| **Human-in-the-Loop** | Commenter runs only after explicit user confirmation via Handoff |
+| **Transparency** | Todo list shows progress; each Gate reports status |
+| **Idempotency** | Re-scoring overwrites; safe to run multiple times |
+| **ISP** | Each sub-agent receives only the tools and data it needs |
 
 ---
 
-## システムアーキテクチャ
+## System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -176,54 +178,55 @@ flowchart TD
 
 ---
 
-## セットアップ
+## Setup
 
-### 前提条件
+### Prerequisites
 
 - Python 3.10+
-- [uv](https://docs.astral.sh/uv/) (パッケージマネージャー)
-- [gh CLI](https://cli.github.com/) (GitHub CLI、認証済み)
+- [uv](https://docs.astral.sh/uv/) (package manager)
+- [gh CLI](https://cli.github.com/) (GitHub CLI, authenticated)
 - VS Code + GitHub Copilot
 
-### インストール
+### Installation
 
 ```bash
-# リポジトリをクローン
+# Clone the repository
 git clone <repo-url>
 cd FY26_techconnect_saiten
 
-# Python 仮想環境を作成
+# Create Python virtual environment
 uv venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
-# 依存パッケージをインストール
+# Install dependencies
 uv pip install -e .
 
-# gh CLI の認証確認
+# Verify gh CLI authentication
 gh auth status
 ```
 
-### VS Code 設定
+### VS Code Configuration
 
-`.vscode/mcp.json` が自動で MCP サーバーを設定します。追加設定は不要です。
-
----
-
-## 使い方
-
-VS Code のチャットパネルで以下のように入力します:
-
-| コマンド                          | 説明                     | 使用エージェント |
-| --------------------------------- | ------------------------ | ---------------- |
-| `@saiten 採点して`                | 全提出物を一括採点       | collector → scorer → reporter |
-| `@saiten #48 を採点して`          | 個別提出物を採点         | collector → scorer → reporter |
-| `@saiten ランキング出して`        | ランキングレポートを生成 | reporter のみ |
-| `@saiten #48 を再採点して`        | 個別提出物を再採点       | collector → scorer → reporter |
-| `@saiten Creative の採点基準は？` | 採点基準を表示           | 直接応答 (MCP) |
+`.vscode/mcp.json` automatically configures the MCP server. No additional setup required.
 
 ---
 
-## プロジェクト構成
+## Usage
+
+Type the following in the VS Code chat panel:
+
+| Command | Description | Agents Used |
+|---------|-------------|-------------|
+| `@saiten score all` | Score all submissions | collector → scorer → reviewer → reporter |
+| `@saiten score #48` | Score a single submission | collector → scorer → reviewer → reporter |
+| `@saiten ranking` | Generate ranking report | reporter only |
+| `@saiten rescore #48` | Re-score a submission | collector → scorer → reviewer → reporter |
+| `@saiten show rubric for Creative` | Display scoring rubric | Direct response (MCP) |
+| `@saiten review scores` | Review score consistency | reviewer only |
+
+---
+
+## Project Structure
 
 ```
 FY26_techconnect_saiten/
@@ -258,17 +261,17 @@ FY26_techconnect_saiten/
 
 ---
 
-## 採点トラック
+## Scoring Tracks
 
-| トラック             | 基準数 | 特記                              |
-| -------------------- | ------ | --------------------------------- |
-| 🎨 Creative Apps     | 5 基準 | Community Vote (10%) を除外し按分 |
-| 🧠 Reasoning Agents  | 5 基準 | 全体共通基準を採用                |
-| 💼 Enterprise Agents | 3 基準 | 独自の 3 軸評価                   |
+| Track | Criteria | Notes |
+|-------|----------|-------|
+| 🎨 Creative Apps | 5 criteria | Community Vote (10%) excluded; remaining 90% prorated to 100% |
+| 🧠 Reasoning Agents | 5 criteria | Uses common overall criteria |
+| 💼 Enterprise Agents | 3 criteria | Custom 3-axis evaluation |
 
 ---
 
-## 技術スタック
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -281,6 +284,6 @@ FY26_techconnect_saiten/
 
 ---
 
-## ライセンス
+## License
 
 MIT

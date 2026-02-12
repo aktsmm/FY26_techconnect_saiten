@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "last_updated": "2026-02-12T23:17:03.149968+00:00",
+    "last_updated": "2026-02-12T23:34:45.230505+00:00",
     "version": "1.0",
     "total_submissions": 0,
-    "scored_count": 42
+    "scored_count": 43
   },
   "scores": [
     {
@@ -592,6 +592,28 @@
       "improvements": [],
       "summary": "Architect Agent is a creative apps submission scoring 69.5/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
       "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 9999,
+      "project_name": "Test Project",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 7,
+        "Reasoning & Multi-step Thinking": 6,
+        "Creativity & Originality": 8,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 6
+      },
+      "weighted_total": 67.8,
+      "strengths": [
+        "Good test coverage",
+        "Clean code"
+      ],
+      "improvements": [
+        "Needs better docs"
+      ],
+      "summary": "A solid test project.",
+      "scored_at": "2026-02-12T23:34:45.230505+00:00"
     },
     {
       "issue_number": 40,

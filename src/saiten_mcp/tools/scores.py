@@ -1,7 +1,7 @@
-"""Saiten MCP — スコア永続化 (Scores) ツール.
+"""Saiten MCP — Scores persistence tool.
 
-採点結果を data/scores.json に保存する。冪等性を保証し、
-既存スコアは上書き方式で更新する。
+Persists scoring results to data/scores.json with idempotent
+merge (existing scores are overwritten by issue_number).
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ SCORES_FILE = DATA_DIR / "scores.json"
 
 
 def _load_scores() -> dict[str, Any]:
-    """scores.json を読み込む。存在しない場合は空のストアを返す."""
+    """Load scores.json. Returns an empty store if file does not exist."""
     if not SCORES_FILE.exists():
         return {
             "metadata": {
@@ -36,12 +36,12 @@ def _load_scores() -> dict[str, Any]:
         with open(SCORES_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except (json.JSONDecodeError, OSError) as exc:
-        # 破損時はバックアップ作成後に新規作成
-        logger.warning("scores.json 読み込み失敗。バックアップを作成します: %s", exc)
+        # Create backup of corrupted file before resetting
+        logger.warning("Failed to load scores.json. Creating backup: %s", exc)
         backup_path = SCORES_FILE.with_suffix(".json.bak")
         try:
             shutil.copy2(SCORES_FILE, backup_path)
-            logger.info("バックアップ作成: %s", backup_path)
+            logger.info("Backup created: %s", backup_path)
         except OSError:
             pass
         return {
@@ -56,7 +56,7 @@ def _load_scores() -> dict[str, Any]:
 
 
 def _save_scores(store: dict[str, Any]) -> None:
-    """scores.json に書き込む."""
+    """Write store to scores.json."""
     SCORES_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(SCORES_FILE, "w", encoding="utf-8") as f:
         json.dump(store, f, ensure_ascii=False, indent=2)
@@ -66,12 +66,12 @@ def _merge_scores(
     existing: list[dict[str, Any]],
     new: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], int]:
-    """既存スコアに新規スコアをマージする (冪等性保証).
+    """Merge new scores into existing scores (idempotent).
 
-    issue_number をキーとして上書き。新規は追加。
+    Uses issue_number as key; existing entries are overwritten.
 
     Returns:
-        (マージ済みリスト, 上書き件数)
+        (merged list, number of overwrites)
     """
     score_map: dict[int, dict[str, Any]] = {
         s["issue_number"]: s for s in existing
@@ -96,27 +96,27 @@ def _merge_scores(
 
 @mcp.tool()
 async def save_scores(scores: list[dict]) -> dict[str, Any]:
-    """採点結果を data/scores.json に保存する。
+    """Save scoring results to data/scores.json.
 
-    既存スコアがある Issue は上書き（冪等性保証）。
-    新規 Issue は追加される。
+    Existing scores for the same Issue are overwritten (idempotent).
+    New Issues are appended.
 
     Args:
-        scores: 採点結果のリスト。各要素は以下のキーを含む辞書:
+        scores: List of scoring result dicts. Each must contain:
             - issue_number (int)
             - project_name (str)
             - track (str)
-            - criteria_scores (dict[str, int]): 各基準のスコア (1-10)
-            - weighted_total (float): 加重合計 (0-100)
+            - criteria_scores (dict[str, int]): per-criterion scores (1-10)
+            - weighted_total (float): weighted total (0-100)
             - strengths (list[str])
             - improvements (list[str])
             - summary (str)
 
     Returns:
-        保存結果の要約辞書 (saved_count, updated_count, total_in_store, file_path)。
+        Summary dict (saved_count, updated_count, total_in_store, file_path).
 
     Raises:
-        OSError: ディスク書き込み失敗時。
+        OSError: If disk write fails.
     """
     store = _load_scores()
     existing = store.get("scores", [])
@@ -138,7 +138,7 @@ async def save_scores(scores: list[dict]) -> dict[str, Any]:
     }
 
     logger.info(
-        "save_scores: 新規=%d, 上書き=%d, 合計=%d",
+        "save_scores: new=%d, updated=%d, total=%d",
         new_count,
         updated_count,
         len(merged),
