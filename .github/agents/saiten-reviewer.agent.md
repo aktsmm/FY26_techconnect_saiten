@@ -32,10 +32,10 @@ It checks the FINAL scores (baseline + AI adjustments) for problems.
 
 ## Available Tools
 
-| Tool | Purpose |
-|------|---------|
-| `get_scoring_rubric(track)` | Load rubric for comparison |
-| `read/readFile` | Read scores.json for bulk analysis |
+| Tool                        | Purpose                            |
+| --------------------------- | ---------------------------------- |
+| `get_scoring_rubric(track)` | Load rubric for comparison         |
+| `read/readFile`             | Read scores.json for bulk analysis |
 
 ---
 
@@ -136,7 +136,7 @@ It checks the FINAL scores (baseline + AI adjustments) for problems.
 11. [Output] Review Report:
    - PASS: No critical issues found
    - FLAG: List of submissions needing re-scoring with reasons
-     { issue_number, current_score, concern, 
+     { issue_number, current_score, concern,
        evidence_quality: "pass"|"fail"|"weak",
        suggested_action }
 ```

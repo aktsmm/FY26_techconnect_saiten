@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "last_updated": "2026-02-13T05:30:06.585379+00:00",
+    "last_updated": "2026-02-13T12:31:57.644164+00:00",
     "version": "1.0",
     "total_submissions": 0,
-    "scored_count": 46
+    "scored_count": 50
   },
   "scores": [
     {
@@ -13,16 +13,16 @@
       "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/27",
       "github_username": "ethanjenkins1",
       "criteria_scores": {
-        "Accuracy & Relevance": 10,
+        "Accuracy & Relevance": 9,
         "Reasoning & Multi-step Thinking": 10,
         "Creativity & Originality": 9,
         "User Experience & Presentation": 9,
         "Technical Implementation": 9
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social media, content. Grounding: search, rag, retrieval. Repo: 17 source, 3 test, 49 total files, 12 commits",
-        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought. ReAct signals: react, act. Self-reflection: self-correct, self-reflection, evaluate. Multi-step flow: orchestrat, pipeline",
-        "Creativity & Originality": "Innovation signals: differentiator, custom. Technology stack: Key Technologies Used in TrendSurf Copilot:**, | Technology | Role |, |---|---|, | **Azure OpenAI Service** (gpt-4.1) | LLM powering all 4 agents |, | **Azure OpenAI Assistants API** | Agent runtime — threads. Detailed problem description. Domain-specific approach: compliance, brand. Multi-language: .py, .ts, .tsx",
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: content, social media. Grounding: retrieval, search, rag. Repo: 17 source, 3 test, 49 total files, 12 commits",
+        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought. ReAct signals: react, act. Self-reflection: self-reflection, evaluate, self-correct. Multi-step flow: orchestrat, pipeline",
+        "Creativity & Originality": "Innovation signals: custom, differentiator. Technology stack: Key Technologies Used in TrendSurf Copilot:**, | Technology | Role |, |---|---|, | **Azure OpenAI Service** (gpt-4.1) | LLM powering all 4 agents |, | **Azure OpenAI Assistants API** | Agent runtime — threads. Detailed problem description. Domain-specific approach: brand, compliance. Multi-language: .py, .ts, .tsx",
         "User Experience & Presentation": "Demo: screenshots. Detailed README (31 sections). Setup instructions present. Architecture or flow diagram included",
         "Technical Implementation": "Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in README. Repo: 17 source, 3 test, 49 total files, 12 commits"
       },
@@ -33,20 +33,68 @@
         ".env.example provided for secure config",
         "Multi-language project (.py, .ts, .tsx)"
       ],
-      "weighted_total": 95.0,
+      "weighted_total": 92.5,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social",
-        "Reasoning & Multi-step Thinking: CoT pattern: chain-of-thought. ReAct signals: react, act. Self-reflection: self-correct, self-reflection, evaluate. Mult",
-        "Creativity & Originality: Innovation signals: differentiator, custom. Technology stack: Key Technologies Used in TrendSurf Copilot:**, | Technolog",
-        "User Experience & Presentation: Demo: screenshots. Detailed README (31 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation: Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in RE"
+        "Genuine multi-agent pipeline with 4 distinct reasoning patterns",
+        "WorkIQ integration pulls real M365 context",
+        "Brand Guard uses vector store for semantic compliance checking",
+        "Comprehensive README with screenshots"
       ],
       "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Could add automated testing for agent outputs",
+        "Brand policy enforcement could include more configurable rules"
       ],
-      "summary": "TrendSurf (reasoning-agents track, 95.0/100): **TrendSurf Copilot** is an AI-powered social media content pipeline for regulated industries (like fintech). You give it a trending topic, and it automatically produces publish-ready posts for Linked",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Multi-agent social media pipeline for regulated industries with 4 specialized agents chaining reasoning patterns (ReAct, CoT, Structured Generation, Self-Reflection), brand policy enforcement via vector store, and WorkIQ M365 data integration.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "TrendSurf: Excellent 4-agent pipeline with real Azure OpenAI, WorkIQ M365, and brand policy vector store. Slight downgrade on Accuracy (narrow social media domain).",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 58,
+      "project_name": "StoryCircuit",
+      "track": "reasoning-agents",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/58",
+      "github_username": "vrengar",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 10,
+        "Creativity & Originality": 7,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 10
+      },
+      "evidence": {
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, foundry. Checklist: 100% met. Communication/content scenario: social media, content, communication. Grounding: retrieval, search, rag, knowledge base",
+        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought. ReAct signals: react, act. Self-reflection: self-reflection. Multi-step flow: orchestrat, pipeline, workflow",
+        "Creativity & Originality": "Innovation signals: custom. Technology stack: **Azure AI Foundry** - AI agent orchestration with Chain-of-Thought reasoning, **Azure Cosmos DB** - NoSQL database for content storage, **Azure Container Apps** - Compute for App Hosting, **FastAPI** - Python web framework for REST API, **Model Context Protocol (MCP)** - Tool integration for Microsoft Docs search. Detailed problem description. Domain-specific approach: brand, compliance",
+        "User Experience & Presentation": "Demo: screenshots. Detailed README (35 sections). Setup instructions present. Architecture or flow diagram included",
+        "Technical Implementation": "Error handling documented. Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in README"
+      },
+      "confidence": "high",
+      "red_flags_detected": [],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        "Automated tests present",
+        "Substantial codebase (35 source files)",
+        "CI/CD pipeline configured",
+        ".env.example provided for secure config",
+        "Containerized (Dockerfile found)"
+      ],
+      "weighted_total": 90.0,
+      "strengths": [
+        "Large knowledge base (987 lines) for Chain-of-Thought reasoning",
+        "MCP tool integration for real-time Microsoft Docs search",
+        "Containerized deployment with Dockerfile",
+        "35 source files with 8 commits"
+      ],
+      "improvements": [
+        "Differentiate from other social media content tools in cohort",
+        "Add evaluation metrics for content quality",
+        "Expand beyond social media generation"
+      ],
+      "summary": "Technical narrative architect transforming complex topics into platform-optimized social media content via Azure AI Foundry. Features MCP tool integration for Microsoft Docs search, 987-line knowledge base for CoT reasoning, containerized deployment. Strong engineering but shares crowded social media content domain.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "StoryCircuit: Strong 35-file codebase with 987-line knowledge base and MCP tools. Dockerized deployment. BUT it is another social media content generator - domain overlap with #27, #38, #43, #12. Creativity downgraded for crowded domain. Accuracy slightly lowered.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 38,
@@ -55,131 +103,44 @@
       "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/38",
       "github_username": "sureshpaulraj",
       "criteria_scores": {
-        "Accuracy & Relevance": 10,
+        "Accuracy & Relevance": 9,
         "Reasoning & Multi-step Thinking": 10,
-        "Creativity & Originality": 8,
+        "Creativity & Originality": 7,
         "User Experience & Presentation": 9,
-        "Technical Implementation": 10
+        "Technical Implementation": 8
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social media, campaign, content. Grounding: search, grounding, rag",
-        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought. ReAct signals: react, act, observe, think. Self-reflection: self-reflection. Multi-step flow: workflow, orchestrat, pipeline",
-        "Creativity & Originality": "Innovation signals: custom. Technology stack: Backend (Python)**, Microsoft Agent Framework — multi-agent orchestration (GroupChat with Creator, Reviewer, Publisher agents), Azure AI Projects SDK — Azure AI integration. Detailed problem description. Domain-specific approach: brand. Multi-language: .py, .js, .tsx, .ts. Only 2 commits",
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: campaign, content, social media. Grounding: search, rag, grounding",
+        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought. ReAct signals: observe, act, react, think. Self-reflection: self-reflection. Multi-step flow: orchestrat, pipeline, workflow",
+        "Creativity & Originality": "Innovation signals: custom. Technology stack: Backend (Python)**, Microsoft Agent Framework — multi-agent orchestration (GroupChat with Creator, Reviewer, Publisher agents), Azure AI Projects SDK — Azure AI integration. Detailed problem description. Domain-specific approach: brand. Multi-language: .ts, .py, .js, .tsx",
         "User Experience & Presentation": "Demo: screenshots. Detailed README (23 sections). Setup instructions present. Architecture or flow diagram included",
         "Technical Implementation": "Error handling documented. Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in README"
       },
       "confidence": "high",
-      "red_flags_detected": [
-        "Very few commits (2) — may be template or rushed"
-      ],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        "Automated tests present",
-        "Substantial codebase (28 source files)",
-        "CI/CD pipeline configured",
-        ".env.example provided for secure config",
-        "Multi-language project (.py, .js, .tsx, .ts)"
-      ],
-      "weighted_total": 94.5,
-      "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social",
-        "Reasoning & Multi-step Thinking: CoT pattern: chain-of-thought. ReAct signals: react, act, observe, think. Self-reflection: self-reflection. Multi-step f",
-        "Creativity & Originality: Innovation signals: custom. Technology stack: Backend (Python)**, Microsoft Agent Framework — multi-agent orchestration ",
-        "User Experience & Presentation: Demo: screenshots. Detailed README (23 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation: Error handling documented. Automated tests present. Security measures documented. Multi-agent or tool integration archit"
-      ],
-      "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
-      ],
-      "summary": "Zavatravel (reasoning-agents track, 94.5/100): Three AI agents collaborate in a group chat to generate, review, and publish platform-ready social media content for Zava Travel Inc.\n\n- **Creator** | Azure OpenAI (GPT-5.x) | Chain-of-Thought (5 step",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 32,
-      "project_name": "SovereignFit",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/32",
-      "github_username": "danieletten",
-      "criteria_scores": {
-        "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 9,
-        "Creativity & Originality": 7,
-        "UX & Presentation": 9,
-        "Reliability & Safety": 9
-      },
-      "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Checklist: 100% requirements met. Detailed description (742 chars). Repo: 14 source, 4 test, 42 total files, 1 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: . Multi-agent architecture: multi-agent, orchestrat. Error handling or recovery logic documented",
-        "Creativity & Originality": "Novelty signals: custom. Diverse technology combination: FastMCP (Model Context Protocol) — MCP server with 5 tools for GitHub Copilot, Rich — Interactive terminal UI with color-coded score bars, radar charts, medal rankings, GitHub Copilot Agent Mode — Primary development tool (~90% of 4. Detailed project description with technical highlights. Only 1 commits",
-        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 30 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: .env, gitignore. Error handling documented. Testing documented (automated tests). Checklist confirms no hardcoded secrets. 4 test files found. .gitignore present"
-      },
-      "confidence": "high",
-      "red_flags_detected": [
-        "Very few commits (1) — may be template or rushed"
-      ],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        "Automated tests present"
-      ],
-      "weighted_total": 86.7,
-      "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Chec",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: . Multi-agent architecture: multi-agent, orchestrat. Error handling or recovery logic documented",
-        "Creativity & Originality: Novelty signals: custom. Diverse technology combination: FastMCP (Model Context Protocol) — MCP server with 5 tools for ",
-        "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 30 sections. Setup instructions included. Architecture d",
-        "Reliability & Safety: Security considerations: .env, gitignore. Error handling documented. Testing documented (automated tests). Checklist con"
-      ],
-      "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
-      ],
-      "summary": "SovereignFit (creative-apps track, 86.7/100): SovereignFit is a multi-agent reasoning pipeline that analyzes workload characteristics and recommends the optimal Azure deployment model. It evaluates 5 models (Public Azure, Azure Local Connected, H",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 23,
-      "project_name": "repo-analyzer",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/23",
-      "github_username": "olivomarco",
-      "criteria_scores": {
-        "Accuracy & Relevance": 8,
-        "Reasoning & Multi-step Thinking": 9,
-        "Creativity & Originality": 7,
-        "UX & Presentation": 9,
-        "Reliability & Safety": 10
-      },
-      "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (302 chars). Repo: 25 source, 19 test, 58 total files, 5 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: . Multi-agent architecture: orchestrat. Error handling or recovery logic documented",
-        "Creativity & Originality": "Novelty signals: custom. Detailed project description with technical highlights",
-        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 38 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: .env, environment variable. Error handling documented. Testing documented (automated tests). Checklist confirms no hardcoded secrets. Verified 19 test files. .gitignore present"
-      },
-      "confidence": "high",
       "red_flags_detected": [],
       "bonus_signals_detected": [
+        "MCP integration found",
         "Automated tests present",
-        "Substantial codebase (25 source files)",
-        "Verified: 19 test files in repo",
-        ".env.example provided for secure config"
+        "Substantial codebase (31 source files)",
+        "Verified: 12 test files in repo",
+        "CI/CD pipeline configured",
+        "Multi-language project (.ts, .py, .js, .tsx)"
       ],
-      "weighted_total": 86.7,
+      "weighted_total": 87.0,
       "strengths": [
-        "Accuracy & Relevance: Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (302 chars).",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: . Multi-agent architecture: orchestrat. Error handling or recovery logic documented",
-        "Creativity & Originality: Novelty signals: custom. Detailed project description with technical highlights",
-        "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 38 sections. Setup instructions included. Architecture d",
-        "Reliability & Safety: Security considerations: .env, environment variable. Error handling documented. Testing documented (automated tests). Ch"
+        "Three distinct agents with different reasoning patterns",
+        "Full-stack with React frontend and Fluent UI",
+        "Brand guidelines grounding via vector store"
       ],
       "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Only 2 commits - limited iterative development evidence",
+        "Concept overlaps with other social media agents",
+        "No test files"
       ],
-      "summary": "repo-analyzer (creative-apps track, 86.7/100): **Repo Inspector** analyzes any GitHub repository and provides actionable insights across **people**, **code quality**, **security**, and **team dynamics**. It combines deterministic metrics with LLM-",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Multi-agent GroupChat social media content creator with Creator (CoT), Reviewer (ReAct), and Publisher (Self-Reflection) agents. Features Azure OpenAI + Copilot SDK hybrid, React frontend, brand guidelines grounding.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Zavatravel: Similar concept to #27 (social media content). GroupChat orchestration genuine but only 2 commits. Similar concept reduces novelty. Tech Implementation downgraded.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 42,
@@ -195,9 +156,9 @@
         "Reliability & Safety": 9
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (923 chars). Repo: 14 source, 7 test, 50 total files, 8 commits",
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (923 chars). Repo: 14 source, 7 test, 50 total files, 8 commits",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: . Multi-agent architecture: orchestrat",
-        "Creativity & Originality": "Novelty signals: custom, novel. Diverse technology combination: GitHub Copilot SDK (CopilotClient), GPT-4.1, Model Context Protocol (MCP), GitHub MCP, WorkIQ MCP. Detailed project description with technical highlights",
+        "Creativity & Originality": "Novelty signals: novel, custom. Diverse technology combination: GitHub Copilot SDK (CopilotClient), GPT-4.1, Model Context Protocol (MCP), GitHub MCP, WorkIQ MCP. Detailed project description with technical highlights",
         "UX & Presentation": "Video demo provided. Comprehensive README with 14 sections. No clear setup instructions in README. Architecture diagram or flow description found",
         "Reliability & Safety": "Security considerations: .env, credential. Testing documented (automated tests). Checklist confirms no hardcoded secrets. Verified 7 test files. .gitignore present"
       },
@@ -210,82 +171,217 @@
       ],
       "weighted_total": 86.1,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100%",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: . Multi-agent architecture: orchestrat",
-        "Creativity & Originality: Novelty signals: custom, novel. Diverse technology combination: GitHub Copilot SDK (CopilotClient), GPT-4.1, Model Conte",
-        "UX & Presentation: Video demo provided. Comprehensive README with 14 sections. No clear setup instructions in README. Architecture diagram ",
-        "Reliability & Safety: Security considerations: .env, credential. Testing documented (automated tests). Checklist confirms no hardcoded secrets"
+        "181 automated tests - exceptional coverage",
+        "Markdown-driven skill system is genuinely innovative",
+        "GPT-4.1 routing with MCP integration"
       ],
       "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Could document skill pipeline architecture more clearly",
+        "Error handling for edge cases in incident response"
       ],
-      "summary": "Zava Smart Assistant (creative-apps track, 86.1/100): Zava Smart Assistant is an AI-powered enterprise incident response agent built on the GitHub Copilot SDK. It orchestrates a cross-regional product outage scenario through a single conversational inter",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "AI enterprise incident response agent using Copilot SDK with novel Markdown-driven skill pipeline, guiding users through Diagnose/Fix/Verify/Report phases with 181 automated tests.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Zava Smart Assistant: Well-structured with innovative Markdown-driven skill system. 181 tests is exceptional. Score accurate - no changes to criteria.",
+      "ai_reviewed": true
     },
     {
-      "issue_number": 31,
-      "project_name": "Threat Incident Swarm Commander",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/31",
-      "github_username": "dondinulos",
+      "issue_number": 60,
+      "project_name": "BrandComm-agent",
+      "track": "reasoning-agents",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/60",
+      "github_username": "joyjeet",
       "criteria_scores": {
         "Accuracy & Relevance": 10,
-        "Reasoning & Multi-step Thinking": 8,
-        "Creativity & Originality": 7,
-        "UX & Presentation": 10,
-        "Reliability & Safety": 8
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 8,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 8
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Checklist: 100% requirements met. Detailed description (539 chars). Repo: 4168 source, 214 test, 6593 total files, 10 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: react. Multi-agent architecture: swarm, multi-agent, orchestrat",
-        "Creativity & Originality": "Novelty signals: first. Diverse technology combination: GitHub Copilot, TypeScript — shared engine, terminal, web, and MCP server. Multi-language: .ts, .js, .tsx",
-        "UX & Presentation": "Video demo provided. Comprehensive README with 24 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: credential. No automated tests mentioned. Checklist confirms no hardcoded secrets. Verified 214 test files. CI/CD pipeline found"
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: social media, content, communication. Grounding: retrieval, grounding",
+        "Reasoning & Multi-step Thinking": "ReAct signals: react, act. Multi-step flow: orchestrat, workflow",
+        "Creativity & Originality": "Innovation signals: custom. Technology stack: Microsoft Foundry – Agent orchestration, grounding, tool integration, and deployment, Reasoning Model (GPT‑4o) – Multi‑step reasoning and content generation. Domain-specific approach: brand, compliance. Multi-language: .cs, .js, .tsx, .ts",
+        "User Experience & Presentation": "Video demo available. Detailed README (31 sections). Setup instructions present",
+        "Technical Implementation": "Error handling documented. Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in README"
+      },
+      "confidence": "high",
+      "red_flags_detected": [
+        "Claims testing but no test files found in repo"
+      ],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        "Automated tests present",
+        "Substantial codebase (52 source files)",
+        "Multi-language project (.cs, .js, .tsx, .ts)"
+      ],
+      "weighted_total": 84.0,
+      "strengths": [
+        "Full-stack implementation with React 19 + ASP.NET Core 9",
+        "Entra ID authentication with PKCE flow",
+        "Azure Container Apps deployment via azd up",
+        "CELA compliance rules for content guardrails"
+      ],
+      "improvements": [
+        "Add automated tests (0 test files despite claims)",
+        "Document the reasoning pattern used (CoT/ReAct/etc.)",
+        "Add demo screenshots or video"
+      ],
+      "summary": "Full-stack BrandComm agent with React 19 + ASP.NET Core 9, Entra ID PKCE auth, and Azure AI Foundry v2 Agent integration for brand-compliant social media content. 52 source files, 15 commits, Azure Container Apps deployment via azd.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "BrandComm-agent: Full-stack React+ASP.NET+Foundry with Entra ID auth. 52 source files, 15 commits. Solid engineering but narrow social media domain. Matches well with reasoning-agents. No tests despite test claim.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 54,
+      "project_name": "Saiten — Multi-Agent Scoring System",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/54",
+      "github_username": "aktsmm",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 8,
+        "UX & Presentation": 5,
+        "Reliability & Safety": 10
+      },
+      "evidence": {
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool. Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (1910 chars). Repo: 15 source, 7 test, 104 total files, 16 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: chain-of-thought, cot. Multi-agent architecture: multi-agent, orchestrat. Error handling or recovery logic documented",
+        "Creativity & Originality": "Novelty signals: novel, custom. Diverse technology combination: **VS Code Copilot Custom Agents** (`.agent.md`) — Orchestrator-Workers multi-agent pattern with 6 agents, **FastMCP (Model Context Protocol)** — Python MCP server with stdio transport, 6 registered tools, **GitHub CLI (gh)** — GitHub REST API integration with exponential backoff retry and sliding-window rate limiting, **Pydantic v2** — Data models with boundary validation (scores 1-10. Detailed project description with technical highlights",
+        "UX & Presentation": "No demo materials provided. Comprehensive README with 11 sections. No clear setup instructions in README. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: .env, gitignore. Error handling documented. Testing documented (automated tests). Checklist confirms no hardcoded secrets. Verified 7 test files. .gitignore present"
       },
       "confidence": "high",
       "red_flags_detected": [],
       "bonus_signals_detected": [
         "MCP integration found",
-        "Substantial codebase (4168 source files)",
-        "Verified: 214 test files in repo",
-        "CI/CD pipeline configured",
-        "Multi-language project (.ts, .js, .tsx)"
+        "Automated tests present",
+        "Verified: 7 test files in repo",
+        ".env.example provided for secure config"
       ],
-      "weighted_total": 86.1,
+      "weighted_total": 83.9,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Chec",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: react. Multi-agent architecture: swarm, multi-agent, orchestrat",
-        "Creativity & Originality: Novelty signals: first. Diverse technology combination: GitHub Copilot, TypeScript — shared engine, terminal, web, and M",
-        "UX & Presentation: Video demo provided. Comprehensive README with 24 sections. Setup instructions included. Architecture diagram or flow de",
-        "Reliability & Safety: Security considerations: credential. No automated tests mentioned. Checklist confirms no hardcoded secrets. Verified 214"
+        "Novel self-referential meta-project concept",
+        "MCP server with 5 tool categories",
+        "7 test files and 16 commits show iterative development",
+        "Sophisticated multi-agent orchestration pattern"
       ],
       "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Add demo video or screenshots",
+        "Expand README with setup instructions",
+        "Handle edge cases in scoring"
       ],
-      "summary": "Threat Incident Swarm Commander (creative-apps track, 86.1/100): Mirrored from the Matrix, an incident starts as one \"Agent Smith\". Within minutes, it multiplies across services/endpoints. My console shows the replication graph in real-time, explains the spawn reas",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Multi-agent scoring system for Agents League hackathon submissions. 6 Copilot custom agents with Orchestrator-Workers pattern, MCP server, and automated pipeline. 15 source files, 7 tests, 16 commits.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Saiten: Self-referential scoring system. 15 source, 7 tests, 16 commits. Good multi-agent architecture.",
+      "ai_reviewed": true
     },
     {
-      "issue_number": 43,
-      "project_name": "Nimbus Content Agent",
+      "issue_number": 47,
+      "project_name": "Semantic Kernel and AutoGen to MAF Modernizer",
       "track": "reasoning-agents",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/43",
-      "github_username": "@namratasherkhane",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/47",
+      "github_username": "misantibanez, valegrajales, eraggi-ar, afrancoc2000",
       "criteria_scores": {
-        "Accuracy & Relevance": 10,
-        "Reasoning & Multi-step Thinking": 9,
-        "Creativity & Originality": 8,
-        "User Experience & Presentation": 8,
-        "Technical Implementation": 7
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 8,
+        "Creativity & Originality": 7,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 9
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: campaign, content. Grounding: search, grounding, knowledge base, retrieval. Repo: 18 source, 0 test, 44 total files, 1 commits",
-        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought. ReAct signals: react, act. Multi-step flow: workflow",
-        "Creativity & Originality": "Innovation signals: custom. Technology stack: Python 3, Microsoft Foundry SDK, Retrieval grounding (knowledge base over local data assets), MCP-style tool hooks (file search, web search. Detailed problem description. Domain-specific approach: persona, compliance, brand. Only 1 commits",
-        "User Experience & Presentation": "Demo: screenshots. Detailed README (8 sections). Setup instructions present",
-        "Technical Implementation": "Error handling documented. Security measures documented. Code examples in README. Repo: 18 source, 0 test, 44 total files, 1 commits"
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: content. Grounding: rag",
+        "Reasoning & Multi-step Thinking": "ReAct signals: act",
+        "Creativity & Originality": "Technology stack: Here are the key technologies used in this project:, Azure AI Foundry serves as the core platform for hosting and managing the modernized agents, leveraging its reasoning agent capabilities. The modernization tool itself is built as an MCP (Model Context Protocol) tool, which allows it to be consumed both programmatically and through the Agent Creation Portal. Semantic Kernel is the primary framework being modernized from (along with the legacy Semantic Kernel and AutoGen frameworks) to the new Microsoft Agent Framework (MAF)., On the infrastructure side. Detailed problem description",
+        "User Experience & Presentation": "Demo: screenshots. Detailed README (17 sections). Setup instructions present. Architecture or flow diagram included",
+        "Technical Implementation": "Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in README"
+      },
+      "confidence": "high",
+      "red_flags_detected": [],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        "Automated tests present",
+        ".env.example provided for secure config",
+        "Active development (23 commits)",
+        "Containerized (Dockerfile found)"
+      ],
+      "weighted_total": 83.5,
+      "strengths": [
+        "Genuine utility for framework modernization",
+        "23 commits show iterative development",
+        "MCP exposure makes it composable"
+      ],
+      "improvements": [
+        "Could expand framework coverage",
+        "More modernization accuracy metrics needed"
+      ],
+      "summary": "MCP-exposed code modernization agent that transforms Semantic Kernel and AutoGen code to Microsoft Agent Framework, usable standalone or as composable agent-callable capability.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "SK/AutoGen to MAF Modernizer: Strong concept, real utility. 23 commits shows iteration. Reasoning upgraded for complex framework analysis.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 23,
+      "project_name": "repo-analyzer",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/23",
+      "github_username": "olivomarco",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 8
+      },
+      "evidence": {
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (302 chars). Repo: 25 source, 19 test, 58 total files, 5 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: . Multi-agent architecture: orchestrat. Error handling or recovery logic documented",
+        "Creativity & Originality": "Novelty signals: custom. Detailed project description with technical highlights",
+        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 38 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: .env, environment variable. Error handling documented. Testing documented (automated tests). Checklist confirms no hardcoded secrets. Verified 19 test files. .gitignore present"
+      },
+      "confidence": "high",
+      "red_flags_detected": [],
+      "bonus_signals_detected": [
+        "Automated tests present",
+        "Substantial codebase (25 source files)",
+        "Verified: 19 test files in repo",
+        ".env.example provided for secure config"
+      ],
+      "weighted_total": 82.2,
+      "strengths": [
+        "Excellent test coverage with 19 test files",
+        "DevContainer for consistent environment",
+        "Multi-dimensional analysis (people, code, security, team)"
+      ],
+      "improvements": [
+        "Heavy AI code generation acknowledged - originality concern",
+        "Could add explicit error handling documentation"
+      ],
+      "summary": "GitHub repository analyzer combining deterministic metrics with LLM-powered intelligence to surface risks, knowledge silos, and code quality insights across people, security, and team dynamics.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "repo-analyzer: Solid tool with impressive 19 test files. Reliability 10 downgraded - no explicit error handling/safety patterns mentioned.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 32,
+      "project_name": "SovereignFit",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/32",
+      "github_username": "danieletten",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 7
+      },
+      "evidence": {
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: github copilot, copilot, copilot chat. Checklist: 100% requirements met. Detailed description (742 chars). Repo: 14 source, 4 test, 42 total files, 1 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: . Multi-agent architecture: multi-agent, orchestrat. Error handling or recovery logic documented",
+        "Creativity & Originality": "Novelty signals: custom. Diverse technology combination: FastMCP (Model Context Protocol) — MCP server with 5 tools for GitHub Copilot, Rich — Interactive terminal UI with color-coded score bars, radar charts, medal rankings, GitHub Copilot Agent Mode — Primary development tool (~90% of 4. Detailed project description with technical highlights. Only 1 commits",
+        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 30 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: .env, gitignore. Error handling documented. Testing documented (automated tests). Checklist confirms no hardcoded secrets. 4 test files found. .gitignore present"
       },
       "confidence": "high",
       "red_flags_detected": [
@@ -293,22 +389,22 @@
       ],
       "bonus_signals_detected": [
         "MCP integration found",
-        ".env.example provided for secure config"
+        "Automated tests present"
       ],
-      "weighted_total": 86.0,
+      "weighted_total": 82.2,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: campaign, content. Groun",
-        "Reasoning & Multi-step Thinking: CoT pattern: chain-of-thought. ReAct signals: react, act. Multi-step flow: workflow",
-        "Creativity & Originality: Innovation signals: custom. Technology stack: Python 3, Microsoft Foundry SDK, Retrieval grounding (knowledge base over ",
-        "User Experience & Presentation: Demo: screenshots. Detailed README (8 sections). Setup instructions present",
-        "Technical Implementation: Error handling documented. Security measures documented. Code examples in README. Repo: 18 source, 0 test, 44 total file"
+        "Dynamic weight adjustment based on workload signals is novel",
+        "MCP server with 5 tools for Copilot integration",
+        "34 pytest tests across 4 agents"
       ],
       "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Only 1 commit despite 4000+ lines - hard to verify iterative development",
+        "Consider multi-commit workflow for credibility"
       ],
-      "summary": "Nimbus Content Agent (reasoning-agents track, 86.0/100): AI agent that helps a loan-focused BFSI comms team craft platform-ready social content. It uses Microsoft Foundry for reasoning, grounds on brand and industry context, and can be extended with MCP too",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Multi-agent Azure deployment recommender evaluating 5 models across 5 dynamically weighted dimensions with MCP server integration, rich terminal UI, and 34 automated tests.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "SovereignFit: Strong MCP pipeline with 34 tests. But only 1 commit despite 4000+ lines raises template concerns. Reliability downgraded.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 35,
@@ -318,14 +414,14 @@
       "github_username": "taimoor-janjua",
       "criteria_scores": {
         "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 7,
+        "Reasoning & Multi-step Thinking": 8,
         "Creativity & Originality": 7,
         "User Experience & Presentation": 9,
-        "Technical Implementation": 10
+        "Technical Implementation": 8
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, azure ai foundry. Checklist: 100% met. Repo: 20 source, 4 test, 53 total files, 1 commits",
-        "Reasoning & Multi-step Thinking": "ReAct signals: react, act. Multi-step flow: workflow, orchestrat, pipeline",
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, foundry. Checklist: 100% met. Repo: 20 source, 4 test, 53 total files, 1 commits",
+        "Reasoning & Multi-step Thinking": "ReAct signals: react, act. Multi-step flow: orchestrat, pipeline, workflow",
         "Creativity & Originality": "Technology stack: React + TypeScript frontend, .NET 8 Web API backend, Azure AI Foundry. Detailed problem description. Domain-specific approach: compliance. Multi-language: .cs, .js, .tsx, .ts. Only 1 commits",
         "User Experience & Presentation": "Demo: screenshots. Detailed README (28 sections). Setup instructions present. Architecture or flow diagram included",
         "Technical Implementation": "Error handling documented. Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in README"
@@ -341,64 +437,20 @@
         "Multi-language project (.cs, .js, .tsx, .ts)",
         "Containerized (Dockerfile found)"
       ],
-      "weighted_total": 82.5,
+      "weighted_total": 82.0,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, azure ai foundry. Checklist: 100% met. Repo: 20 source, 4 test, 53 total files, 1 commits",
-        "Reasoning & Multi-step Thinking: ReAct signals: react, act. Multi-step flow: workflow, orchestrat, pipeline",
-        "Creativity & Originality: Technology stack: React + TypeScript frontend, .NET 8 Web API backend, Azure AI Foundry. Detailed problem description. D",
-        "User Experience & Presentation: Demo: screenshots. Detailed README (28 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation: Error handling documented. Automated tests present. Security measures documented. Multi-agent or tool integration archit"
+        "Full-stack MVP with React + .NET 8",
+        "Deep GDPR domain knowledge (13 Article 13/14 fields)",
+        "User-friendly conversational approach"
       ],
       "improvements": [
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Only 1 commit limits verification",
+        "Could add test coverage for compliance edge cases"
       ],
-      "summary": "techconnect-policy-compliance-checker (reasoning-agents track, 82.5/100): - The AI Privacy Notice Copilot is a full-stack MVP (React + TypeScript frontend, .NET 8 backend, Azure AI Foundry) that guides non-technical users through creating GDPR-compliant privacy notices via ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 47,
-      "project_name": "Semantic Kernel and AutoGen to MAF Modernizer",
-      "track": "reasoning-agents",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/47",
-      "github_username": "misantibanez, valegrajales, eraggi-ar, afrancoc2000",
-      "criteria_scores": {
-        "Accuracy & Relevance": 10,
-        "Reasoning & Multi-step Thinking": 6,
-        "Creativity & Originality": 7,
-        "User Experience & Presentation": 9,
-        "Technical Implementation": 9
-      },
-      "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: content. Grounding: rag",
-        "Reasoning & Multi-step Thinking": "ReAct signals: act",
-        "Creativity & Originality": "Technology stack: Here are the key technologies used in this project:, Azure AI Foundry serves as the core platform for hosting and managing the modernized agents, leveraging its reasoning agent capabilities. The modernization tool itself is built as an MCP (Model Context Protocol) tool, which allows it to be consumed both programmatically and through the Agent Creation Portal. Semantic Kernel is the primary framework being modernized from (along with the legacy Semantic Kernel and AutoGen frameworks) to the new Microsoft Agent Framework (MAF)., On the infrastructure side. Detailed problem description",
-        "User Experience & Presentation": "Demo: screenshots. Detailed README (17 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation": "Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in README"
-      },
-      "confidence": "high",
-      "red_flags_detected": [],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        "Automated tests present",
-        ".env.example provided for secure config",
-        "Active development (23 commits)",
-        "Containerized (Dockerfile found)"
-      ],
-      "weighted_total": 81.0,
-      "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: conten",
-        "Creativity & Originality: Technology stack: Here are the key technologies used in this project:, Azure AI Foundry serves as the core platform for ",
-        "User Experience & Presentation: Demo: screenshots. Detailed README (17 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation: Automated tests present. Security measures documented. Multi-agent or tool integration architecture. Code examples in RE"
-      ],
-      "improvements": [
-        "Consider strengthening Reasoning & Multi-step Thinking (scored 6/10)",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
-      ],
-      "summary": "Semantic Kernel and AutoGen to MAF Modernizer (reasoning-agents track, 81.0/100): An MCP-exposed AI agent that analyzes code written with Semantic Kernel or AutoGen and modernizes it to Microsoft Agent Framework (MAF). Built to integrate with the [MAF Agent Portal](https://github.c",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "GDPR privacy notice copilot with full-stack architecture (React/TS, .NET 8, Azure AI Foundry) guiding users through all 13 mandatory Article 13/14 fields via conversational chat.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Policy compliance checker: Full-stack React + .NET 8 + AI Foundry. Complex GDPR domain. Reasoning upgraded, TechImpl downgraded (1 commit).",
+      "ai_reviewed": true
     },
     {
       "issue_number": 51,
@@ -412,7 +464,7 @@
         "Innovation & Creativity": 7
       },
       "evidence": {
-        "Technical Implementation": "M365 integration: copilot chat, microsoft 365, m365, outlook, teams. MCP: mcp, mcp server. Adaptive Cards: card, adaptive card, adaptive",
+        "Technical Implementation": "M365 integration: microsoft 365, teams, outlook, copilot chat, m365. MCP: mcp server, mcp. Adaptive Cards: adaptive, card, adaptive card",
         "Business Value": "Business value signals: business. Enterprise scenario: enterprise, workflow. Detailed business description",
         "Innovation & Creativity": "Technology stack: **Copilot Studio** - Connected Agents + Instruction Engineering v7, **M365 Copilot Chat (Teams)** - Production deployment channel, **Office 365 Outlook Connector** - Standard connector (DLP-safe): GetCalendarView, CreateMeeting, **Power Automate** - Agent Flow for Graph API getSchedule bridge (built & tested). Microsoft Graph integration. Documentation quality: 18 README sections"
       },
@@ -424,7 +476,7 @@
       ],
       "weighted_total": 79.9,
       "strengths": [
-        "Technical Implementation: M365 integration: copilot chat, microsoft 365, m365, outlook, teams. MCP: mcp, mcp server. Adaptive Cards: card, adaptiv",
+        "Technical Implementation: M365 integration: microsoft 365, teams, outlook, copilot chat, m365. MCP: mcp server, mcp. Adaptive Cards: adaptive, car",
         "Business Value: Business value signals: business. Enterprise scenario: enterprise, workflow. Detailed business description",
         "Innovation & Creativity: Technology stack: **Copilot Studio** - Connected Agents + Instruction Engineering v7, **M365 Copilot Chat (Teams)** - Pr"
       ],
@@ -433,140 +485,95 @@
         "Consider adding architecture documentation"
       ],
       "summary": "Biz-Ops Calendar Agent (enterprise-agents track, 79.9/100): Biz-Ops Calendar Agent is a Copilot Studio agent deployed to M365 Copilot Chat (Teams) that provides smart scheduling and email management through Connected Agents (Calendar Sub-Agent + Email Sub-Agen",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
-      "issue_number": 18,
-      "project_name": "My Proposal Develop",
+      "issue_number": 43,
+      "project_name": "Nimbus Content Agent",
       "track": "reasoning-agents",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/18",
-      "github_username": "balakreshnan",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/43",
+      "github_username": "@namratasherkhane",
       "criteria_scores": {
-        "Accuracy & Relevance": 9,
+        "Accuracy & Relevance": 8,
         "Reasoning & Multi-step Thinking": 9,
-        "Creativity & Originality": 5,
-        "User Experience & Presentation": 9,
-        "Technical Implementation": 7
+        "Creativity & Originality": 8,
+        "User Experience & Presentation": 8,
+        "Technical Implementation": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry. Checklist: 100% met. Communication/content scenario: content. Grounding: search. Limited code: Repo: 4 source, 0 test, 18 total files, 17 commits",
-        "Reasoning & Multi-step Thinking": "ReAct signals: act. Self-reflection: evaluate. Multi-step flow: workflow, pipeline",
-        "Creativity & Originality": "Standard approach",
-        "User Experience & Presentation": "Demo: screenshots. Detailed README (47 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation": "Automated tests present. Security measures documented. Code examples in README. Limited code: Repo: 4 source, 0 test, 18 total files, 17 commits"
+        "Accuracy & Relevance": "Foundry usage: microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: campaign, content. Grounding: retrieval, search, grounding, knowledge base. Repo: 18 source, 0 test, 44 total files, 1 commits",
+        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought. ReAct signals: react, act. Multi-step flow: workflow",
+        "Creativity & Originality": "Innovation signals: custom. Technology stack: Python 3, Microsoft Foundry SDK, Retrieval grounding (knowledge base over local data assets), MCP-style tool hooks (file search, web search. Detailed problem description. Domain-specific approach: brand, compliance, persona. Only 1 commits",
+        "User Experience & Presentation": "Demo: screenshots. Detailed README (8 sections). Setup instructions present",
+        "Technical Implementation": "Error handling documented. Security measures documented. Code examples in README. Repo: 18 source, 0 test, 44 total files, 1 commits"
       },
       "confidence": "high",
       "red_flags_detected": [
-        "Claims testing but no test files found in repo"
+        "Very few commits (1) — may be template or rushed"
       ],
       "bonus_signals_detected": [
-        "Automated tests present",
-        "CI/CD pipeline configured"
+        "MCP integration found",
+        ".env.example provided for secure config"
       ],
-      "weighted_total": 79.0,
+      "weighted_total": 79.5,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry. Checklist: 100% met. Communication/content scenario: content. Grounding: search. Limited code: R",
-        "Reasoning & Multi-step Thinking: ReAct signals: act. Self-reflection: evaluate. Multi-step flow: workflow, pipeline",
-        "User Experience & Presentation: Demo: screenshots. Detailed README (47 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation: Automated tests present. Security measures documented. Code examples in README. Limited code: Repo: 4 source, 0 test, 18"
+        "Domain-specific BFSI focus with brand grounding",
+        "Knowledge base with source attribution",
+        "Extensible MCP tool architecture"
       ],
       "improvements": [
-        "Creativity & Originality: Standard approach",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Only 1 commit with no tests",
+        "Technical highlights are minimal",
+        "No CI/CD or automated testing"
       ],
-      "summary": "My Proposal Develop (reasoning-agents track, 79.0/100): My idea is to build agent for RFP proposal with foundry IQ and then make it a CI/CD to deploy to various environments",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "BFSI social media content agent using Microsoft Foundry SDK with knowledge base grounding on brand guidelines and industry data, extensible via MCP tool hooks.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Nimbus Content Agent: Decent BFSI agent but 1 commit, 0 tests, minimal technical highlights. Accuracy and TechImpl downgraded.",
+      "ai_reviewed": true
     },
     {
-      "issue_number": 34,
-      "project_name": "LearnIQ",
+      "issue_number": 39,
+      "project_name": "CodeIntel",
       "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/34",
-      "github_username": "kylednoland",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/39",
+      "github_username": "Mazher-Ul-Haq",
       "criteria_scores": {
-        "Accuracy & Relevance": 10,
-        "Reasoning & Multi-step Thinking": 7,
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 8,
         "Creativity & Originality": 7,
         "UX & Presentation": 9,
         "Reliability & Safety": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp client. Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (799 chars). Repo: 21 source, 0 test, 33 total files, 3 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
-        "Creativity & Originality": "Novelty signals: first. Diverse technology combination: TypeScript, Next.js 16, React 19, Tailwind CSS 4, Zod. Detailed project description with technical highlights. Only 3 commits",
-        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 20 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: environment variable, gitignore. Testing documented (automated tests). Checklist confirms no hardcoded secrets. Claims tests but 0 test files in repo. .gitignore present"
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration, mcp client. Copilot usage: github copilot, copilot, copilot chat. Checklist: 100% requirements met. Detailed description (572 chars)",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: multi-step. Error handling or recovery logic documented",
+        "Creativity & Originality": "Novelty signals: unique, first, custom, original. Diverse technology combination: Built with: Node.js, MCP SDK, Express, WorkIQ MCP, GitHub REST API. Detailed project description with technical highlights. Only 1 commits",
+        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 23 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: .env, environment variable, gitignore, credential. Error handling documented. No automated tests mentioned. Checklist confirms no hardcoded secrets. RED FLAG: Potential hardcoded secrets detected. .gitignore present"
       },
       "confidence": "high",
       "red_flags_detected": [
-        "Claims testing but no test files found in repo",
-        "Very few commits (3) — may be template or rushed"
+        "Very few commits (1) — may be template or rushed"
       ],
       "bonus_signals_detected": [
         "MCP integration found",
-        "Automated tests present",
-        "Substantial codebase (21 source files)"
-      ],
-      "weighted_total": 77.8,
-      "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp client. Copilot usage: copilot, github copilot. Checklist: 100% requirements met.",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: react",
-        "Creativity & Originality: Novelty signals: first. Diverse technology combination: TypeScript, Next.js 16, React 19, Tailwind CSS 4, Zod. Detailed ",
-        "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 20 sections. Setup instructions included. Architecture d"
-      ],
-      "improvements": [
-        "Consider strengthening Reliability & Safety (scored 6/10)",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
-      ],
-      "summary": "LearnIQ (creative-apps track, 77.8/100): LearnIQ is a personalized learning companion that connects your professional skills and career role to relevant content from the Microsoft Learn catalog. Instead of manually browsing thousands of modu",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 54,
-      "project_name": "Saiten — Multi-Agent Scoring System",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/54",
-      "github_username": "aktsmm",
-      "criteria_scores": {
-        "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 9,
-        "Creativity & Originality": 7,
-        "UX & Presentation": 5,
-        "Reliability & Safety": 8
-      },
-      "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool. Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (492 chars). Repo: 15 source, 7 test, 104 total files, 12 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: chain-of-thought, cot. Multi-agent architecture: multi-agent, orchestrat. Error handling or recovery logic documented",
-        "Creativity & Originality": "Novelty signals: custom, novel. Diverse technology combination: VS Code Copilot Custom Agents (.agent.md) - Orchestrator-Workers multi-agent pattern with 6 agents, FastMCP (Model Context Protocol) - Python MCP server with stdio transport, 5 registered tools, GitHub CLI (gh) - GitHub REST API integration with exponential backoff retry, Pydantic v2 - Data models with boundary validation, YAML - Track-specific scoring rubrics with evidence signals",
-        "UX & Presentation": "No demo materials provided. Comprehensive README with 11 sections. No clear setup instructions in README. Architecture diagram or flow description found",
-        "Reliability & Safety": "Error handling documented. Testing documented (automated tests). Hardcoded secrets concern (checklist not confirmed). Verified 7 test files. .gitignore present"
-      },
-      "confidence": "medium",
-      "red_flags_detected": [
-        "No working demo provided"
-      ],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        "Automated tests present",
-        "Verified: 7 test files in repo",
         ".env.example provided for secure config"
       ],
       "weighted_total": 77.8,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp tool. Copilot usage: copilot, github copilot. Checklist: 100% requirements met. D",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: chain-of-thought, cot. Multi-agent architecture: multi-agent, orchestrat. Error handling or recovery",
-        "Creativity & Originality: Novelty signals: custom, novel. Diverse technology combination: VS Code Copilot Custom Agents (.agent.md) - Orchestrator",
-        "Reliability & Safety: Error handling documented. Testing documented (automated tests). Hardcoded secrets concern (checklist not confirmed). Ve"
+        "MCP + WorkIQ M365 data combination is interesting",
+        "Multi-interface: MCP server + REST API + CLI",
+        "8 source files showing real implementation"
       ],
       "improvements": [
-        "UX & Presentation: No demo materials provided. Comprehensive README with 11 sections. No clear setup instructions in README. Architecture d",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Only 1 commit suggests possible template or code dump",
+        "Add automated tests",
+        "Include .env.example for configuration"
       ],
-      "summary": "Saiten — Multi-Agent Scoring System (creative-apps track, 77.8/100): A multi-agent scoring system that automatically evaluates all Agents League @ TechConnect hackathon submissions and generates ranking reports. Designed with Orchestrator-Workers + Prompt Chaining + Ev",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Team intelligence hub combining GitHub analytics with M365 WorkIQ insights. Features 8 MCP tools for Copilot, REST API, CLI. Single commit raises development maturity questions.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "CodeIntel: 8 source files, 1 commit. MCP + WorkIQ combination interesting. TechImpl slightly inflated for 1 commit.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 41,
@@ -608,49 +615,7 @@
         "Consider strengthening Reliability & Safety (scored 6/10)"
       ],
       "summary": "Architect Agent (creative-apps track, 76.1/100): Agent Architect helps teams determine the best approach for building AI agents by analyzing customer needs, technical constraints, and requirements. It provides build vs. buy recommendations, architec",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 49,
-      "project_name": "EasyExpenseAI",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/49",
-      "github_username": "chakras",
-      "criteria_scores": {
-        "Accuracy & Relevance": 7,
-        "Reasoning & Multi-step Thinking": 9,
-        "Creativity & Originality": 5,
-        "UX & Presentation": 10,
-        "Reliability & Safety": 7
-      },
-      "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (893 chars). Repo: 19 source, 0 test, 41 total files, 1 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: . Multi-agent architecture: multi-agent, semantic kernel, orchestrat. Error handling or recovery logic documented",
-        "Creativity & Originality": "Novelty signals: original, unique, custom. Diverse technology combination: Runtime & Framework**, Node.js v24 — Server-side JavaScript runtime, Express.js 4.x — Web application framework, EJS — Server-side HTML templating engine, Azure AI & Cognitive Services**. Detailed project description with technical highlights. Appears to be template/generic project: sample. Only 1 commits",
-        "UX & Presentation": "Video demo provided. Comprehensive README with 12 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: environment variable, credential. Error handling documented. No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
-      },
-      "confidence": "high",
-      "red_flags_detected": [
-        "Very few commits (1) — may be template or rushed"
-      ],
-      "bonus_signals_detected": [
-        ".env.example provided for secure config"
-      ],
-      "weighted_total": 76.1,
-      "strengths": [
-        "Accuracy & Relevance: Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (893 chars). Repo: 19 sou",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: . Multi-agent architecture: multi-agent, semantic kernel, orchestrat. Error handling or recovery log",
-        "UX & Presentation: Video demo provided. Comprehensive README with 12 sections. Setup instructions included. Architecture diagram or flow de",
-        "Reliability & Safety: Security considerations: environment variable, credential. Error handling documented. No automated tests mentioned. Chec"
-      ],
-      "improvements": [
-        "Creativity & Originality: Novelty signals: original, unique, custom. Diverse technology combination: Runtime & Framework**, Node.js v24 — Server-s",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
-      ],
-      "summary": "EasyExpenseAI (creative-apps track, 76.1/100): An intelligent expense report application powered by a multi-agent AI pipeline built with Microsoft Semantic Kernel, Azure AI Document Intelligence, and Azure OpenAI.\n\nEasyExpenseAI automates the tedi",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 25,
@@ -666,7 +631,7 @@
         "Reliability & Safety": 7
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Checklist: 100% requirements met. Detailed description (789 chars). Limited code: Repo: 4 source, 0 test, 15 total files, 5 commits",
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot, copilot chat. Checklist: 100% requirements met. Detailed description (789 chars). Limited code: Repo: 4 source, 0 test, 15 total files, 5 commits",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: . Error handling or recovery logic documented",
         "Creativity & Originality": "Diverse technology combination: Node.js, Commander.js (CLI framework), Model Context Protocol (MCP), GitHub Copilot (Chat + Agent Mode), Zod (schema validation). Detailed project description with technical highlights",
         "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included",
@@ -680,7 +645,7 @@
       ],
       "weighted_total": 76.1,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Checklist: 100",
+        "Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot, copilot chat. Checklist: 100",
         "Reasoning & Multi-step Thinking: Reasoning patterns: . Error handling or recovery logic documented",
         "Creativity & Originality: Diverse technology combination: Node.js, Commander.js (CLI framework), Model Context Protocol (MCP), GitHub Copilot (Cha",
         "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included",
@@ -691,7 +656,7 @@
         "Consider adding architecture documentation"
       ],
       "summary": "Team Risk Analyzer (creative-apps track, 76.1/100): Team Risk Analyzer is an MCP‑enabled CLI tool that helps teams keep a pulse on their day‑to‑day delivery health inside VS Code.\nIt reviews pull requests, issues, and meeting notes—using the same style",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 14,
@@ -707,7 +672,7 @@
         "Reliability & Safety": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: MCP mentioned in project. Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (816 chars). Repo: 11 source, 0 test, 43 total files, 6 commits",
+        "Accuracy & Relevance": "MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (816 chars). Repo: 11 source, 0 test, 43 total files, 6 commits",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: . Error handling or recovery logic documented",
         "Creativity & Originality": "Diverse technology combination: TypeScript, JavaScript, CSS, HTML. Detailed project description with technical highlights",
         "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 12 sections. No clear setup instructions in README. Architecture diagram or flow description found",
@@ -720,7 +685,7 @@
       ],
       "weighted_total": 76.1,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% re",
+        "Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% re",
         "Reasoning & Multi-step Thinking: Reasoning patterns: . Error handling or recovery logic documented",
         "Creativity & Originality: Diverse technology combination: TypeScript, JavaScript, CSS, HTML. Detailed project description with technical highlight",
         "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 12 sections. No clear setup instructions in README. Arch"
@@ -731,90 +696,138 @@
         "Consider adding architecture documentation"
       ],
       "summary": "Windows Cortex (creative-apps track, 76.1/100): My app is a Claude Cowork Killer... using 100% Microsoft tools, accessible for anyone through text or voice, and running on Windows!\n\nWindows Cortex is a native desktop application that gives you AI s",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
-      "issue_number": 11,
-      "project_name": "Hybrid DNS Copilot",
+      "issue_number": 45,
+      "project_name": "Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape.",
       "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/11",
-      "github_username": "@munieswar",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/45",
+      "github_username": "billwhalenmsft",
       "criteria_scores": {
         "Accuracy & Relevance": 9,
         "Reasoning & Multi-step Thinking": 7,
-        "Creativity & Originality": 6,
-        "UX & Presentation": 10,
-        "Reliability & Safety": 6
+        "Creativity & Originality": 9,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 5
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Checklist: 100% requirements met. Detailed description (1257 chars). Repo: 11 source, 0 test, 22 total files, 4 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
-        "Creativity & Originality": "Detailed project description with technical highlights",
-        "UX & Presentation": "Live demo URL available. Comprehensive README with 15 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "No automated tests mentioned. Checklist confirms no hardcoded secrets. CI/CD pipeline found. .gitignore present"
-      },
-      "confidence": "medium",
-      "red_flags_detected": [
-        "No working demo provided"
-      ],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        "CI/CD pipeline configured"
-      ],
-      "weighted_total": 75.6,
-      "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: copilot, github copilot, copilot chat. Chec",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: react",
-        "UX & Presentation: Live demo URL available. Comprehensive README with 15 sections. Setup instructions included. Architecture diagram or flo"
-      ],
-      "improvements": [
-        "Consider strengthening Creativity & Originality (scored 6/10)",
-        "Consider strengthening Reliability & Safety (scored 6/10)"
-      ],
-      "summary": "Hybrid DNS Copilot (creative-apps track, 75.6/100): Hybrid DNS Architect helps network engineers and cloud architects visualize, understand, and deploy Azure DNS Private Resolver configurations for hybrid DNS environments. It tackles the complexity of ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 22,
-      "project_name": "DailySync",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/22",
-      "github_username": "robertoborges",
-      "criteria_scores": {
-        "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 7,
-        "Creativity & Originality": 6,
-        "UX & Presentation": 9,
-        "Reliability & Safety": 6
-      },
-      "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot sdk, copilot chat. Checklist: 100% requirements met. Detailed description (230 chars). Repo: 13 source, 0 test, 21 total files, 3 commits",
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (587 chars). Repo: 11 source, 0 test, 20 total files, 1 commits",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: ",
-        "Creativity & Originality": "Novelty signals: first, custom. Diverse technology combination: TypeScript, Node.js, GitHub Copilot SDK, Model Context Protocol (MCP), WorkIQ  MCP. Only 3 commits",
-        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 33 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: .env, environment variable. No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
+        "Creativity & Originality": "Novelty signals: custom. Diverse technology combination: Frontend | HTML, CSS, JavaScript — CSS art & animations, retro-gaming aesthetic, Backend | Node.js + Express + TypeScript. Detailed project description with technical highlights. Only 1 commits",
+        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 18 sections. Setup instructions included",
+        "Reliability & Safety": "No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
       },
-      "confidence": "medium",
+      "confidence": "high",
       "red_flags_detected": [
-        "No working demo provided",
-        "Very few commits (3) — may be template or rushed"
+        "Very few commits (1) — may be template or rushed"
       ],
       "bonus_signals_detected": [
         "MCP integration found",
         ".env.example provided for secure config"
       ],
-      "weighted_total": 73.9,
+      "weighted_total": 75.0,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot sdk, copilot chat. C",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: ",
-        "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 33 sections. Setup instructions included. Architecture d"
+        "Genuinely creative gamification of prompt engineering",
+        "Multiple themed adventures with escalating difficulty",
+        "Visual storytelling with immersive narratives"
       ],
       "improvements": [
-        "Consider strengthening Creativity & Originality (scored 6/10)",
-        "Consider strengthening Reliability & Safety (scored 6/10)"
+        "Only 1 commit raises template concerns",
+        "No test files for puzzle logic"
       ],
-      "summary": "DailySync (creative-apps track, 73.9/100): AI-powered CLI tool that auto-generates daily standup reports by pulling real\n  developer activity from GitHub (commits, PRs, issues) and Microsoft 365 (calendar, Teams, action items) via MCP.\n  Saves",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Visual prompt-engineering escape room game with 3 themed adventures where players write AI prompts to solve puzzles, combining gamification with AI education.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Prompt Escape: Genuinely creative escape room game for prompt engineering. Creativity UNDER-scored at 7 - upgraded to 9.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 18,
+      "project_name": "My Proposal Develop",
+      "track": "reasoning-agents",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/18",
+      "github_username": "balakreshnan",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 5,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 5
+      },
+      "evidence": {
+        "Accuracy & Relevance": "Foundry usage: foundry. Checklist: 100% met. Communication/content scenario: content. Grounding: search. Limited code: Repo: 4 source, 0 test, 18 total files, 17 commits",
+        "Reasoning & Multi-step Thinking": "ReAct signals: act. Self-reflection: evaluate. Multi-step flow: pipeline, workflow",
+        "Creativity & Originality": "Standard approach",
+        "User Experience & Presentation": "Demo: screenshots. Detailed README (47 sections). Setup instructions present. Architecture or flow diagram included",
+        "Technical Implementation": "Automated tests present. Security measures documented. Code examples in README. Limited code: Repo: 4 source, 0 test, 18 total files, 17 commits"
+      },
+      "confidence": "high",
+      "red_flags_detected": [
+        "Claims testing but no test files found in repo"
+      ],
+      "bonus_signals_detected": [
+        "Automated tests present",
+        "CI/CD pipeline configured"
+      ],
+      "weighted_total": 73.5,
+      "strengths": [
+        "Comprehensive documentation",
+        "Azure AI Foundry integration",
+        "Practical RFP business scenario"
+      ],
+      "improvements": [
+        "Add test files described in documentation",
+        "Increase source code",
+        "Include CI/CD configuration"
+      ],
+      "summary": "RFP proposal agent with Foundry IQ. Documentation-heavy (47 README sections) but only 4 source files and no test files, creating a gap between documentation ambition and actual implementation.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "My Proposal Develop: Large README but only 4 source files and 0 test files despite claims. Gap between docs and implementation.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 34,
+      "project_name": "LearnIQ",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/34",
+      "github_username": "kylednoland",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 6
+      },
+      "evidence": {
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp client. Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (799 chars). Repo: 21 source, 0 test, 33 total files, 3 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
+        "Creativity & Originality": "Novelty signals: first. Diverse technology combination: TypeScript, Next.js 16, React 19, Tailwind CSS 4, Zod. Detailed project description with technical highlights. Only 3 commits",
+        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 20 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: environment variable, gitignore. Testing documented (automated tests). Checklist confirms no hardcoded secrets. Claims tests but 0 test files in repo. .gitignore present"
+      },
+      "confidence": "high",
+      "red_flags_detected": [
+        "Claims testing but no test files found in repo",
+        "Very few commits (3) — may be template or rushed"
+      ],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        "Automated tests present",
+        "Substantial codebase (21 source files)"
+      ],
+      "weighted_total": 73.3,
+      "strengths": [
+        "21 source files showing substantial implementation",
+        "Personalized learning approach"
+      ],
+      "improvements": [
+        "No test files - essential for educational platforms",
+        "Only 3 commits"
+      ],
+      "summary": "AI-powered adaptive learning platform with personalized content delivery and progress tracking using GitHub Copilot SDK.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "LearnIQ: 21 source files but Accuracy 10 too high - no learning outcome verification. No tests.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 33,
@@ -830,7 +843,7 @@
         "Reliability & Safety": 7
       },
       "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (550 chars). Repo: 14 source, 0 test, 29 total files, 7 commits",
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (550 chars). Repo: 14 source, 0 test, 29 total files, 7 commits",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
         "Creativity & Originality": "Diverse technology combination: > 🤖 This project was fully generated by **GitHub Copilot** in **VS Code** — code, structure, and all., | Category | Technology |, |---|---|. Detailed project description with technical highlights",
         "UX & Presentation": "Video demo provided. Comprehensive README with 17 sections. Setup instructions included",
@@ -846,7 +859,7 @@
       ],
       "weighted_total": 73.3,
       "strengths": [
-        "Accuracy & Relevance: Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (550 chars). Repo: 14 sou",
+        "Accuracy & Relevance: Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (550 chars). Repo: 14 sou",
         "Reasoning & Multi-step Thinking: Reasoning patterns: react",
         "Creativity & Originality: Diverse technology combination: > 🤖 This project was fully generated by **GitHub Copilot** in **VS Code** — code, struct",
         "UX & Presentation: Video demo provided. Comprehensive README with 17 sections. Setup instructions included",
@@ -857,7 +870,48 @@
         "Consider adding architecture documentation"
       ],
       "summary": "BeatMyPrompt (creative-apps track, 73.3/100): **BeatMyPrompt** is a live AI battle experience where two AI‑generated verses go head‑to‑head, and the **audience decides the winner using their applause**.\n\nNo apps, no sign‑ups, no friction.  \nJust:",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
+    },
+    {
+      "issue_number": 49,
+      "project_name": "EasyExpenseAI",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/49",
+      "github_username": "chakras",
+      "criteria_scores": {
+        "Accuracy & Relevance": 7,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 5,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 7
+      },
+      "evidence": {
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (893 chars). Repo: 19 source, 0 test, 41 total files, 1 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: . Multi-agent architecture: semantic kernel, multi-agent, orchestrat. Error handling or recovery logic documented",
+        "Creativity & Originality": "Novelty signals: unique, custom, original. Diverse technology combination: Runtime & Framework**, Node.js v24 — Server-side JavaScript runtime, Express.js 4.x — Web application framework, EJS — Server-side HTML templating engine, Azure AI & Cognitive Services**. Detailed project description with technical highlights. Appears to be template/generic project: sample. Only 1 commits",
+        "UX & Presentation": "Video demo provided. Comprehensive README with 12 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: environment variable, credential. Error handling documented. No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
+      },
+      "confidence": "high",
+      "red_flags_detected": [
+        "Very few commits (1) — may be template or rushed"
+      ],
+      "bonus_signals_detected": [
+        ".env.example provided for secure config"
+      ],
+      "weighted_total": 72.8,
+      "strengths": [
+        "19 source files showing substantial implementation",
+        "Mobile-first design approach"
+      ],
+      "improvements": [
+        "Only 1 commit suggests possible template",
+        "No test files"
+      ],
+      "summary": "AI expense tracking app with receipt scanning and categorization, featuring mobile-first design built with Copilot SDK.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "EasyExpenseAI: 19 source files. UX 10 too high without exceptional UX evidence beyond screenshots.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 52,
@@ -873,8 +927,8 @@
         "Technical Implementation": 7
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social media, content. Minimal source: 1 files. Limited code: Repo: 1 source, 0 test, 15 total files, 4 commits",
-        "Reasoning & Multi-step Thinking": "ReAct signals: act. Multi-step flow: workflow, orchestrat, pipeline. Minimal source: 1 files",
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: content, social media. Minimal source: 1 files. Limited code: Repo: 1 source, 0 test, 15 total files, 4 commits",
+        "Reasoning & Multi-step Thinking": "ReAct signals: act. Multi-step flow: orchestrat, pipeline, workflow. Minimal source: 1 files",
         "Creativity & Originality": "Innovation signals: custom. Technology stack: Microsoft Agent Framework (Python) — multi-agent orchestration, Microsoft Foundry — model hosting & project management, gpt-4.1 — LLM powering all 6 text agents, gpt-image-1.5 — AI image generation for final artwork, Azure Identity (DefaultAzureCredential) — Entra ID token-based auth (keyless). Detailed problem description. Domain-specific approach: brand. Minimal source: 1 files",
         "User Experience & Presentation": "Demo: screenshots. Detailed README (18 sections). Setup instructions present. Architecture or flow diagram included",
         "Technical Implementation": "Error handling documented. Security measures documented. Multi-agent or tool integration architecture. Code examples in README. Minimal source: 1 files"
@@ -888,18 +942,60 @@
       ],
       "weighted_total": 72.5,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social",
-        "Creativity & Originality: Innovation signals: custom. Technology stack: Microsoft Agent Framework (Python) — multi-agent orchestration, Microsoft ",
-        "User Experience & Presentation: Demo: screenshots. Detailed README (18 sections). Setup instructions present. Architecture or flow diagram included",
-        "Technical Implementation: Error handling documented. Security measures documented. Multi-agent or tool integration architecture. Code examples in "
+        "Creative fusion of news and visual art",
+        "Unique concept in reasoning-agents track"
       ],
       "improvements": [
-        "Consider strengthening Reasoning & Multi-step Thinking (scored 6/10)",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "Only 1 source file",
+        "Only 4 commits"
       ],
-      "summary": "HeadlineArt: Where News Meets Canvas (reasoning-agents track, 72.5/100): HeadlineArt is a 7-agent AI pipeline built with Microsoft Agent Framework that scans daily news, curates the most visually compelling stories, designs an art concept, writes Instagram-ready captions, ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "AI agent that transforms trending news headlines into visual art, combining news analysis with creative image generation.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "HeadlineArt: Creative concept but thin codebase (1 source file, 4 commits). Scores appropriate.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 55,
+      "project_name": "kube-copilot",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/55",
+      "github_username": "@openjny",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 8,
+        "UX & Presentation": 6,
+        "Reliability & Safety": 6
+      },
+      "evidence": {
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot, copilot sdk, copilot chat. Checklist: 100% requirements met. Detailed description (646 chars). Repo: 15 source, 1 test, 32 total files, 11 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: multi-step, react",
+        "Creativity & Originality": "Novelty signals: custom. Diverse technology combination: **@github/copilot-sdk** — LLM integration via GitHub Copilot CLI (no API keys needed), **@modelcontextprotocol/sdk** — Custom K8s docs MCP server (stdio transport), **Microsoft Learn MCP** — Remote MCP server (streamable HTTP) for MS Learn docs, code samples, and page fetching. Detailed project description with technical highlights",
+        "UX & Presentation": "No demo materials provided. Comprehensive README with 18 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: environment variable. No automated tests mentioned. Checklist confirms no hardcoded secrets. 1 test files found. .gitignore present"
+      },
+      "confidence": "high",
+      "red_flags_detected": [],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        ".env.example provided for secure config"
+      ],
+      "weighted_total": 72.2,
+      "strengths": [
+        "Genuinely useful tool replacing complex kubectl commands",
+        "Real TUI implementation with interactive interface",
+        "11 commits showing iterative development",
+        "Creative Copilot SDK + Kubernetes combination"
+      ],
+      "improvements": [
+        "Add more automated tests beyond single test file",
+        "Include architecture documentation",
+        "Add error recovery examples"
+      ],
+      "summary": "Terminal UI for natural-language Kubernetes cluster management via Copilot SDK. Replaces complex kubectl commands with conversational interface. 15 source files, 11 commits showing genuine iterative development.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "kube-copilot: Genuinely useful TUI for Kubernetes. 11 commits shows iteration. Creativity under-scored. Upgraded.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 28,
@@ -917,7 +1013,7 @@
       "evidence": {
         "Accuracy & Relevance": "MCP integration found: mcp server. Checklist: 100% requirements met. Detailed description (208 chars)",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: ",
-        "Creativity & Originality": "Novelty signals: custom, unique",
+        "Creativity & Originality": "Novelty signals: unique, custom",
         "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 20 sections. Setup instructions included",
         "Reliability & Safety": "Testing documented (automated tests). Checklist confirms no hardcoded secrets. .gitignore present"
       },
@@ -941,93 +1037,52 @@
         "Consider adding architecture documentation"
       ],
       "summary": "creative 404 (creative-apps track, 72.2/100): Generates a 404 image for use with websites.  As input, you point the generator to a working MCP server.  The code will inspect the server and based on the capabilities, generate a graphic that is apr",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
-      "issue_number": 45,
-      "project_name": "Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape.",
+      "issue_number": 31,
+      "project_name": "Threat Incident Swarm Commander",
       "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/45",
-      "github_username": "billwhalenmsft",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/31",
+      "github_username": "dondinulos",
       "criteria_scores": {
-        "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 7,
+        "Accuracy & Relevance": 7,
+        "Reasoning & Multi-step Thinking": 8,
         "Creativity & Originality": 7,
         "UX & Presentation": 8,
-        "Reliability & Safety": 5
+        "Reliability & Safety": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (587 chars). Repo: 11 source, 0 test, 20 total files, 1 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: ",
-        "Creativity & Originality": "Novelty signals: custom. Diverse technology combination: Frontend | HTML, CSS, JavaScript — CSS art & animations, retro-gaming aesthetic, Backend | Node.js + Express + TypeScript. Detailed project description with technical highlights. Only 1 commits",
-        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 18 sections. Setup instructions included",
-        "Reliability & Safety": "No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: github copilot, copilot, copilot chat. Checklist: 100% requirements met. Detailed description (539 chars). Repo: 4168 source, 214 test, 6593 total files, 10 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: react. Multi-agent architecture: multi-agent, swarm, orchestrat",
+        "Creativity & Originality": "Novelty signals: first. Diverse technology combination: GitHub Copilot, TypeScript — shared engine, terminal, web, and MCP server. Multi-language: .ts, .js, .tsx",
+        "UX & Presentation": "Video demo provided. Comprehensive README with 24 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: credential. No automated tests mentioned. Checklist confirms no hardcoded secrets. Verified 214 test files. CI/CD pipeline found"
       },
       "confidence": "high",
-      "red_flags_detected": [
-        "Very few commits (1) — may be template or rushed"
-      ],
+      "red_flags_detected": [],
       "bonus_signals_detected": [
         "MCP integration found",
-        ".env.example provided for secure config"
+        "Substantial codebase (4168 source files)",
+        "Verified: 214 test files in repo",
+        "CI/CD pipeline configured",
+        "Multi-language project (.ts, .js, .tsx)"
       ],
       "weighted_total": 71.7,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot. Checklist: 100% requirements",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: ",
-        "Creativity & Originality: Novelty signals: custom. Diverse technology combination: Frontend | HTML, CSS, JavaScript — CSS art & animations, retro-",
-        "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 18 sections. Setup instructions included"
+        "Highly creative Matrix metaphor for incident response",
+        "Dual UI with code rain visualization",
+        "MCP integration for Copilot Chat"
       ],
       "improvements": [
-        "Reliability & Safety: No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
+        "6593 files suggests vendor/node_modules included",
+        "30 min dev time raises quality concerns",
+        "No production-relevant incident response logic"
       ],
-      "summary": "Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape. (creative-apps track, 71.7/100): Prompt Escape is a visual, prompt-engineering escape room game where players write AI prompts to solve puzzles and escape themed rooms. It features 3 themed adventures — Indiana Jones, Harry Potter, a",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 39,
-      "project_name": "CodeIntel",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/39",
-      "github_username": "Mazher-Ul-Haq",
-      "criteria_scores": {
-        "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 8,
-        "Creativity & Originality": 7,
-        "UX & Presentation": 9,
-        "Reliability & Safety": 3
-      },
-      "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration, mcp client. Copilot usage: copilot, github copilot, copilot chat. Checklist: 100% requirements met. Detailed description (572 chars)",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: multi-step. Error handling or recovery logic documented",
-        "Creativity & Originality": "Novelty signals: first, original, unique, custom. Diverse technology combination: Built with: Node.js, MCP SDK, Express, WorkIQ MCP, GitHub REST API. Detailed project description with technical highlights. Only 1 commits",
-        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 23 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: .env, credential, environment variable, gitignore. Error handling documented. No automated tests mentioned. Checklist confirms no hardcoded secrets. RED FLAG: Potential hardcoded secrets detected. .gitignore present"
-      },
-      "confidence": "high",
-      "red_flags_detected": [
-        "Very few commits (1) — may be template or rushed"
-      ],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        ".env.example provided for secure config"
-      ],
-      "weighted_total": 71.1,
-      "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp tool, mcp integration, mcp client. Copilot usage: copilot, github copilot, copilo",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: multi-step. Error handling or recovery logic documented",
-        "Creativity & Originality: Novelty signals: first, original, unique, custom. Diverse technology combination: Built with: Node.js, MCP SDK, Express,",
-        "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 23 sections. Setup instructions included. Architecture d"
-      ],
-      "improvements": [
-        "Reliability & Safety: Security considerations: .env, credential, environment variable, gitignore. Error handling documented. No automated test",
-        "Consider adding automated tests",
-        "Consider adding architecture documentation"
-      ],
-      "summary": "CodeIntel (creative-apps track, 71.1/100): CodeIntel — Team Intelligence Hub\n\nCodeIntel transforms raw GitHub repository data and Microsoft 365 signals into actionable team intelligence. It combines an MCP server (8 tools for GitHub Copilot), ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Matrix-themed autonomous swarm AI simulation modeling cascading incident response, with dual UI (terminal + React Canvas) and MCP integration for Copilot Chat control.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Threat Incident Swarm Commander: Creative Matrix theme but 6593 files (likely node_modules). 30 min dev time claim. Accuracy/UX/Reliability downgraded.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 15,
@@ -1043,7 +1098,7 @@
         "Reliability & Safety": 7
       },
       "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (230 chars). Minimal source: 1 files",
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (230 chars). Minimal source: 1 files",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: react. Error handling or recovery logic documented. Minimal source: 1 files",
         "Creativity & Originality": "Novelty signals: custom. Diverse technology combination: Astro for static site generator, Node.js for runtime data aggregation, gray-matter to parse yaml frontmatter from SKILL.md files, JSZip to generate the client package download, CSS for customization UI. Minimal source: 1 files",
         "UX & Presentation": "Live demo URL available. Comprehensive README with 20 sections. Setup instructions included. Architecture diagram or flow description found",
@@ -1057,7 +1112,7 @@
       "bonus_signals_detected": [
         "Automated tests present",
         "CI/CD pipeline configured",
-        "Active development (59 commits)"
+        "Active development (62 commits)"
       ],
       "weighted_total": 71.1,
       "strengths": [
@@ -1070,7 +1125,96 @@
         "Consider strengthening Creativity & Originality (scored 6/10)"
       ],
       "summary": "Skills Hub (creative-apps track, 71.1/100): Copilot Skills Hub is a curated catalog of GitHub Copilot skills. Skills are instruction files (SKILL.md) that teach Copilot how to handle specific development tasks — from generating commit messages ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
+    },
+    {
+      "issue_number": 11,
+      "project_name": "Hybrid DNS Copilot",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/11",
+      "github_username": "@munieswar",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 6,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 6
+      },
+      "evidence": {
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp tool, mcp integration. Copilot usage: github copilot, copilot, copilot chat. Checklist: 100% requirements met. Detailed description (1257 chars). Repo: 11 source, 0 test, 22 total files, 4 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
+        "Creativity & Originality": "Detailed project description with technical highlights",
+        "UX & Presentation": "Live demo URL available. Comprehensive README with 15 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "No automated tests mentioned. Checklist confirms no hardcoded secrets. CI/CD pipeline found. .gitignore present"
+      },
+      "confidence": "medium",
+      "red_flags_detected": [
+        "No working demo provided"
+      ],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        "CI/CD pipeline configured"
+      ],
+      "weighted_total": 70.5,
+      "strengths": [
+        "MCP server integration for GitHub Copilot",
+        "Detailed documentation with architecture",
+        "11 source files"
+      ],
+      "improvements": [
+        "Add working demo video or screenshots",
+        "Add automated tests",
+        "Provide usage examples"
+      ],
+      "summary": "Interactive Azure DNS Private Resolver visualizer with MCP server for GitHub Copilot. 11 source files, good documentation but no working demo evidence.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Hybrid DNS Copilot: Good MCP server + DNS tools. 11 source files. No working demo but live URL. UX slightly over-scored without demo evidence.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 22,
+      "project_name": "DailySync",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/22",
+      "github_username": "robertoborges",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 6,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 6
+      },
+      "evidence": {
+        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot, copilot sdk, copilot chat. Checklist: 100% requirements met. Detailed description (230 chars). Repo: 13 source, 0 test, 21 total files, 3 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: ",
+        "Creativity & Originality": "Novelty signals: first, custom. Diverse technology combination: TypeScript, Node.js, GitHub Copilot SDK, Model Context Protocol (MCP), WorkIQ  MCP. Only 3 commits",
+        "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 33 sections. Setup instructions included. Architecture diagram or flow description found",
+        "Reliability & Safety": "Security considerations: .env, environment variable. No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
+      },
+      "confidence": "medium",
+      "red_flags_detected": [
+        "No working demo provided",
+        "Very few commits (3) — may be template or rushed"
+      ],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        ".env.example provided for secure config"
+      ],
+      "weighted_total": 70.5,
+      "strengths": [
+        "Practical developer productivity concept",
+        "Combines GitHub and M365 data sources",
+        "13 source files"
+      ],
+      "improvements": [
+        "Add working demo video",
+        "Increase commit history",
+        "Add automated tests"
+      ],
+      "summary": "AI-powered CLI for daily standup report generation from GitHub and M365 data. Good concept with 13 source files but lacks working demo and has only 3 commits.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "DailySync: 13 source files, useful dev productivity tool. Only 3 commits, no demo. UX and Reliability slightly over-scored.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 40,
@@ -1112,7 +1256,7 @@
         "Consider strengthening Reliability & Safety (scored 6/10)"
       ],
       "summary": "AI Project Recap Storyboard (creative-apps track, 70.0/100): Recap Storyboard turns GitHub activity and local notes into a narrative recap with chapters, highlights, risks, and a timeline. It pulls PRs and commits for a chosen date range, blends in local notes ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 29,
@@ -1128,7 +1272,7 @@
         "Technical Implementation": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, azure ai foundry. Checklist: 100% met. Communication/content scenario: content. Limited code: Repo: 4 source, 0 test, 13 total files, 3 commits",
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, foundry. Checklist: 100% met. Communication/content scenario: content. Limited code: Repo: 4 source, 0 test, 13 total files, 3 commits",
         "Reasoning & Multi-step Thinking": "ReAct signals: react, act",
         "Creativity & Originality": "Technology stack: Python & FastAPI — Backend API, React & Vite — Frontend UI, Azure AI Foundry (GPT-4.1) — LLM analysis, Git — Shallow repo diffing, Server-Sent Events (SSE) — Real-time streaming. Detailed problem description. Multi-language: .py, .jsx, .js. Only 3 commits",
         "User Experience & Presentation": "Demo: screenshots. Detailed README (10 sections). Setup instructions present. Architecture or flow diagram included",
@@ -1144,7 +1288,7 @@
       ],
       "weighted_total": 69.5,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, azure ai foundry. Checklist: 100% met. Communication/content scenario: content. Limited code: Re",
+        "Accuracy & Relevance: Foundry usage: azure ai foundry, foundry. Checklist: 100% met. Communication/content scenario: content. Limited code: Re",
         "User Experience & Presentation: Demo: screenshots. Detailed README (10 sections). Setup instructions present. Architecture or flow diagram included"
       ],
       "improvements": [
@@ -1152,7 +1296,7 @@
         "Consider strengthening Creativity & Originality (scored 6/10)"
       ],
       "summary": "Upgrade Sage (reasoning-agents track, 69.5/100): Many companies rely on legacy projects that lag several versions behind modern releases. When organizations finally attempt to upgrade, they often face a long, complicated migration path filled with u",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 53,
@@ -1168,9 +1312,9 @@
         "Reliability & Safety": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "MCP integration found: MCP mentioned in project. Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (956 chars). Minimal source: 1 files. Limited code: Repo: 1 source, 0 test, 15 total files, 11 commits",
+        "Accuracy & Relevance": "MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% requirements met. Detailed description (956 chars). Minimal source: 1 files. Limited code: Repo: 1 source, 0 test, 15 total files, 11 commits",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: cot. Multi-agent architecture: multi-agent. Minimal source: 1 files",
-        "Creativity & Originality": "Novelty signals: first, original, unique, custom. Diverse technology combination: Azure OpenAI, Azure MCP, Microsoft Foundry, GitHub Copilot, GitHub Copilot SDK. Detailed project description with technical highlights. Minimal source: 1 files",
+        "Creativity & Originality": "Novelty signals: unique, first, custom, original. Diverse technology combination: Azure OpenAI, Azure MCP, Microsoft Foundry, GitHub Copilot, GitHub Copilot SDK. Detailed project description with technical highlights. Minimal source: 1 files",
         "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included",
         "Reliability & Safety": "Security considerations: . No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
       },
@@ -1183,9 +1327,9 @@
       ],
       "weighted_total": 69.5,
       "strengths": [
-        "Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% re",
+        "Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% re",
         "Reasoning & Multi-step Thinking: Reasoning patterns: cot. Multi-agent architecture: multi-agent. Minimal source: 1 files",
-        "Creativity & Originality: Novelty signals: first, original, unique, custom. Diverse technology combination: Azure OpenAI, Azure MCP, Microsoft Fou",
+        "Creativity & Originality: Novelty signals: unique, first, custom, original. Diverse technology combination: Azure OpenAI, Azure MCP, Microsoft Fou",
         "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included"
       ],
       "improvements": [
@@ -1194,7 +1338,7 @@
         "Consider adding architecture documentation"
       ],
       "summary": "Marketing Asset Creation Agent (creative-apps track, 69.5/100): Conference and meetup organizers struggle with incomplete, scattered, and outdated speaker profiles. Speakers submit partial bios late, and their information is spread across LinkedIn, GitHub, Twitter",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 37,
@@ -1210,7 +1354,7 @@
         "Reliability & Safety": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (322 chars). Repo: 10 source, 3 test, 42 total files, 4 commits",
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (322 chars). Repo: 10 source, 3 test, 42 total files, 4 commits",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
         "Creativity & Originality": "Novelty signals: first. Detailed project description with technical highlights",
         "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 32 sections. Setup instructions included",
@@ -1224,7 +1368,7 @@
       ],
       "weighted_total": 69.5,
       "strengths": [
-        "Accuracy & Relevance: Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (322 chars). Repo: 10 sou",
+        "Accuracy & Relevance: Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (322 chars). Repo: 10 sou",
         "Reasoning & Multi-step Thinking: Reasoning patterns: react",
         "Creativity & Originality: Novelty signals: first. Detailed project description with technical highlights",
         "UX & Presentation: Screenshots provided in demo section. Comprehensive README with 32 sections. Setup instructions included"
@@ -1235,70 +1379,7 @@
         "Consider adding architecture documentation"
       ],
       "summary": "Making money by poop (creative-apps track, 69.5/100): Start making money while pooping at work! 🚽💰 Ever wondered how much you've earned just by sitting on the toilet? This hilarious yet powerful app lets you track every poop, calculate your exact earning",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 55,
-      "project_name": "kube-copilot",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/55",
-      "github_username": "@openjny",
-      "criteria_scores": {
-        "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 7,
-        "Creativity & Originality": 7,
-        "UX & Presentation": 6,
-        "Reliability & Safety": 5
-      },
-      "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot sdk, copilot chat. Checklist: 100% requirements met. Detailed description (586 chars). Repo: 15 source, 1 test, 32 total files, 11 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: multi-step, react",
-        "Creativity & Originality": "Novelty signals: custom. Diverse technology combination: @github/copilot-sdk - LLM integration via GitHub Copilot CLI, @modelcontextprotocol/sdk - Custom K8s docs MCP server (stdio transport), Microsoft Learn MCP - Remote MCP server (streamable HTTP), Ink (React for terminals) - Rich TUI framework with React components, kubectl - Kubernetes CLI",
-        "UX & Presentation": "No demo materials provided. Comprehensive README with 18 sections. Setup instructions included. Architecture diagram or flow description found",
-        "Reliability & Safety": "Security considerations: environment variable. No automated tests mentioned. Hardcoded secrets concern (checklist not confirmed). 1 test files found. .gitignore present"
-      },
-      "confidence": "medium",
-      "red_flags_detected": [
-        "No working demo provided"
-      ],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        ".env.example provided for secure config"
-      ],
-      "weighted_total": 68.3,
-      "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: copilot, github copilot, copilot sdk, copilot chat. C",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: multi-step, react",
-        "Creativity & Originality: Novelty signals: custom. Diverse technology combination: @github/copilot-sdk - LLM integration via GitHub Copilot CLI, @"
-      ],
-      "improvements": [
-        "Reliability & Safety: Security considerations: environment variable. No automated tests mentioned. Hardcoded secrets concern (checklist not co",
-        "Consider strengthening UX & Presentation (scored 6/10)"
-      ],
-      "summary": "kube-copilot (creative-apps track, 68.3/100): kube-copilot is a terminal UI (TUI) that lets you manage Kubernetes clusters using natural language. Instead of memorizing complex kubectl flags and resource names, you simply describe what you want i",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 9999,
-      "project_name": "Test Project",
-      "track": "creative-apps",
-      "criteria_scores": {
-        "Accuracy & Relevance": 7,
-        "Reasoning & Multi-step Thinking": 6,
-        "Creativity & Originality": 8,
-        "UX & Presentation": 7,
-        "Reliability & Safety": 6
-      },
-      "weighted_total": 67.8,
-      "strengths": [
-        "Good test coverage",
-        "Clean code"
-      ],
-      "improvements": [
-        "Needs better docs"
-      ],
-      "summary": "A solid test project.",
-      "scored_at": "2026-02-13T05:30:06.585379+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 30,
@@ -1333,16 +1414,18 @@
       ],
       "weighted_total": 67.2,
       "strengths": [
-        "Reasoning & Multi-step Thinking: Reasoning patterns: react",
-        "Creativity & Originality: Novelty signals: custom. Diverse technology combination: Next.js (App Router) and React, TypeScript, Tailwind CSS, Azure",
-        "Reliability & Safety: Security considerations: .env. Testing documented (automated tests). Checklist confirms no hardcoded secrets. 4 test fil"
+        "Policy-as-code concept for enterprise compliance",
+        "Description mentions MCP integration"
       ],
       "improvements": [
-        "UX & Presentation: Screenshots provided in demo section. No README available (repo private or inaccessible)",
-        "Consider strengthening Accuracy & Relevance (scored 6/10)"
+        "Add comprehensive README",
+        "Use multiple commits",
+        "Make repository accessible"
       ],
-      "summary": "PolicyShield (creative-apps track, 67.2/100): PolicyShield is a Next.js web app that enables enterprise policy-as-code. Regulations and controls evolve, so instead of relying on static built-in policies, customers can generate and own their compl",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Enterprise policy-as-code Next.js web app. Interesting concept but no README and 1 commit, making implementation quality unverifiable.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "PolicyShield: No README available, 1 commit. Interesting policy-as-code concept. Accuracy over-scored without README evidence.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 36,
@@ -1380,49 +1463,7 @@
         "Consider strengthening Accuracy & Relevance (scored 6/10)"
       ],
       "summary": "AgentRob (creative-apps track, 65.0/100): **Real-time voice-enabled AI Scrum Master** that facilitates daily standup meetings, collects structured updates from each team member, and delivers an actionable digest — powered by Azure Voice Live ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 26,
-      "project_name": "Bridgenote",
-      "track": "creative-apps",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/26",
-      "github_username": "@kbeaver16",
-      "criteria_scores": {
-        "Accuracy & Relevance": 9,
-        "Reasoning & Multi-step Thinking": 7,
-        "Creativity & Originality": 5,
-        "UX & Presentation": 4,
-        "Reliability & Safety": 6
-      },
-      "evidence": {
-        "Accuracy & Relevance": "MCP integration found: mcp server. Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (1567 chars). Repo: 18 source, 0 test, 56 total files, 2 commits",
-        "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
-        "Creativity & Originality": "Diverse technology combination: Key technologies in this project:, Frontend: Next.js (React) with app router, Backend: Node.js + Express (with CORS), Agent service: Python + Microsoft Agent Framework + FastAPI (Foundry-backed), AI hosting: Microsoft Foundry (Azure AI Foundry). Multi-language: .py, .js, .jsx. Only 2 commits",
-        "UX & Presentation": "Screenshots provided in demo section. No README available (repo private or inaccessible)",
-        "Reliability & Safety": "Security considerations: .env, credential. No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
-      },
-      "confidence": "medium",
-      "red_flags_detected": [
-        "No README or inaccessible repository",
-        "Very few commits (2) — may be template or rushed"
-      ],
-      "bonus_signals_detected": [
-        "MCP integration found",
-        ".env.example provided for secure config",
-        "Multi-language project (.py, .js, .jsx)"
-      ],
-      "weighted_total": 63.9,
-      "strengths": [
-        "Accuracy & Relevance: MCP integration found: mcp server. Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed de",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: react"
-      ],
-      "improvements": [
-        "Creativity & Originality: Diverse technology combination: Key technologies in this project:, Frontend: Next.js (React) with app router, Backend: N",
-        "UX & Presentation: Screenshots provided in demo section. No README available (repo private or inaccessible)"
-      ],
-      "summary": "Bridgenote (creative-apps track, 63.9/100): BridgeNote — Project Description\nBridgeNote is a creative note‑transformation assistant designed for people who work across disconnected systems and constantly email themselves notes just to keep info",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 46,
@@ -1438,7 +1479,7 @@
         "Reliability & Safety": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (427 chars). Minimal source: 3 files",
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (427 chars). Minimal source: 3 files",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: agent loop. Minimal source: 3 files",
         "Creativity & Originality": "Detailed project description with technical highlights. Minimal source: 3 files",
         "UX & Presentation": "Screenshots provided in demo section. Comprehensive README with 14 sections. Setup instructions included. Architecture diagram or flow description found",
@@ -1462,7 +1503,7 @@
         "Consider strengthening Accuracy & Relevance (scored 6/10)"
       ],
       "summary": "PowerPoint Reviewer Agent (creative-apps track, 63.3/100): An AI-powered agent that automatically reviews and corrects PowerPoint presentations using OpenAI GPT-4.\n\nFeatures\nSpelling & Grammar Correction - AI-powered detection and fixing of errors\nAlignment S",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 48,
@@ -1478,9 +1519,9 @@
         "Technical Implementation": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social media, campaign, marketing, content. Grounding: grounding, retrieval. REPO NOT ACCESSIBLE — scores penalized",
-        "Reasoning & Multi-step Thinking": "ReAct signals: act. Self-reflection: self-reflection. Multi-step flow: multi-step, workflow, orchestrat. REPO NOT ACCESSIBLE — scores penalized",
-        "Creativity & Originality": "Technology stack: Microsoft Foundry (Azure AI Foundry) – Used as the unified platform for building and orchestrating reasoning agents., Azure OpenAI (Reasoning Models such as GPT-5.x) – Powers multi-step reasoning, content generation, and self-reflection workflows., Azure AI Projects SDK (azure-ai-projects) – Enables secure agent configuration and integration with Foundry services.. Detailed problem description. Domain-specific approach: persona, compliance, brand. REPO NOT ACCESSIBLE — scores penalized",
+        "Accuracy & Relevance": "Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: campaign, content, marketing, social media. Grounding: retrieval, grounding. REPO NOT ACCESSIBLE — scores penalized",
+        "Reasoning & Multi-step Thinking": "ReAct signals: act. Self-reflection: self-reflection. Multi-step flow: multi-step, orchestrat, workflow. REPO NOT ACCESSIBLE — scores penalized",
+        "Creativity & Originality": "Technology stack: Microsoft Foundry (Azure AI Foundry) – Used as the unified platform for building and orchestrating reasoning agents., Azure OpenAI (Reasoning Models such as GPT-5.x) – Powers multi-step reasoning, content generation, and self-reflection workflows., Azure AI Projects SDK (azure-ai-projects) – Enables secure agent configuration and integration with Foundry services.. Detailed problem description. Domain-specific approach: brand, compliance, persona. REPO NOT ACCESSIBLE — scores penalized",
         "User Experience & Presentation": "Video demo available. No README (repo inaccessible). REPO NOT ACCESSIBLE — scores penalized",
         "Technical Implementation": "Error handling documented. Security measures documented. Multi-agent or tool integration architecture. REPO NOT ACCESSIBLE — scores penalized"
       },
@@ -1492,15 +1533,98 @@
       "bonus_signals_detected": [],
       "weighted_total": 63.0,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, azure ai foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: social",
-        "Reasoning & Multi-step Thinking: ReAct signals: act. Self-reflection: self-reflection. Multi-step flow: multi-step, workflow, orchestrat. REPO NOT ACCESS"
+        "Accuracy & Relevance: Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: campai",
+        "Reasoning & Multi-step Thinking: ReAct signals: act. Self-reflection: self-reflection. Multi-step flow: multi-step, orchestrat, workflow. REPO NOT ACCESS"
       ],
       "improvements": [
         "User Experience & Presentation: Video demo available. No README (repo inaccessible). REPO NOT ACCESSIBLE — scores penalized",
         "Consider strengthening Creativity & Originality (scored 6/10)"
       ],
       "summary": "CommsGuard (reasoning-agents track, 63.0/100): CommsGuard AI is a multi-agent reasoning system built on Microsoft Foundry to help BFSI organizations create compliant, high-quality social media content. The system orchestrates four specialized agen",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
+    },
+    {
+      "issue_number": 13,
+      "project_name": "SE Agent",
+      "track": "enterprise-agents",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/13",
+      "github_username": "@Daboostr",
+      "criteria_scores": {
+        "Technical Implementation": 7,
+        "Business Value": 7,
+        "Innovation & Creativity": 4
+      },
+      "evidence": {
+        "Technical Implementation": "M365 integration: m365. Auth: sso. NO SOURCE CODE in repo (3 files total)",
+        "Business Value": "Enterprise scenario: process, workflow. NO SOURCE CODE in repo (3 files total)",
+        "Innovation & Creativity": "Technology stack: Copilot Studio, M365 Copilot, Dynamics 365 (Dataverse). Innovation signals: unique. Demo type: video. Documentation quality: 21 README sections. NO SOURCE CODE in repo (3 files total)"
+      },
+      "confidence": "high",
+      "red_flags_detected": [
+        "No source code files found in repo (3 total files)"
+      ],
+      "bonus_signals_detected": [
+        "Automated tests present"
+      ],
+      "weighted_total": 59.8,
+      "strengths": [
+        "Genuine Copilot Studio + Power Platform architecture",
+        "Real D365 FSI use case with detailed entity coverage",
+        "Importable Power Platform Solution"
+      ],
+      "improvements": [
+        "No source code files (Power Platform) makes evaluation difficult",
+        "Could add customization documentation"
+      ],
+      "summary": "Copilot Studio agent as Power Platform Solution generating realistic Financial Services demo data in D365 Sales/Dataverse, covering accounts, contacts, leads, and FSI entities.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "SE Agent: Copilot Studio Power Platform solution - 0 source files is misleading for no-code/low-code. Detailed README. Significantly UNDER-scored. TechImpl and BusinessValue upgraded.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 26,
+      "project_name": "Bridgenote",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/26",
+      "github_username": "@kbeaver16",
+      "criteria_scores": {
+        "Accuracy & Relevance": 6,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 5,
+        "UX & Presentation": 5,
+        "Reliability & Safety": 6
+      },
+      "evidence": {
+        "Accuracy & Relevance": "MCP integration found: mcp server. Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (1567 chars). Repo: 18 source, 0 test, 56 total files, 2 commits",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: react",
+        "Creativity & Originality": "Diverse technology combination: Key technologies in this project:, Frontend: Next.js (React) with app router, Backend: Node.js + Express (with CORS), Agent service: Python + Microsoft Agent Framework + FastAPI (Foundry-backed), AI hosting: Microsoft Foundry (Azure AI Foundry). Multi-language: .py, .js, .jsx. Only 2 commits",
+        "UX & Presentation": "Screenshots provided in demo section. No README available (repo private or inaccessible)",
+        "Reliability & Safety": "Security considerations: .env, credential. No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
+      },
+      "confidence": "medium",
+      "red_flags_detected": [
+        "No README or inaccessible repository",
+        "Very few commits (2) — may be template or rushed"
+      ],
+      "bonus_signals_detected": [
+        "MCP integration found",
+        ".env.example provided for secure config",
+        "Multi-language project (.py, .js, .jsx)"
+      ],
+      "weighted_total": 58.9,
+      "strengths": [
+        "Cross-system note transformation concept",
+        "18 source files exist"
+      ],
+      "improvements": [
+        "Add comprehensive README",
+        "Provide working demo",
+        "Increase development commits"
+      ],
+      "summary": "Note transformation assistant for cross-system workflows. No README and only 2 commits make implementation quality unverifiable.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Bridgenote: No README, 2 commits. 18 source files. Interesting concept but unverifiable quality.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 12,
@@ -1516,9 +1640,9 @@
         "Technical Implementation": 6
       },
       "evidence": {
-        "Accuracy & Relevance": "No explicit Foundry usage evidence. Checklist: 100% met. Communication/content scenario: social media, marketing, content. Grounding: rag. REPO NOT ACCESSIBLE — scores penalized",
-        "Reasoning & Multi-step Thinking": "CoT pattern: chain-of-thought, cot, step-by-step reasoning. ReAct signals: react, act. Self-reflection: self-reflection. Multi-step flow: workflow, orchestrat, pipeline. REPO NOT ACCESSIBLE — scores penalized",
-        "Creativity & Originality": "Innovation signals: custom. Technology stack: Core Platform:, Azure Functions - Serverless compute for hosting the application, Azure Durable Functions - Stateful orchestration framework for long-running workflows, Python 3.x - Programming language, AI/ML:. Detailed problem description. Domain-specific approach: strategy, brand. REPO NOT ACCESSIBLE — scores penalized",
+        "Accuracy & Relevance": "No explicit Foundry usage evidence. Checklist: 100% met. Communication/content scenario: content, marketing, social media. Grounding: rag. REPO NOT ACCESSIBLE — scores penalized",
+        "Reasoning & Multi-step Thinking": "CoT pattern: step-by-step reasoning, chain-of-thought, cot. ReAct signals: react, act. Self-reflection: self-reflection. Multi-step flow: orchestrat, pipeline, workflow. REPO NOT ACCESSIBLE — scores penalized",
+        "Creativity & Originality": "Innovation signals: custom. Technology stack: Core Platform:, Azure Functions - Serverless compute for hosting the application, Azure Durable Functions - Stateful orchestration framework for long-running workflows, Python 3.x - Programming language, AI/ML:. Detailed problem description. Domain-specific approach: brand, strategy. REPO NOT ACCESSIBLE — scores penalized",
         "User Experience & Presentation": "Demo: screenshots. No README (repo inaccessible). REPO NOT ACCESSIBLE — scores penalized",
         "Technical Implementation": "Error handling documented. Security measures documented. Multi-agent or tool integration architecture. REPO NOT ACCESSIBLE — scores penalized"
       },
@@ -1530,15 +1654,15 @@
       "bonus_signals_detected": [],
       "weighted_total": 58.5,
       "strengths": [
-        "Reasoning & Multi-step Thinking: CoT pattern: chain-of-thought, cot, step-by-step reasoning. ReAct signals: react, act. Self-reflection: self-reflection.",
+        "Reasoning & Multi-step Thinking: CoT pattern: step-by-step reasoning, chain-of-thought, cot. ReAct signals: react, act. Self-reflection: self-reflection.",
         "Creativity & Originality: Innovation signals: custom. Technology stack: Core Platform:, Azure Functions - Serverless compute for hosting the appli"
       ],
       "improvements": [
-        "Accuracy & Relevance: No explicit Foundry usage evidence. Checklist: 100% met. Communication/content scenario: social media, marketing, conten",
+        "Accuracy & Relevance: No explicit Foundry usage evidence. Checklist: 100% met. Communication/content scenario: content, marketing, social medi",
         "User Experience & Presentation: Demo: screenshots. No README (repo inaccessible). REPO NOT ACCESSIBLE — scores penalized"
       ],
       "summary": "Zava Content Studio — Social Media Content Agent (reasoning-agents track, 58.5/100): AI Content Studio — A multi-agent social media content creation system powered by Microsoft Agent Framework and Azure Durable Functions. Three specialized AI agents (Ideation, Creator, Reviewer) colla",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 16,
@@ -1554,7 +1678,7 @@
         "Technical Implementation": 2
       },
       "evidence": {
-        "Accuracy & Relevance": "Foundry usage: foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: marketing, content. Grounding: search, grounding, rag, retrieval. NO SOURCE CODE in repo (4 files total)",
+        "Accuracy & Relevance": "Foundry usage: microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: content, marketing. Grounding: retrieval, search, rag, grounding. NO SOURCE CODE in repo (4 files total)",
         "Reasoning & Multi-step Thinking": "ReAct signals: act. Self-reflection: evaluate. Multi-step flow: workflow. NO SOURCE CODE in repo (4 files total)",
         "Creativity & Originality": "Technology stack: Microsoft Foundry Agent Service – managed runtime to build, run, and govern enterprise AI agents, GPT‑5.2‑Chat (Microsoft Foundry) – reasoning model for deterministic, enterprise‑ready content generation. Detailed problem description. Domain-specific approach: governance. NO SOURCE CODE in repo (4 files total)",
         "User Experience & Presentation": "Demo: screenshots. Detailed README (10 sections). Setup instructions present. Architecture or flow diagram included. NO SOURCE CODE in repo (4 files total)",
@@ -1569,14 +1693,14 @@
       ],
       "weighted_total": 54.5,
       "strengths": [
-        "Accuracy & Relevance: Foundry usage: foundry, microsoft foundry. Checklist: 100% met. Communication/content scenario: marketing, content. Grou"
+        "Accuracy & Relevance: Foundry usage: microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: content, marketing. Grou"
       ],
       "improvements": [
         "Creativity & Originality: Technology stack: Microsoft Foundry Agent Service – managed runtime to build, run, and govern enterprise AI agents, GPT‑",
         "Technical Implementation: Code examples in README. NO SOURCE CODE in repo (4 files total)"
       ],
       "summary": "FoundryReleaseScout (reasoning-agents track, 54.5/100): Enterprise AI Release Scouting Agent helps enterprise architects and partners stay current on Microsoft AI platform updates without marketing noise. The agent treats Microsoft Foundry blog posts as si",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 21,
@@ -1615,7 +1739,7 @@
         "Reliability & Safety: Security considerations: .env, credential. Error handling documented. No automated tests mentioned. Checklist confirms n"
       ],
       "summary": "Deal to Glory (creative-apps track, 53.3/100): Deal to Glory is a voice-first, multi-agent workflow that turns a seller's post-meeting sentence into a closed-loop CRM update, commission calculation, and manager recognition moment — all in under 5 ",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 44,
@@ -1629,7 +1753,7 @@
         "Innovation & Creativity": 3
       },
       "evidence": {
-        "Technical Implementation": "M365 integration: teams, m365. MCP: mcp, mcp server. Auth: authentication, oauth. Adaptive Cards: card, adaptive card, adaptive. NO SOURCE CODE in repo (6 files total)",
+        "Technical Implementation": "M365 integration: m365, teams. MCP: mcp server, mcp. Auth: oauth, authentication. Adaptive Cards: adaptive, card, adaptive card. NO SOURCE CODE in repo (6 files total)",
         "Business Value": "Business value signals: business. Enterprise scenario: enterprise. Detailed business description. NO SOURCE CODE in repo (6 files total)",
         "Innovation & Creativity": "Microsoft Graph integration. NO SOURCE CODE in repo (6 files total)"
       },
@@ -1643,14 +1767,55 @@
       ],
       "weighted_total": 49.8,
       "strengths": [
-        "Technical Implementation: M365 integration: teams, m365. MCP: mcp, mcp server. Auth: authentication, oauth. Adaptive Cards: card, adaptive card, a"
+        "Entertaining and relatable concept"
       ],
       "improvements": [
-        "Business Value: Business value signals: business. Enterprise scenario: enterprise. Detailed business description. NO SOURCE CODE in repo",
-        "Innovation & Creativity: Microsoft Graph integration. NO SOURCE CODE in repo (6 files total)"
+        "README is just one line",
+        "No source code files",
+        "No working demo evidence"
       ],
-      "summary": "Corporate Bullshit Translator (enterprise-agents track, 49.8/100): Corporate Bullshit Translator is an intelligent M365 Copilot agent that analyzes \nmeeting transcripts and corporate communications to identify vague business jargon \nand translate it into clear, hones",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "M365 Copilot agent concept for translating corporate jargon, but lacks implementation evidence.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Corporate Bullshit Translator: Good concept but README is one line. No source code. Score appropriate - concept without implementation.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 59,
+      "project_name": "Dictation 4 Kids",
+      "track": "creative-apps",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/59",
+      "github_username": "@kevintkliu",
+      "criteria_scores": {
+        "Accuracy & Relevance": 5,
+        "Reasoning & Multi-step Thinking": 6,
+        "Creativity & Originality": 5,
+        "UX & Presentation": 2,
+        "Reliability & Safety": 6
+      },
+      "evidence": {
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (2115 chars). REPO NOT ACCESSIBLE — scores penalized",
+        "Reasoning & Multi-step Thinking": "Reasoning patterns: . Error handling or recovery logic documented. REPO NOT ACCESSIBLE — scores penalized",
+        "Creativity & Originality": "Novelty signals: first, custom. Detailed project description with technical highlights. REPO NOT ACCESSIBLE — scores penalized",
+        "UX & Presentation": "Screenshots provided in demo section. No README available (repo private or inaccessible). REPO NOT ACCESSIBLE — scores penalized",
+        "Reliability & Safety": "Error handling documented. Testing documented (automated tests). Checklist confirms no hardcoded secrets. REPO NOT ACCESSIBLE — scores penalized"
+      },
+      "confidence": "medium",
+      "red_flags_detected": [
+        "No README or inaccessible repository",
+        "Repository inaccessible or private"
+      ],
+      "bonus_signals_detected": [
+        "Automated tests present"
+      ],
+      "weighted_total": 49.4,
+      "strengths": [],
+      "improvements": [
+        "Accuracy & Relevance: Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (2115 chars). REPO NOT AC",
+        "Creativity & Originality: Novelty signals: first, custom. Detailed project description with technical highlights. REPO NOT ACCESSIBLE — scores pen",
+        "UX & Presentation: Screenshots provided in demo section. No README available (repo private or inaccessible). REPO NOT ACCESSIBLE — scores p"
+      ],
+      "summary": "Dictation 4 Kids (creative-apps track, 49.4/100): 🌟 Introduction to Dictation 4 Kids\nAs a parent, helping our children study can be both rewarding and… a little challenging.\nWhen I help my son prepare for dictation, he often asks the same questions m",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 24,
@@ -1693,40 +1858,7 @@
         "Reliability & Safety: No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present"
       ],
       "summary": "STEMProjectGenerator (creative-apps track, 41.6/100): A web solution to generate new STEM project ideas for kids.",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
-    },
-    {
-      "issue_number": 13,
-      "project_name": "SE Agent",
-      "track": "enterprise-agents",
-      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/13",
-      "github_username": "@Daboostr",
-      "criteria_scores": {
-        "Technical Implementation": 5,
-        "Business Value": 3,
-        "Innovation & Creativity": 4
-      },
-      "evidence": {
-        "Technical Implementation": "M365 integration: m365. Auth: sso. NO SOURCE CODE in repo (3 files total)",
-        "Business Value": "Enterprise scenario: workflow, process. NO SOURCE CODE in repo (3 files total)",
-        "Innovation & Creativity": "Technology stack: Copilot Studio, M365 Copilot, Dynamics 365 (Dataverse). Innovation signals: unique. Demo type: video. Documentation quality: 21 README sections. NO SOURCE CODE in repo (3 files total)"
-      },
-      "confidence": "high",
-      "red_flags_detected": [
-        "No source code files found in repo (3 total files)"
-      ],
-      "bonus_signals_detected": [
-        "Automated tests present"
-      ],
-      "weighted_total": 40.0,
-      "strengths": [],
-      "improvements": [
-        "Technical Implementation: M365 integration: m365. Auth: sso. NO SOURCE CODE in repo (3 files total)",
-        "Business Value: Enterprise scenario: workflow, process. NO SOURCE CODE in repo (3 files total)",
-        "Innovation & Creativity: Technology stack: Copilot Studio, M365 Copilot, Dynamics 365 (Dataverse). Innovation signals: unique. Demo type: video. "
-      ],
-      "summary": "SE Agent (enterprise-agents track, 40.0/100): My Agent will create demo leads in Dynamics 365 for FSI data model.  The agent can be customized to generate leads for any industry with a simple tweak to the prompt.",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 19,
@@ -1735,14 +1867,14 @@
       "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/19",
       "github_username": "JochenMSFT",
       "criteria_scores": {
-        "Accuracy & Relevance": 5,
+        "Accuracy & Relevance": 4,
         "Reasoning & Multi-step Thinking": 5,
-        "Creativity & Originality": 3,
-        "UX & Presentation": 2,
+        "Creativity & Originality": 4,
+        "UX & Presentation": 4,
         "Reliability & Safety": 3
       },
       "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% requirements met. REPO NOT ACCESSIBLE — scores penalized",
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% requirements met. REPO NOT ACCESSIBLE — scores penalized",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: . REPO NOT ACCESSIBLE — scores penalized",
         "Creativity & Originality": "Standard project concept. REPO NOT ACCESSIBLE — scores penalized",
         "UX & Presentation": "Screenshots provided in demo section. No README available (repo private or inaccessible). REPO NOT ACCESSIBLE — scores penalized",
@@ -1754,17 +1886,57 @@
         "Repository inaccessible or private"
       ],
       "bonus_signals_detected": [],
-      "weighted_total": 37.2,
-      "strengths": [],
-      "improvements": [
-        "Accuracy & Relevance: Copilot usage: copilot, github copilot, copilot sdk. Checklist: 100% requirements met. REPO NOT ACCESSIBLE — scores pena",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: . REPO NOT ACCESSIBLE — scores penalized",
-        "Creativity & Originality: Standard project concept. REPO NOT ACCESSIBLE — scores penalized",
-        "UX & Presentation: Screenshots provided in demo section. No README available (repo private or inaccessible). REPO NOT ACCESSIBLE — scores p",
-        "Reliability & Safety: No automated tests mentioned. Checklist confirms no hardcoded secrets. REPO NOT ACCESSIBLE — scores penalized"
+      "weighted_total": 40.0,
+      "strengths": [
+        "Interesting auto-generation concept"
       ],
-      "summary": "My Awesome Architecture Executive Visualizer (creative-apps track, 37.2/100): My agent can automatically generate PowerPoint slides from technical artifacts.",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "improvements": [
+        "Make repository public",
+        "Add README",
+        "Provide demo"
+      ],
+      "summary": "PowerPoint slide generator from technical artifacts. Repository private/inaccessible, making implementation unverifiable.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Architecture Executive Visualizer: Repo inaccessible. Cannot verify implementation.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 56,
+      "project_name": "Compliment my pet",
+      "track": "enterprise-agents",
+      "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/56",
+      "github_username": "tanjaquaijtaal-ux",
+      "criteria_scores": {
+        "Technical Implementation": 5,
+        "Business Value": 2,
+        "Innovation & Creativity": 3
+      },
+      "evidence": {
+        "Technical Implementation": "M365 integration: outlook. MCP: mcp. NO SOURCE CODE in repo (4 files total)",
+        "Business Value": "Business value signals: productivity, business. Enterprise scenario: enterprise. Detailed business description. NO SOURCE CODE in repo (4 files total)",
+        "Innovation & Creativity": "Technology stack: Microsoft Copilot Studio, Image input & conversational AI, Office 365 Outlook MCP. Demo type: video. Documentation quality: 12 README sections. NO SOURCE CODE in repo (4 files total)"
+      },
+      "confidence": "high",
+      "red_flags_detected": [
+        "No source code files found in repo (4 total files)"
+      ],
+      "bonus_signals_detected": [
+        "MCP integration found"
+      ],
+      "weighted_total": 33.3,
+      "strengths": [
+        "Fun mood-boosting concept",
+        "Has README with setup instructions"
+      ],
+      "improvements": [
+        "Add actual source code",
+        "Pivot to creative-apps track",
+        "Implement MCP integration"
+      ],
+      "summary": "AI agent for pet compliments. Fun concept but 0 source files and minimal enterprise business value. Wrong track assignment (enterprise vs creative).",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Compliment my pet: Fun concept but wrong track (enterprise). 0 source files. Minimal business value.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 20,
@@ -1780,7 +1952,7 @@
         "Reliability & Safety": 2
       },
       "evidence": {
-        "Accuracy & Relevance": "Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (598 chars). NO SOURCE CODE in repo (10 files total)",
+        "Accuracy & Relevance": "Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (598 chars). NO SOURCE CODE in repo (10 files total)",
         "Reasoning & Multi-step Thinking": "Reasoning patterns: react. NO SOURCE CODE in repo (10 files total)",
         "Creativity & Originality": "Diverse technology combination: Framework: React 18 + TypeScript, Build Tool: Vite 5, Styling: CSS3 (Gradients, Flexbox, Grid. Detailed project description with technical highlights. NO SOURCE CODE in repo (10 files total)",
         "UX & Presentation": "Video demo provided. No README available (repo private or inaccessible). NO SOURCE CODE in repo (10 files total)",
@@ -1795,14 +1967,14 @@
       "weighted_total": 30.6,
       "strengths": [],
       "improvements": [
-        "Accuracy & Relevance: Copilot usage: copilot, github copilot. Checklist: 100% requirements met. Detailed description (598 chars). NO SOURCE CO",
+        "Accuracy & Relevance: Copilot usage: github copilot, copilot. Checklist: 100% requirements met. Detailed description (598 chars). NO SOURCE CO",
         "Reasoning & Multi-step Thinking: Reasoning patterns: react. NO SOURCE CODE in repo (10 files total)",
         "Creativity & Originality: Diverse technology combination: Framework: React 18 + TypeScript, Build Tool: Vite 5, Styling: CSS3 (Gradients, Flexbox,",
         "UX & Presentation: Video demo provided. No README available (repo private or inaccessible). NO SOURCE CODE in repo (10 files total)",
         "Reliability & Safety: No automated tests mentioned. Checklist confirms no hardcoded secrets. NO SOURCE CODE in repo (10 files total)"
       ],
       "summary": "Pokémon Memory Game (creative-apps track, 30.6/100): A React-based memory card game built for the TechConnect Hack Fest Creative Apps challenge. Players flip cards to find matching Pokemon pairs from a 4x4 grid featuring 8 iconic Pokemon characters (Pik",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "scored_at": "2026-02-13T12:30:18.063079+00:00"
     },
     {
       "issue_number": 50,
@@ -1811,7 +1983,7 @@
       "issue_url": "https://github.com/microsoft/agentsleague-techconnect/issues/50",
       "github_username": "@akshaydmaq",
       "criteria_scores": {
-        "Technical Implementation": 4,
+        "Technical Implementation": 2,
         "Business Value": 3,
         "Innovation & Creativity": 2
       },
@@ -1825,15 +1997,19 @@
         "No source code files found in repo (2 total files)"
       ],
       "bonus_signals_detected": [],
-      "weighted_total": 29.9,
-      "strengths": [],
-      "improvements": [
-        "Technical Implementation: M365 integration: teams. NO SOURCE CODE in repo (2 files total)",
-        "Business Value: Detailed business description. NO SOURCE CODE in repo (2 files total)",
-        "Innovation & Creativity: Standard approach. NO SOURCE CODE in repo (2 files total)"
+      "weighted_total": 23.3,
+      "strengths": [
+        "Practical email management concept"
       ],
-      "summary": "Email Summarizer (enterprise-agents track, 29.9/100): An agent that reads the user's email inbox, summarizes emails, and identifies action items, prioritizing emails from customers list , low sentiment emails, and escalation emails for bugs and issues re",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "improvements": [
+        "Add source code",
+        "Create M365 integration",
+        "Write comprehensive README"
+      ],
+      "summary": "Email inbox summarization concept. Only 2 files with no source code - effectively a concept submission.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "Email Summarizer: Only 2 files, 0 source code. Concept only.",
+      "ai_reviewed": true
     },
     {
       "issue_number": 10,
@@ -1844,8 +2020,8 @@
       "criteria_scores": {
         "Accuracy & Relevance": 3,
         "Reasoning & Multi-step Thinking": 4,
-        "Creativity & Originality": 3,
-        "UX & Presentation": 2,
+        "Creativity & Originality": 1,
+        "UX & Presentation": 1,
         "Reliability & Safety": 2
       },
       "evidence": {
@@ -1860,17 +2036,40 @@
         "No source code files found in repo (1 total files)"
       ],
       "bonus_signals_detected": [],
-      "weighted_total": 28.3,
+      "weighted_total": 23.3,
+      "strengths": [
+        "Honest description"
+      ],
+      "improvements": [
+        "Implement an actual project",
+        "Add source code",
+        "Define a clear use case"
+      ],
+      "summary": "Self-described as doing nothing. Single file (README only, 13 chars). Joke entry.",
+      "scored_at": "2026-02-13T12:30:18.063079+00:00",
+      "ai_review_notes": "My Hackathon Project: Self-described as doing nothing. Score appropriate.",
+      "ai_reviewed": true
+    },
+    {
+      "issue_number": 9999,
+      "project_name": "Test Project",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 1,
+        "Reasoning & Multi-step Thinking": 1,
+        "Creativity & Originality": 1,
+        "UX & Presentation": 1,
+        "Reliability & Safety": 1
+      },
+      "weighted_total": 10.0,
       "strengths": [],
       "improvements": [
-        "Accuracy & Relevance: Checklist: 100% requirements met. NO SOURCE CODE in repo (1 files total)",
-        "Reasoning & Multi-step Thinking: Reasoning patterns: . NO SOURCE CODE in repo (1 files total)",
-        "Creativity & Originality: Novelty signals: first. NO SOURCE CODE in repo (1 files total)",
-        "UX & Presentation: Screenshots provided in demo section. Brief README (1 sections). No clear setup instructions in README. NO SOURCE CODE i",
-        "Reliability & Safety: No automated tests mentioned. Checklist confirms no hardcoded secrets. NO SOURCE CODE in repo (1 files total)"
+        "This is a test entry and should be excluded from rankings"
       ],
-      "summary": "My Hackathon Project (creative-apps track, 28.3/100): My Agent is just to get first prize for submission which actually does nothing",
-      "scored_at": "2026-02-13T05:20:39.518843+00:00"
+      "summary": "Test submission - not a real project entry.",
+      "scored_at": "2026-02-13T05:34:45.212342+00:00",
+      "ai_review_notes": "Test submission, not a real project.",
+      "ai_reviewed": true
     }
   ]
 }

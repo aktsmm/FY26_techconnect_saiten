@@ -87,6 +87,17 @@ and validates that all required fields are present for scoring.
 
 ---
 
+## IMPORTANT: Incremental Collection Policy
+
+- **ALWAYS** fetch the live Issue list via `list_submissions()` first
+- Compare with existing `data/collected_submissions.json`
+- Fetch details ONLY for new Issues not already in the data file (upsert, not overwrite)
+- Preserve existing entries; merge new data into the existing dataset
+- Use `--force` flag only when explicitly requested by user
+- Script: `scripts/collect_all.py` (supports incremental by default)
+
+---
+
 ## Non-Goals
 
 - **DO NOT** score or evaluate submissions

@@ -32,13 +32,13 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 > **SSOT**: See AGENTS.md for the canonical agent table.
 > Below is kept minimal for quick reference only.
 
-| Agent              | SRP Responsibility                          |
-| ------------------ | ------------------------------------------- |
-| `saiten-collector` | Data collection & validation                |
-| `saiten-scorer`    | AI qualitative review & score adjustment    |
-| `saiten-reviewer`  | Score consistency review & bias detection   |
-| `saiten-reporter`  | Ranking report generation & presentation    |
-| `saiten-commenter` | GitHub Issue feedback comments (via Handoff)|
+| Agent              | SRP Responsibility                           |
+| ------------------ | -------------------------------------------- |
+| `saiten-collector` | Data collection & validation                 |
+| `saiten-scorer`    | AI qualitative review & score adjustment     |
+| `saiten-reviewer`  | Score consistency review & bias detection    |
+| `saiten-reporter`  | Ranking report generation & presentation     |
+| `saiten-commenter` | GitHub Issue feedback comments (via Handoff) |
 
 ---
 
@@ -62,16 +62,20 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
    → Call list_submissions() to verify MCP connectivity
    → FAIL → Report error and STOP
 
-3. [Step] Delegate to @saiten-collector
+3. [Step] Delegate to @saiten-collector (INCREMENTAL)
    → MUST use #tool:agent with prompt:
-     "Collect all submissions. Return: valid_submissions list,
+     "Collect all submissions INCREMENTALLY. Compare live GitHub
+      Issues with existing data/collected_submissions.json.
+      Fetch details only for NEW Issues. Merge into existing data.
+      Return: valid_submissions list, newly_fetched count,
       flagged_submissions, errors, track_distribution."
-   → Validate: at least 1 valid submission returned
+   → Validate: at least 1 valid submission in merged data
    → Output saved to data/collected_submissions.json
+   → Script: `.venv/Scripts/python scripts/collect_all.py`
 
 4. [Gate] Collection Checkpoint
-   → Report: "✅ {N} submissions collected ({track_distribution})"
-   → If errors > 0: "⚠️ {M} submissions skipped"
+   → Report: "✅ {N} total submissions ({M} newly fetched) ({track_distribution})"
+   → If errors > 0: "⚠️ {E} submissions skipped"
 
 --- PHASE A: Mechanical Baseline (Orchestrator runs directly) ---
 

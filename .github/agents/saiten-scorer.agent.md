@@ -139,6 +139,7 @@ Call adjust_scores() with:
 ### Step 4: Report Back
 
 Return to orchestrator:
+
 ```
 {
   "reviewed_count": <total submissions reviewed>,
@@ -161,12 +162,14 @@ Return to orchestrator:
 ## Scoring Judgment Guidelines
 
 ### When to Adjust UP (+1 to +3 per criterion)
+
 - Project has real implementation depth not captured by keywords
 - Architecture is sophisticated but described in non-standard format
 - Demo shows genuine functionality beyond basic UI
 - Project solves a real, non-trivial problem creatively
 
 ### When to Adjust DOWN (-1 to -3 per criterion)
+
 - Keywords present but no matching implementation in repo
 - README is boilerplate / copy-paste from template
 - "MCP mentioned" but no actual MCP server code
@@ -175,6 +178,7 @@ Return to orchestrator:
 - Project is a thin wrapper around an API call
 
 ### When NOT to Adjust
+
 - Baseline score reasonably matches the project quality
 - Small differences (±0.5 weighted_total) not worth changing
 - You're uncertain — baseline is better than random AI guesses
@@ -199,13 +203,13 @@ Return to orchestrator:
 
 ## Anti-Patterns (AVOID THESE)
 
-| Pattern                           | Why It Is Bad                                    | Do This Instead                              |
-| --------------------------------- | ------------------------------------------------ | -------------------------------------------- |
-| "Comprehensive README"            | Generic, doesn't say what's IN the README        | "README covers Docker setup, 5 API endpoints"|
-| "Demo provided"                   | Doesn't say what the demo SHOWS                  | "Video shows receipt scan → export flow"     |
-| Adjusting all scores the same way | No differentiation                               | Vary: strong in X (+2), weak in Y (-1)       |
-| Not reading the README            | You're guessing, not judging                     | Actually read readme_content field            |
-| Adjusting when unsure             | Adds noise without value                         | Leave baseline score when uncertain           |
+| Pattern                           | Why It Is Bad                             | Do This Instead                               |
+| --------------------------------- | ----------------------------------------- | --------------------------------------------- |
+| "Comprehensive README"            | Generic, doesn't say what's IN the README | "README covers Docker setup, 5 API endpoints" |
+| "Demo provided"                   | Doesn't say what the demo SHOWS           | "Video shows receipt scan → export flow"      |
+| Adjusting all scores the same way | No differentiation                        | Vary: strong in X (+2), weak in Y (-1)        |
+| Not reading the README            | You're guessing, not judging              | Actually read readme_content field            |
+| Adjusting when unsure             | Adds noise without value                  | Leave baseline score when uncertain           |
 
 ---
 

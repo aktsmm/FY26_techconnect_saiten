@@ -463,10 +463,10 @@ cp data/scores.json.bak data/scores.json
 
 This project was enabled by several open-source tools created by the same team:
 
-| Tool | Description | Repo |
-|------|-------------|------|
-| **Agent Skill Ninja** | VS Code extension for searching, installing, and managing Agent Skills (SKILL.md) for GitHub Copilot, Claude Code, and other AI coding assistants. Used to install the `agentic-workflow-guide` skill into this project. | [vscode-agent-skill-ninja](https://github.com/aktsmm/vscode-agent-skill-ninja) |
-| **Agentic Workflow Guide** | A comprehensive Agent Skill covering 5 workflow patterns, agent delegation, Handoffs, and Context Engineering. The design principles (SSOT, SRP, Fail Fast) and workflow patterns (Orchestrator-Workers, Evaluator-Optimizer) used in Saiten all come from this skill. | [Agent-Skills](https://github.com/aktsmm/Agent-Skills) |
+| Tool                       | Description                                                                                                                                                                                                                                                            | Repo                                                                           |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Agent Skill Ninja**      | VS Code extension for searching, installing, and managing Agent Skills (SKILL.md) for GitHub Copilot, Claude Code, and other AI coding assistants. Used to install the `agentic-workflow-guide` skill into this project.                                               | [vscode-agent-skill-ninja](https://github.com/aktsmm/vscode-agent-skill-ninja) |
+| **Agentic Workflow Guide** | A comprehensive Agent Skill covering 5 workflow patterns, agent delegation, Handoffs, and Context Engineering. The design principles (SSOT, SRP, Fail Fast) and workflow patterns (Orchestrator-Workers, Evaluator-Optimizer) used in Saiten all come from this skill. | [Agent-Skills](https://github.com/aktsmm/Agent-Skills)                         |
 
 ### How Agent Skill Ninja Powers This Project
 
@@ -479,6 +479,7 @@ This project was enabled by several open-source tools created by the same team:
 ```
 
 The `agentic-workflow-guide` skill provides:
+
 - **5 workflow pattern references** (Prompt Chaining, Routing, Parallelization, Orchestrator-Workers, Evaluator-Optimizer)
 - **Agent templates** with SRP, Gate, and Handoff patterns
 - **Design principles** (SSOT, Fail Fast, Feedback Loop, Human-in-the-Loop)

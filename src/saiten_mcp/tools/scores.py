@@ -256,13 +256,21 @@ async def adjust_scores(
         # Recalculate weighted_total if criteria changed but total not given
         if "criteria_scores" in adj and "weighted_total" not in adj:
             track = entry.get("track", "")
-            if track in ("creative-apps", "reasoning-agents"):
+            if track == "creative-apps":
                 weights = {
                     "Accuracy & Relevance": 0.222,
                     "Reasoning & Multi-step Thinking": 0.222,
                     "Creativity & Originality": 0.167,
                     "UX & Presentation": 0.167,
                     "Reliability & Safety": 0.222,
+                }
+            elif track == "reasoning-agents":
+                weights = {
+                    "Accuracy & Relevance": 0.25,
+                    "Reasoning & Multi-step Thinking": 0.25,
+                    "Creativity & Originality": 0.2,
+                    "User Experience & Presentation": 0.15,
+                    "Technical Implementation": 0.15,
                 }
             elif track == "enterprise-agents":
                 weights = {

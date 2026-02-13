@@ -85,3 +85,12 @@ User Request
 - `@scorer` = Phase B AI Review — **Copilot agent** reads submissions qualitatively,
   judges novelty/depth/quality, catches keyword gaming, adjusts via `adjust_scores()`
 - `@reviewer` = Phase C — **Copilot agent** validates score consistency and fairness
+
+### Design Principles
+
+- **Incremental Collection**: ALWAYS fetch live Issue list from GitHub and compare
+  with existing data. Fetch details only for new/updated Issues. Never rely on
+  hardcoded Issue number lists.
+- **Idempotent & Merge-Based**: Batch scripts MUST be idempotent. Existing data
+  is preserved via upsert; never overwrite blindly. Partial runs must not corrupt
+  previously collected data.
