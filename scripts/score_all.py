@@ -67,6 +67,15 @@ def _has_setup_instructions(readme: str) -> bool:
     ])
 
 
+def _has_setup_summary(setup_summary: str) -> bool:
+    cleaned = (setup_summary or "").strip().lower()
+    if not cleaned:
+        return False
+    if cleaned in {"_no response_", "no response", "na", "n/a", "none"}:
+        return False
+    return True
+
+
 def _has_tests(readme: str) -> bool:
     lower = readme.lower()
     return any(kw in lower for kw in [
@@ -310,6 +319,7 @@ def _apply_repo_signals(
 
 def score_creative_apps(sub: dict, rubric: dict, repo_tree: dict | None = None) -> dict:
     readme = sub.get("readme_content") or ""
+    setup_summary = sub.get("setup_summary") or ""
     all_text = _all_text(sub)
     desc = sub.get("description") or ""
     tech_highlights = sub.get("technical_highlights") or ""
@@ -414,6 +424,9 @@ def score_creative_apps(sub: dict, rubric: dict, repo_tree: dict | None = None) 
     if demo_type == "video":
         ux_score += 2
         ux_evidence_parts.append("Video demo provided")
+    elif demo_type == "gif":
+        ux_score += 1
+        ux_evidence_parts.append("Animated GIF demo provided")
     elif demo_type == "screenshots":
         ux_score += 1
         ux_evidence_parts.append("Screenshots provided in demo section")
@@ -436,6 +449,8 @@ def score_creative_apps(sub: dict, rubric: dict, repo_tree: dict | None = None) 
 
         if _has_setup_instructions(readme):
             ux_evidence_parts.append("Setup instructions included")
+        elif _has_setup_summary(setup_summary):
+            ux_evidence_parts.append("Setup instructions provided via setup summary")
         else:
             ux_score -= 1
             ux_evidence_parts.append("No clear setup instructions in README")
@@ -991,4 +1006,5 @@ async def main():
             print(f"{track}: n={len(track_scores)}, mean={mean:.1f}, min={min_s}, max={max_s}")
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

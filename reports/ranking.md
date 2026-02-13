@@ -1,6 +1,6 @@
 # 🏆 Agents League @ TechConnect — Scoring Ranking
 
-> Auto-generated: 2026-02-13 12:32:06 UTC
+> Auto-generated: 2026-02-13 12:57:47 UTC
 > Scored: 50 / 0 submissions
 
 ---
@@ -10,11 +10,11 @@
 | Rank | Project | Track | Submitter | Score |
 |------|---------|-------|-----------|-------|
 | 1 | [TrendSurf](https://github.com/microsoft/agentsleague-techconnect/issues/27) | 🧠 | [@ethanjenkins1](https://github.com/ethanjenkins1) (hedinulo) | 92.5 |
-| 2 | [StoryCircuit](https://github.com/microsoft/agentsleague-techconnect/issues/58) | 🧠 | [@vrengar](https://github.com/vrengar) | 90.0 |
-| 3 | [Zavatravel](https://github.com/microsoft/agentsleague-techconnect/issues/38) | 🧠 | [@sureshpaulraj](https://github.com/sureshpaulraj) (surep, senthkumar, makizhne) | 87.0 |
-| 4 | [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42) | 🎨 | [@payton-chou-ms](https://github.com/payton-chou-ms) | 86.1 |
-| 5 | [BrandComm-agent](https://github.com/microsoft/agentsleague-techconnect/issues/60) | 🧠 | [@joyjeet](https://github.com/joyjeet) | 84.0 |
-| 6 | [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54) | 🎨 | [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda) | 83.9 |
+| 2 | [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54) | 🎨 | [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda) | 90.5 |
+| 3 | [StoryCircuit](https://github.com/microsoft/agentsleague-techconnect/issues/58) | 🧠 | [@vrengar](https://github.com/vrengar) | 90.0 |
+| 4 | [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42) | 🎨 | [@payton-chou-ms](https://github.com/payton-chou-ms) | 87.8 |
+| 5 | [Zavatravel](https://github.com/microsoft/agentsleague-techconnect/issues/38) | 🧠 | [@sureshpaulraj](https://github.com/sureshpaulraj) (surep, senthkumar, makizhne) | 87.0 |
+| 6 | [BrandComm-agent](https://github.com/microsoft/agentsleague-techconnect/issues/60) | 🧠 | [@joyjeet](https://github.com/joyjeet) | 84.0 |
 | 7 | [Semantic Kernel and AutoGen to MAF Modernizer](https://github.com/microsoft/agentsleague-techconnect/issues/47) | 🧠 | [@misantibanez, valegrajales, eraggi-ar, afrancoc2000](https://github.com/misantibanez, valegrajales, eraggi-ar, afrancoc2000) (michelle.santibanez, valentinag, emilioraggi, anafranco) | 83.5 |
 | 8 | [repo-analyzer](https://github.com/microsoft/agentsleague-techconnect/issues/23) | 🎨 | [@olivomarco](https://github.com/olivomarco) | 82.2 |
 | 9 | [SovereignFit](https://github.com/microsoft/agentsleague-techconnect/issues/32) | 🎨 | [@danieletten](https://github.com/danieletten) (daetten) | 82.2 |
@@ -28,8 +28,8 @@
 
 | Rank | Project | Submitter | Score |
 |------|---------|-----------|-------|
-| 1 | [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42) | [@payton-chou-ms](https://github.com/payton-chou-ms) | 86.1 |
-| 2 | [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54) | [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda) | 83.9 |
+| 1 | [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54) | [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda) | 90.5 |
+| 2 | [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42) | [@payton-chou-ms](https://github.com/payton-chou-ms) | 87.8 |
 | 3 | [repo-analyzer](https://github.com/microsoft/agentsleague-techconnect/issues/23) | [@olivomarco](https://github.com/olivomarco) | 82.2 |
 
 ### 🧠 Reasoning Agents
@@ -55,28 +55,28 @@
 | # | Issue | Project | Track | Submitter | Repo | Score | Scored At |
 |---|-------|---------|-------|-----------|------|-------|-----------|
 | 1 | [#27](https://github.com/microsoft/agentsleague-techconnect/issues/27) | [TrendSurf](https://github.com/microsoft/agentsleague-techconnect/issues/27) | 🧠 | [@ethanjenkins1](https://github.com/ethanjenkins1) (hedinulo) | [repo](https://github.com/ethanjenkins1/trendsurf) | 92.5 | 2026-02-13 |
-| 2 | [#58](https://github.com/microsoft/agentsleague-techconnect/issues/58) | [StoryCircuit](https://github.com/microsoft/agentsleague-techconnect/issues/58) | 🧠 | [@vrengar](https://github.com/vrengar) | [repo](https://github.com/vrengar/storycircuit) | 90.0 | 2026-02-13 |
-| 3 | [#38](https://github.com/microsoft/agentsleague-techconnect/issues/38) | [Zavatravel](https://github.com/microsoft/agentsleague-techconnect/issues/38) | 🧠 | [@sureshpaulraj](https://github.com/sureshpaulraj) (surep, senthkumar, makizhne) | [repo](https://github.com/sureshpaulraj/zavatravel) | 87.0 | 2026-02-13 |
-| 4 | [#42](https://github.com/microsoft/agentsleague-techconnect/issues/42) | [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42) | 🎨 | [@payton-chou-ms](https://github.com/payton-chou-ms) | [repo](https://github.com/payton-chou-ms/poc-agents-league-techconnect-2026) | 86.1 | 2026-02-13 |
-| 5 | [#60](https://github.com/microsoft/agentsleague-techconnect/issues/60) | [BrandComm-agent](https://github.com/microsoft/agentsleague-techconnect/issues/60) | 🧠 | [@joyjeet](https://github.com/joyjeet) | [repo](https://github.com/joyjeet/TechConnectHack/tree/main/agent-webapp) | 84.0 | 2026-02-13 |
-| 6 | [#54](https://github.com/microsoft/agentsleague-techconnect/issues/54) | [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54) | 🎨 | [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda) | [repo](https://github.com/aktsmm/FY26_techconnect_saiten) | 83.9 | 2026-02-13 |
+| 2 | [#54](https://github.com/microsoft/agentsleague-techconnect/issues/54) | [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54) | 🎨 | [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda) | [repo](https://github.com/aktsmm/FY26_techconnect_saiten) | 90.5 | 2026-02-13 |
+| 3 | [#58](https://github.com/microsoft/agentsleague-techconnect/issues/58) | [StoryCircuit](https://github.com/microsoft/agentsleague-techconnect/issues/58) | 🧠 | [@vrengar](https://github.com/vrengar) | [repo](https://github.com/vrengar/storycircuit) | 90.0 | 2026-02-13 |
+| 4 | [#42](https://github.com/microsoft/agentsleague-techconnect/issues/42) | [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42) | 🎨 | [@payton-chou-ms](https://github.com/payton-chou-ms) | [repo](https://github.com/payton-chou-ms/poc-agents-league-techconnect-2026) | 87.8 | 2026-02-13 |
+| 5 | [#38](https://github.com/microsoft/agentsleague-techconnect/issues/38) | [Zavatravel](https://github.com/microsoft/agentsleague-techconnect/issues/38) | 🧠 | [@sureshpaulraj](https://github.com/sureshpaulraj) (surep, senthkumar, makizhne) | [repo](https://github.com/sureshpaulraj/zavatravel) | 87.0 | 2026-02-13 |
+| 6 | [#60](https://github.com/microsoft/agentsleague-techconnect/issues/60) | [BrandComm-agent](https://github.com/microsoft/agentsleague-techconnect/issues/60) | 🧠 | [@joyjeet](https://github.com/joyjeet) | [repo](https://github.com/joyjeet/TechConnectHack/tree/main/agent-webapp) | 84.0 | 2026-02-13 |
 | 7 | [#47](https://github.com/microsoft/agentsleague-techconnect/issues/47) | [Semantic Kernel and AutoGen to MAF Modernizer](https://github.com/microsoft/agentsleague-techconnect/issues/47) | 🧠 | [@misantibanez, valegrajales, eraggi-ar, afrancoc2000](https://github.com/misantibanez, valegrajales, eraggi-ar, afrancoc2000) (michelle.santibanez, valentinag, emilioraggi, anafranco) | [repo](https://github.com/afrancoc2000/tech-connect-2026-sk-modernizer) | 83.5 | 2026-02-13 |
 | 8 | [#23](https://github.com/microsoft/agentsleague-techconnect/issues/23) | [repo-analyzer](https://github.com/microsoft/agentsleague-techconnect/issues/23) | 🎨 | [@olivomarco](https://github.com/olivomarco) | [repo](https://github.com/olivomarco/repo-analyzer) | 82.2 | 2026-02-13 |
 | 9 | [#32](https://github.com/microsoft/agentsleague-techconnect/issues/32) | [SovereignFit](https://github.com/microsoft/agentsleague-techconnect/issues/32) | 🎨 | [@danieletten](https://github.com/danieletten) (daetten) | [repo](https://github.com/danieletten/SovereignFit) | 82.2 | 2026-02-13 |
 | 10 | [#35](https://github.com/microsoft/agentsleague-techconnect/issues/35) | [techconnect-policy-compliance-checker](https://github.com/microsoft/agentsleague-techconnect/issues/35) | 🧠 | [@taimoor-janjua](https://github.com/taimoor-janjua) | [repo](https://github.com/taimoor-janjua/techconnect-policy-compliance-checker) | 82.0 | 2026-02-13 |
 | 11 | [#51](https://github.com/microsoft/agentsleague-techconnect/issues/51) | [Biz-Ops Calendar Agent](https://github.com/microsoft/agentsleague-techconnect/issues/51) | 💼 | [@aktsmm](https://github.com/aktsmm) | [repo](https://github.com/aktsmm/biz-ops-calendar-agent) | 79.9 | 2026-02-13 |
 | 12 | [#43](https://github.com/microsoft/agentsleague-techconnect/issues/43) | [Nimbus Content Agent](https://github.com/microsoft/agentsleague-techconnect/issues/43) | 🧠 | [@namratasherkhane](https://github.com/namratasherkhane) | [repo](https://github.com/namratasherkhane/namratasherkhane) | 79.5 | 2026-02-13 |
-| 13 | [#39](https://github.com/microsoft/agentsleague-techconnect/issues/39) | [CodeIntel](https://github.com/microsoft/agentsleague-techconnect/issues/39) | 🎨 | [@Mazher-Ul-Haq](https://github.com/Mazher-Ul-Haq) | [repo](https://github.com/Mazher-Ul-Haq/codeintel) | 77.8 | 2026-02-13 |
-| 14 | [#41](https://github.com/microsoft/agentsleague-techconnect/issues/41) | [Architect Agent](https://github.com/microsoft/agentsleague-techconnect/issues/41) | 🎨 | [@bzbrkic](https://github.com/bzbrkic) | [repo](https://github.com/bzbrkic/Agent-Architect) | 76.1 | 2026-02-13 |
-| 15 | [#25](https://github.com/microsoft/agentsleague-techconnect/issues/25) | [Team Risk Analyzer](https://github.com/microsoft/agentsleague-techconnect/issues/25) | 🎨 | [@rebmid](https://github.com/rebmid) | [repo](https://github.com/rebmid/team-risk-analyzer) | 76.1 | 2026-02-13 |
-| 16 | [#14](https://github.com/microsoft/agentsleague-techconnect/issues/14) | [Windows Cortex](https://github.com/microsoft/agentsleague-techconnect/issues/14) | 🎨 | [@jrubiosainz, rag2111](https://github.com/jrubiosainz, rag2111) (jrubiosainz, rarocha) | [repo](https://github.com/jrubiosainz/windows-cortex) | 76.1 | 2026-02-13 |
-| 17 | [#45](https://github.com/microsoft/agentsleague-techconnect/issues/45) | [Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape.](https://github.com/microsoft/agentsleague-techconnect/issues/45) | 🎨 | [@billwhalenmsft](https://github.com/billwhalenmsft) | [repo](https://github.com/billwhalenmsft/PromptEscape) | 75.0 | 2026-02-13 |
-| 18 | [#18](https://github.com/microsoft/agentsleague-techconnect/issues/18) | [My Proposal Develop](https://github.com/microsoft/agentsleague-techconnect/issues/18) | 🧠 | [@balakreshnan](https://github.com/balakreshnan) | [repo](https://github.com/balakreshnan/TechconnectFY26Hackfest) | 73.5 | 2026-02-13 |
-| 19 | [#34](https://github.com/microsoft/agentsleague-techconnect/issues/34) | [LearnIQ](https://github.com/microsoft/agentsleague-techconnect/issues/34) | 🎨 | [@kylednoland](https://github.com/kylednoland) | [repo](https://github.com/kylednoland/LearnIQ) | 73.3 | 2026-02-13 |
-| 20 | [#33](https://github.com/microsoft/agentsleague-techconnect/issues/33) | [BeatMyPrompt](https://github.com/microsoft/agentsleague-techconnect/issues/33) | 🎨 | [@fimdim](https://github.com/fimdim) | [repo](https://github.com/fimdim/BeatMyPrompt) | 73.3 | 2026-02-13 |
-| 21 | [#49](https://github.com/microsoft/agentsleague-techconnect/issues/49) | [EasyExpenseAI](https://github.com/microsoft/agentsleague-techconnect/issues/49) | 🎨 | [@chakras](https://github.com/chakras) (arashinkar,jaideeproy) | [repo](https://github.com/chakras/Easy-Expense-AI) | 72.8 | 2026-02-13 |
-| 22 | [#52](https://github.com/microsoft/agentsleague-techconnect/issues/52) | [HeadlineArt: Where News Meets Canvas](https://github.com/microsoft/agentsleague-techconnect/issues/52) | 🧠 | [@FranGenoa, Ajananth, Lakshmy](https://github.com/FranGenoa, Ajananth, Lakshmy) (frfava, ajananth, lchandran, msadhwani, kumarahu) | [repo](https://github.com/FranGenoa/HeadlineArt) | 72.5 | 2026-02-13 |
-| 23 | [#55](https://github.com/microsoft/agentsleague-techconnect/issues/55) | [kube-copilot](https://github.com/microsoft/agentsleague-techconnect/issues/55) | 🎨 | [@openjny](https://github.com/openjny) | [repo](https://github.com/openjny/kube-copilot) | 72.2 | 2026-02-13 |
+| 13 | [#14](https://github.com/microsoft/agentsleague-techconnect/issues/14) | [Windows Cortex](https://github.com/microsoft/agentsleague-techconnect/issues/14) | 🎨 | [@jrubiosainz, rag2111](https://github.com/jrubiosainz, rag2111) (jrubiosainz, rarocha) | [repo](https://github.com/jrubiosainz/windows-cortex) | 77.8 | 2026-02-13 |
+| 14 | [#39](https://github.com/microsoft/agentsleague-techconnect/issues/39) | [CodeIntel](https://github.com/microsoft/agentsleague-techconnect/issues/39) | 🎨 | [@Mazher-Ul-Haq](https://github.com/Mazher-Ul-Haq) | [repo](https://github.com/Mazher-Ul-Haq/codeintel) | 77.8 | 2026-02-13 |
+| 15 | [#55](https://github.com/microsoft/agentsleague-techconnect/issues/55) | [kube-copilot](https://github.com/microsoft/agentsleague-techconnect/issues/55) | 🎨 | [@openjny](https://github.com/openjny) | [repo](https://github.com/openjny/kube-copilot) | 77.2 | 2026-02-13 |
+| 16 | [#41](https://github.com/microsoft/agentsleague-techconnect/issues/41) | [Architect Agent](https://github.com/microsoft/agentsleague-techconnect/issues/41) | 🎨 | [@bzbrkic](https://github.com/bzbrkic) | [repo](https://github.com/bzbrkic/Agent-Architect) | 76.1 | 2026-02-13 |
+| 17 | [#25](https://github.com/microsoft/agentsleague-techconnect/issues/25) | [Team Risk Analyzer](https://github.com/microsoft/agentsleague-techconnect/issues/25) | 🎨 | [@rebmid](https://github.com/rebmid) | [repo](https://github.com/rebmid/team-risk-analyzer) | 76.1 | 2026-02-13 |
+| 18 | [#45](https://github.com/microsoft/agentsleague-techconnect/issues/45) | [Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape.](https://github.com/microsoft/agentsleague-techconnect/issues/45) | 🎨 | [@billwhalenmsft](https://github.com/billwhalenmsft) | [repo](https://github.com/billwhalenmsft/PromptEscape) | 75.0 | 2026-02-13 |
+| 19 | [#18](https://github.com/microsoft/agentsleague-techconnect/issues/18) | [My Proposal Develop](https://github.com/microsoft/agentsleague-techconnect/issues/18) | 🧠 | [@balakreshnan](https://github.com/balakreshnan) | [repo](https://github.com/balakreshnan/TechconnectFY26Hackfest) | 73.5 | 2026-02-13 |
+| 20 | [#34](https://github.com/microsoft/agentsleague-techconnect/issues/34) | [LearnIQ](https://github.com/microsoft/agentsleague-techconnect/issues/34) | 🎨 | [@kylednoland](https://github.com/kylednoland) | [repo](https://github.com/kylednoland/LearnIQ) | 73.3 | 2026-02-13 |
+| 21 | [#33](https://github.com/microsoft/agentsleague-techconnect/issues/33) | [BeatMyPrompt](https://github.com/microsoft/agentsleague-techconnect/issues/33) | 🎨 | [@fimdim](https://github.com/fimdim) | [repo](https://github.com/fimdim/BeatMyPrompt) | 73.3 | 2026-02-13 |
+| 22 | [#49](https://github.com/microsoft/agentsleague-techconnect/issues/49) | [EasyExpenseAI](https://github.com/microsoft/agentsleague-techconnect/issues/49) | 🎨 | [@chakras](https://github.com/chakras) (arashinkar,jaideeproy) | [repo](https://github.com/chakras/Easy-Expense-AI) | 72.8 | 2026-02-13 |
+| 23 | [#52](https://github.com/microsoft/agentsleague-techconnect/issues/52) | [HeadlineArt: Where News Meets Canvas](https://github.com/microsoft/agentsleague-techconnect/issues/52) | 🧠 | [@FranGenoa, Ajananth, Lakshmy](https://github.com/FranGenoa, Ajananth, Lakshmy) (frfava, ajananth, lchandran, msadhwani, kumarahu) | [repo](https://github.com/FranGenoa/HeadlineArt) | 72.5 | 2026-02-13 |
 | 24 | [#28](https://github.com/microsoft/agentsleague-techconnect/issues/28) | [creative 404](https://github.com/microsoft/agentsleague-techconnect/issues/28) | 🎨 | [@nagendramishr](https://github.com/nagendramishr) | [repo](https://github.com/nagendramishr/creative404) | 72.2 | 2026-02-13 |
 | 25 | [#31](https://github.com/microsoft/agentsleague-techconnect/issues/31) | [Threat Incident Swarm Commander](https://github.com/microsoft/agentsleague-techconnect/issues/31) | 🎨 | [@dondinulos](https://github.com/dondinulos) (ethanjenkins) | [repo](https://github.com/dondinulos/matrix-smith-swarm) | 71.7 | 2026-02-13 |
 | 26 | [#15](https://github.com/microsoft/agentsleague-techconnect/issues/15) | [Skills Hub](https://github.com/microsoft/agentsleague-techconnect/issues/15) | 🎨 | [@samueltauil, @rleme](https://github.com/samueltauil, @rleme) (samuel.tauil, rodrigoleme) | [repo](https://github.com/samueltauil/skills-hub) | 71.1 | 2026-02-13 |
@@ -97,7 +97,7 @@
 | 41 | [#21](https://github.com/microsoft/agentsleague-techconnect/issues/21) | [Deal to Glory](https://github.com/microsoft/agentsleague-techconnect/issues/21) | 🎨 | [@billwhalenmsft](https://github.com/billwhalenmsft) | [repo](https://github.com/billwhalenmsft/agents-league-deal-to-glory**) | 53.3 | 2026-02-13 |
 | 42 | [#44](https://github.com/microsoft/agentsleague-techconnect/issues/44) | [Corporate Bullshit Translator](https://github.com/microsoft/agentsleague-techconnect/issues/44) | 💼 | [@Aakanksha346](https://github.com/Aakanksha346) | [repo](https://github.com/Aakanksha346/corporate-bullshit-translator) | 49.8 | 2026-02-13 |
 | 43 | [#59](https://github.com/microsoft/agentsleague-techconnect/issues/59) | [Dictation 4 Kids](https://github.com/microsoft/agentsleague-techconnect/issues/59) | 🎨 | [@kevintkliu](https://github.com/kevintkliu) (kevinliu2, erikatang) | [repo](https://github.com/kevintkliu/dictation4kids) | 49.4 | 2026-02-13 |
-| 44 | [#24](https://github.com/microsoft/agentsleague-techconnect/issues/24) | [STEMProjectGenerator](https://github.com/microsoft/agentsleague-techconnect/issues/24) | 🎨 | [@getAlex](https://github.com/getAlex) | [repo](https://github.com/getalex/STEMProjectGenerator) | 41.6 | 2026-02-13 |
+| 44 | [#24](https://github.com/microsoft/agentsleague-techconnect/issues/24) | [STEMProjectGenerator](https://github.com/microsoft/agentsleague-techconnect/issues/24) | 🎨 | [@getAlex](https://github.com/getAlex) | [repo](https://github.com/getalex/STEMProjectGenerator) | 46.7 | 2026-02-13 |
 | 45 | [#19](https://github.com/microsoft/agentsleague-techconnect/issues/19) | [My Awesome Architecture Executive Visualizer](https://github.com/microsoft/agentsleague-techconnect/issues/19) | 🎨 | [@JochenMSFT](https://github.com/JochenMSFT) (joschr) | [repo](https://github.com/JochenMSFT/architecture-executive-visualizer) | 40.0 | 2026-02-13 |
 | 46 | [#56](https://github.com/microsoft/agentsleague-techconnect/issues/56) | [Compliment my pet](https://github.com/microsoft/agentsleague-techconnect/issues/56) | 💼 | [@tanjaquaijtaal-ux](https://github.com/tanjaquaijtaal-ux) | [repo](https://github.com/tanjaquaijtaal-ux/compliment-my-pet/) | 33.3 | 2026-02-13 |
 | 47 | [#20](https://github.com/microsoft/agentsleague-techconnect/issues/20) | [Pokémon Memory Game](https://github.com/microsoft/agentsleague-techconnect/issues/20) | 🎨 | [@PriyamvadaSharma](https://github.com/PriyamvadaSharma) | [repo](https://github.com/PriyamvadaSharma/HackFest) | 30.6 | 2026-02-13 |
@@ -120,6 +120,17 @@
 - **Improvements**: Could add automated testing for agent outputs, Brand policy enforcement could include more configurable rules
 - **Summary**: Multi-agent social media pipeline for regulated industries with 4 specialized agents chaining reasoning patterns (ReAct, CoT, Structured Generation, Self-Reflection), brand policy enforcement via vector store, and WorkIQ M365 data integration.
 
+### #54: [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54)
+- **Track**: 🎨 Creative Apps
+- **Score**: 90.5/100
+- **Submitter**: [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda)
+- **Team**: tatsumiy, nmatsumoto, takuyamasuda
+- **Repo**: [https://github.com/aktsmm/FY26_techconnect_saiten](https://github.com/aktsmm/FY26_techconnect_saiten)
+- **Description**: A multi-agent scoring system that automatically evaluates all Agents League @ TechConnect hackathon submissions and generates ranking reports — just type `@saiten-orchestrator score all` in VS Code.  Designed with **Orchestrator-Workers + Prompt Chaining + Evaluator-Optimizer** patterns, 6 Copilot c…
+- **Strengths**: Novel self-referential meta-project concept, MCP server with 5 tool categories, 7 test files and 16 commits show iterative development, Sophisticated multi-agent orchestration pattern
+- **Improvements**: Add demo video or screenshots, Expand README with setup instructions, Handle edge cases in scoring
+- **Summary**: Multi-agent scoring system for Agents League hackathon. 6 Copilot custom agents with Orchestrator-Workers pattern, MCP server, automated pipeline.
+
 ### #58: [StoryCircuit](https://github.com/microsoft/agentsleague-techconnect/issues/58)
 - **Track**: 🧠 Reasoning Agents
 - **Score**: 90.0/100
@@ -129,6 +140,16 @@
 - **Strengths**: Large knowledge base (987 lines) for Chain-of-Thought reasoning, MCP tool integration for real-time Microsoft Docs search, Containerized deployment with Dockerfile, 35 source files with 8 commits
 - **Improvements**: Differentiate from other social media content tools in cohort, Add evaluation metrics for content quality, Expand beyond social media generation
 - **Summary**: Technical narrative architect transforming complex topics into platform-optimized social media content via Azure AI Foundry. Features MCP tool integration for Microsoft Docs search, 987-line knowledge base for CoT reasoning, containerized deployment. Strong engineering but shares crowded social media content domain.
+
+### #42: [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42)
+- **Track**: 🎨 Creative Apps
+- **Score**: 87.8/100
+- **Submitter**: [@payton-chou-ms](https://github.com/payton-chou-ms)
+- **Repo**: [https://github.com/payton-chou-ms/poc-agents-league-techconnect-2026](https://github.com/payton-chou-ms/poc-agents-league-techconnect-2026)
+- **Description**: Zava Smart Assistant is an AI-powered enterprise incident response agent built on the GitHub Copilot SDK. It orchestrates a cross-regional product outage scenario through a single conversational interface, guiding users through 4 phases: Diagnose, Fix, Verify, and Report. The system uses a novel "Sk…
+- **Strengths**: 181 automated tests - exceptional coverage, Markdown-driven skill system is genuinely innovative, GPT-4.1 routing with MCP integration
+- **Improvements**: Could document skill pipeline architecture more clearly, Error handling for edge cases in incident response
+- **Summary**: AI enterprise incident response agent using Copilot SDK with novel Markdown-driven skill pipeline, guiding users through Diagnose/Fix/Verify/Report phases with 181 automated tests.
 
 ### #38: [Zavatravel](https://github.com/microsoft/agentsleague-techconnect/issues/38)
 - **Track**: 🧠 Reasoning Agents
@@ -141,16 +162,6 @@
 - **Improvements**: Only 2 commits - limited iterative development evidence, Concept overlaps with other social media agents, No test files
 - **Summary**: Multi-agent GroupChat social media content creator with Creator (CoT), Reviewer (ReAct), and Publisher (Self-Reflection) agents. Features Azure OpenAI + Copilot SDK hybrid, React frontend, brand guidelines grounding.
 
-### #42: [Zava Smart Assistant](https://github.com/microsoft/agentsleague-techconnect/issues/42)
-- **Track**: 🎨 Creative Apps
-- **Score**: 86.1/100
-- **Submitter**: [@payton-chou-ms](https://github.com/payton-chou-ms)
-- **Repo**: [https://github.com/payton-chou-ms/poc-agents-league-techconnect-2026](https://github.com/payton-chou-ms/poc-agents-league-techconnect-2026)
-- **Description**: Zava Smart Assistant is an AI-powered enterprise incident response agent built on the GitHub Copilot SDK. It orchestrates a cross-regional product outage scenario through a single conversational interface, guiding users through 4 phases: Diagnose, Fix, Verify, and Report. The system uses a novel "Sk…
-- **Strengths**: 181 automated tests - exceptional coverage, Markdown-driven skill system is genuinely innovative, GPT-4.1 routing with MCP integration
-- **Improvements**: Could document skill pipeline architecture more clearly, Error handling for edge cases in incident response
-- **Summary**: AI enterprise incident response agent using Copilot SDK with novel Markdown-driven skill pipeline, guiding users through Diagnose/Fix/Verify/Report phases with 181 automated tests.
-
 ### #60: [BrandComm-agent](https://github.com/microsoft/agentsleague-techconnect/issues/60)
 - **Track**: 🧠 Reasoning Agents
 - **Score**: 84.0/100
@@ -160,17 +171,6 @@
 - **Strengths**: Full-stack implementation with React 19 + ASP.NET Core 9, Entra ID authentication with PKCE flow, Azure Container Apps deployment via azd up, CELA compliance rules for content guardrails
 - **Improvements**: Add automated tests (0 test files despite claims), Document the reasoning pattern used (CoT/ReAct/etc.), Add demo screenshots or video
 - **Summary**: Full-stack BrandComm agent with React 19 + ASP.NET Core 9, Entra ID PKCE auth, and Azure AI Foundry v2 Agent integration for brand-compliant social media content. 52 source files, 15 commits, Azure Container Apps deployment via azd.
-
-### #54: [Saiten — Multi-Agent Scoring System](https://github.com/microsoft/agentsleague-techconnect/issues/54)
-- **Track**: 🎨 Creative Apps
-- **Score**: 83.9/100
-- **Submitter**: [@aktsmm](https://github.com/aktsmm) (tatsumiy, nmatsumoto, takuyamasuda)
-- **Team**: tatsumiy, nmatsumoto, takuyamasuda
-- **Repo**: [https://github.com/aktsmm/FY26_techconnect_saiten](https://github.com/aktsmm/FY26_techconnect_saiten)
-- **Description**: A multi-agent scoring system that automatically evaluates all Agents League @ TechConnect hackathon submissions and generates ranking reports — just type `@saiten-orchestrator score all` in VS Code.  Designed with **Orchestrator-Workers + Prompt Chaining + Evaluator-Optimizer** patterns, 6 Copilot c…
-- **Strengths**: Novel self-referential meta-project concept, MCP server with 5 tool categories, 7 test files and 16 commits show iterative development, Sophisticated multi-agent orchestration pattern
-- **Improvements**: Add demo video or screenshots, Expand README with setup instructions, Handle edge cases in scoring
-- **Summary**: Multi-agent scoring system for Agents League hackathon submissions. 6 Copilot custom agents with Orchestrator-Workers pattern, MCP server, and automated pipeline. 15 source files, 7 tests, 16 commits.
 
 ### #47: [Semantic Kernel and AutoGen to MAF Modernizer](https://github.com/microsoft/agentsleague-techconnect/issues/47)
 - **Track**: 🧠 Reasoning Agents
@@ -220,7 +220,7 @@
 - **Submitter**: [@aktsmm](https://github.com/aktsmm)
 - **Repo**: [https://github.com/aktsmm/biz-ops-calendar-agent](https://github.com/aktsmm/biz-ops-calendar-agent)
 - **Description**: Biz-Ops Calendar Agent is a Copilot Studio agent deployed to M365 Copilot Chat (Teams) that provides smart scheduling and email management through Connected Agents (Calendar Sub-Agent + Email Sub-Agent) and deep Instruction Engineering with structured output formats (★/🔄 markers + ◎○△ point tables).…
-- **Strengths**: Technical Implementation: M365 integration: microsoft 365, teams, outlook, copilot chat, m365. MCP: mcp server, mcp. Adaptive Cards: adaptive, car, Business Value: Business value signals: business. Enterprise scenario: enterprise, workflow. Detailed business description, Innovation & Creativity: Technology stack: **Copilot Studio** - Connected Agents + Instruction Engineering v7, **M365 Copilot Chat (Teams)** - Pr
+- **Strengths**: Technical Implementation: M365 integration: teams, microsoft 365, outlook, copilot chat, m365. MCP: mcp, mcp server. Adaptive Cards: adaptive, car, Business Value: Business value signals: business. Enterprise scenario: workflow, enterprise. Detailed business description, Innovation & Creativity: Technology stack: **Copilot Studio** - Connected Agents + Instruction Engineering v7, **M365 Copilot Chat (Teams)** - Pr
 - **Improvements**: Consider adding automated tests, Consider adding architecture documentation
 - **Summary**: Biz-Ops Calendar Agent (enterprise-agents track, 79.9/100): Biz-Ops Calendar Agent is a Copilot Studio agent deployed to M365 Copilot Chat (Teams) that provides smart scheduling and email management through Connected Agents (Calendar Sub-Agent + Email Sub-Agen
 
@@ -234,6 +234,19 @@
 - **Improvements**: Only 1 commit with no tests, Technical highlights are minimal, No CI/CD or automated testing
 - **Summary**: BFSI social media content agent using Microsoft Foundry SDK with knowledge base grounding on brand guidelines and industry data, extensible via MCP tool hooks.
 
+### #14: [Windows Cortex](https://github.com/microsoft/agentsleague-techconnect/issues/14)
+- **Track**: 🎨 Creative Apps
+- **Score**: 77.8/100
+- **Submitter**: [@jrubiosainz, rag2111](https://github.com/jrubiosainz, rag2111) (jrubiosainz, rarocha)
+- **Team**: jrubiosainz, rarocha
+- **Repo**: [https://github.com/jrubiosainz/windows-cortex](https://github.com/jrubiosainz/windows-cortex)
+- **Description**: My app is a Claude Cowork Killer... using 100% Microsoft tools, accessible for anyone through text or voice, and running on Windows!  Windows Cortex is a native desktop application that gives you AI superpowers over your Windows PC. Just type (or speak) what you want to do in natural language, and t…
+- **Strengths**: Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% re, Reasoning & Multi-step Thinking: Reasoning patterns: . Error handling or recovery logic documented, Creativity & Originality: Diverse technology combination: TypeScript, JavaScript, CSS, HTML. Detailed project description with technical highlight, UX & Presentation: Screenshots provided in demo section. Comprehensive README with 12 sections. Setup instructions provided via setup summa
+- **Improvements**: Consider strengthening Reliability & Safety (scored 6/10), Consider adding automated tests, Consider adding architecture documentation
+- **Summary**: Windows Cortex (creative-apps track, 77.8/100): My app is a Claude Cowork Killer... using 100% Microsoft tools, accessible for anyone through text or voice, and running on Windows!
+
+Windows Cortex is a native desktop application that gives you AI s
+
 ### #39: [CodeIntel](https://github.com/microsoft/agentsleague-techconnect/issues/39)
 - **Track**: 🎨 Creative Apps
 - **Score**: 77.8/100
@@ -242,7 +255,17 @@
 - **Description**: CodeIntel — Team Intelligence Hub  CodeIntel transforms raw GitHub repository data and Microsoft 365 signals into actionable team intelligence. It combines an MCP server (8 tools for GitHub Copilot), a REST API, a real-time dashboard, and a CLI — all built in under 100 minutes using GitHub Copilot.…
 - **Strengths**: MCP + WorkIQ M365 data combination is interesting, Multi-interface: MCP server + REST API + CLI, 8 source files showing real implementation
 - **Improvements**: Only 1 commit suggests possible template or code dump, Add automated tests, Include .env.example for configuration
-- **Summary**: Team intelligence hub combining GitHub analytics with M365 WorkIQ insights. Features 8 MCP tools for Copilot, REST API, CLI. Single commit raises development maturity questions.
+- **Summary**: Team intelligence hub combining GitHub analytics with M365 WorkIQ insights. Features 8 MCP tools for Copilot, REST API, CLI.
+
+### #55: [kube-copilot](https://github.com/microsoft/agentsleague-techconnect/issues/55)
+- **Track**: 🎨 Creative Apps
+- **Score**: 77.2/100
+- **Submitter**: [@openjny](https://github.com/openjny)
+- **Repo**: [https://github.com/openjny/kube-copilot](https://github.com/openjny/kube-copilot)
+- **Description**: `kube-copilot` is a terminal UI (TUI) that lets you manage Kubernetes clusters using natural language. Instead of memorizing complex `kubectl` flags and resource names, you simply describe what you want in plain English and let GitHub Copilot translate it to the right command. Built with the GitHub…
+- **Strengths**: Genuinely useful tool replacing complex kubectl commands, Real TUI implementation with interactive interface, 11 commits showing iterative development, Creative Copilot SDK + Kubernetes combination
+- **Improvements**: Add more automated tests beyond single test file, Include architecture documentation, Add error recovery examples
+- **Summary**: Terminal UI for natural-language Kubernetes cluster management via Copilot SDK. 15 source files, 11 commits showing genuine iterative development.
 
 ### #41: [Architect Agent](https://github.com/microsoft/agentsleague-techconnect/issues/41)
 - **Track**: 🎨 Creative Apps
@@ -260,23 +283,10 @@
 - **Submitter**: [@rebmid](https://github.com/rebmid)
 - **Repo**: [https://github.com/rebmid/team-risk-analyzer](https://github.com/rebmid/team-risk-analyzer)
 - **Description**: Team Risk Analyzer is an MCP‑enabled CLI tool that helps teams keep a pulse on their day‑to‑day delivery health inside VS Code. It reviews pull requests, issues, and meeting notes—using the same style of metadata you’d find in GitHub—to spot potential risks early. That includes things like aging PRs…
-- **Strengths**: Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot, copilot chat. Checklist: 100, Reasoning & Multi-step Thinking: Reasoning patterns: . Error handling or recovery logic documented, Creativity & Originality: Diverse technology combination: Node.js, Commander.js (CLI framework), Model Context Protocol (MCP), GitHub Copilot (Cha, UX & Presentation: Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included, Reliability & Safety: Security considerations: credential. Error handling documented. No automated tests mentioned. Checklist confirms no hard
+- **Strengths**: Accuracy & Relevance: MCP integration found: mcp server, mcp integration. Copilot usage: github copilot, copilot chat, copilot. Checklist: 100, Reasoning & Multi-step Thinking: Reasoning patterns: . Error handling or recovery logic documented, Creativity & Originality: Diverse technology combination: Node.js, Commander.js (CLI framework), Model Context Protocol (MCP), GitHub Copilot (Cha, UX & Presentation: Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included, Reliability & Safety: Security considerations: credential. Error handling documented. No automated tests mentioned. Checklist confirms no hard
 - **Improvements**: Consider adding automated tests, Consider adding architecture documentation
 - **Summary**: Team Risk Analyzer (creative-apps track, 76.1/100): Team Risk Analyzer is an MCP‑enabled CLI tool that helps teams keep a pulse on their day‑to‑day delivery health inside VS Code.
 It reviews pull requests, issues, and meeting notes—using the same style
-
-### #14: [Windows Cortex](https://github.com/microsoft/agentsleague-techconnect/issues/14)
-- **Track**: 🎨 Creative Apps
-- **Score**: 76.1/100
-- **Submitter**: [@jrubiosainz, rag2111](https://github.com/jrubiosainz, rag2111) (jrubiosainz, rarocha)
-- **Team**: jrubiosainz, rarocha
-- **Repo**: [https://github.com/jrubiosainz/windows-cortex](https://github.com/jrubiosainz/windows-cortex)
-- **Description**: My app is a Claude Cowork Killer... using 100% Microsoft tools, accessible for anyone through text or voice, and running on Windows!  Windows Cortex is a native desktop application that gives you AI superpowers over your Windows PC. Just type (or speak) what you want to do in natural language, and t…
-- **Strengths**: Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% re, Reasoning & Multi-step Thinking: Reasoning patterns: . Error handling or recovery logic documented, Creativity & Originality: Diverse technology combination: TypeScript, JavaScript, CSS, HTML. Detailed project description with technical highlight, UX & Presentation: Screenshots provided in demo section. Comprehensive README with 12 sections. No clear setup instructions in README. Arch
-- **Improvements**: Consider strengthening Reliability & Safety (scored 6/10), Consider adding automated tests, Consider adding architecture documentation
-- **Summary**: Windows Cortex (creative-apps track, 76.1/100): My app is a Claude Cowork Killer... using 100% Microsoft tools, accessible for anyone through text or voice, and running on Windows!
-
-Windows Cortex is a native desktop application that gives you AI s
 
 ### #45: [Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape.](https://github.com/microsoft/agentsleague-techconnect/issues/45)
 - **Track**: 🎨 Creative Apps
@@ -341,17 +351,7 @@ Just:
 - **Description**: HeadlineArt is a 7-agent AI pipeline built with Microsoft Agent Framework that scans daily news, curates the most visually compelling stories, designs an art concept, writes Instagram-ready captions, and generates the final artwork using gpt-image-1.5, all autonomously with a built-in quality review…
 - **Strengths**: Creative fusion of news and visual art, Unique concept in reasoning-agents track
 - **Improvements**: Only 1 source file, Only 4 commits
-- **Summary**: AI agent that transforms trending news headlines into visual art, combining news analysis with creative image generation.
-
-### #55: [kube-copilot](https://github.com/microsoft/agentsleague-techconnect/issues/55)
-- **Track**: 🎨 Creative Apps
-- **Score**: 72.2/100
-- **Submitter**: [@openjny](https://github.com/openjny)
-- **Repo**: [https://github.com/openjny/kube-copilot](https://github.com/openjny/kube-copilot)
-- **Description**: `kube-copilot` is a terminal UI (TUI) that lets you manage Kubernetes clusters using natural language. Instead of memorizing complex `kubectl` flags and resource names, you simply describe what you want in plain English and let GitHub Copilot translate it to the right command. Built with the GitHub…
-- **Strengths**: Genuinely useful tool replacing complex kubectl commands, Real TUI implementation with interactive interface, 11 commits showing iterative development, Creative Copilot SDK + Kubernetes combination
-- **Improvements**: Add more automated tests beyond single test file, Include architecture documentation, Add error recovery examples
-- **Summary**: Terminal UI for natural-language Kubernetes cluster management via Copilot SDK. Replaces complex kubectl commands with conversational interface. 15 source files, 11 commits showing genuine iterative development.
+- **Summary**: AI agent that transforms trending news headlines into visual art.
 
 ### #28: [creative 404](https://github.com/microsoft/agentsleague-techconnect/issues/28)
 - **Track**: 🎨 Creative Apps
@@ -405,7 +405,7 @@ Just:
 - **Description**: AI-powered CLI tool that auto-generates daily standup reports by pulling real   developer activity from GitHub (commits, PRs, issues) and Microsoft 365 (calendar, Teams, action items) via MCP.   Saves ~10 min/day writing standups.
 - **Strengths**: Practical developer productivity concept, Combines GitHub and M365 data sources, 13 source files
 - **Improvements**: Add working demo video, Increase commit history, Add automated tests
-- **Summary**: AI-powered CLI for daily standup report generation from GitHub and M365 data. Good concept with 13 source files but lacks working demo and has only 3 commits.
+- **Summary**: AI-powered CLI for daily standup report generation from GitHub and M365 data. Good concept with 13 source files but lacks demo and has only 3 commits.
 
 ### #40: [AI Project Recap Storyboard](https://github.com/microsoft/agentsleague-techconnect/issues/40)
 - **Track**: 🎨 Creative Apps
@@ -424,7 +424,7 @@ Just:
 - **Submitter**: [@betanu701](https://github.com/betanu701)
 - **Repo**: [https://github.com/Betanu701/UpgradeSage](https://github.com/Betanu701/UpgradeSage)
 - **Description**: Many companies rely on legacy projects that lag several versions behind modern releases. When organizations finally attempt to upgrade, they often face a long, complicated migration path filled with unknown breaking changes and hidden risks. UpgradeSage solves this problem by analyzing differences b…
-- **Strengths**: Accuracy & Relevance: Foundry usage: azure ai foundry, foundry. Checklist: 100% met. Communication/content scenario: content. Limited code: Re, User Experience & Presentation: Demo: screenshots. Detailed README (10 sections). Setup instructions present. Architecture or flow diagram included
+- **Strengths**: Accuracy & Relevance: Foundry usage: foundry, azure ai foundry. Checklist: 100% met. Communication/content scenario: content. Limited code: Re, User Experience & Presentation: Demo: screenshots. Detailed README (10 sections). Setup instructions present. Architecture or flow diagram included
 - **Improvements**: Consider strengthening Reasoning & Multi-step Thinking (scored 6/10), Consider strengthening Creativity & Originality (scored 6/10)
 - **Summary**: Upgrade Sage (reasoning-agents track, 69.5/100): Many companies rely on legacy projects that lag several versions behind modern releases. When organizations finally attempt to upgrade, they often face a long, complicated migration path filled with u
 
@@ -435,7 +435,7 @@ Just:
 - **Team**: jetzlstorfer, sniklas
 - **Repo**: [https://github.com/jetzlstorfer/marketing-asset-creation-agent](https://github.com/jetzlstorfer/marketing-asset-creation-agent)
 - **Description**: Conference and meetup organizers struggle with incomplete, scattered, and outdated speaker profiles. Speakers submit partial bios late, and their information is spread across LinkedIn, GitHub, Twitter, and personal sites — delaying promotional efforts.  This project solves that with a multi-agent AI…
-- **Strengths**: Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% re, Reasoning & Multi-step Thinking: Reasoning patterns: cot. Multi-agent architecture: multi-agent. Minimal source: 1 files, Creativity & Originality: Novelty signals: unique, first, custom, original. Diverse technology combination: Azure OpenAI, Azure MCP, Microsoft Fou, UX & Presentation: Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included
+- **Strengths**: Accuracy & Relevance: MCP integration found: MCP mentioned in project. Copilot usage: github copilot, copilot, copilot sdk. Checklist: 100% re, Reasoning & Multi-step Thinking: Reasoning patterns: cot. Multi-agent architecture: multi-agent. Minimal source: 1 files, Creativity & Originality: Novelty signals: unique, first, original, custom. Diverse technology combination: Azure OpenAI, Azure MCP, Microsoft Fou, UX & Presentation: Screenshots provided in demo section. Comprehensive README with 17 sections. Setup instructions included
 - **Improvements**: Consider strengthening Reliability & Safety (scored 6/10), Consider adding automated tests, Consider adding architecture documentation
 - **Summary**: Marketing Asset Creation Agent (creative-apps track, 69.5/100): Conference and meetup organizers struggle with incomplete, scattered, and outdated speaker profiles. Speakers submit partial bios late, and their information is spread across LinkedIn, GitHub, Twitter
 
@@ -458,7 +458,7 @@ Just:
 - **Description**: PolicyShield is a Next.js web app that enables enterprise policy-as-code. Regulations and controls evolve, so instead of relying on static built-in policies, customers can generate and own their compliance bundles. Users select a top regulation (or type one), Azure OpenAI extracts control requiremen…
 - **Strengths**: Policy-as-code concept for enterprise compliance, Description mentions MCP integration
 - **Improvements**: Add comprehensive README, Use multiple commits, Make repository accessible
-- **Summary**: Enterprise policy-as-code Next.js web app. Interesting concept but no README and 1 commit, making implementation quality unverifiable.
+- **Summary**: Enterprise policy-as-code Next.js web app. Interesting concept but no README and 1 commit.
 
 ### #36: [AgentRob](https://github.com/microsoft/agentsleague-techconnect/issues/36)
 - **Track**: 🎨 Creative Apps
@@ -491,7 +491,7 @@ Alignment S
 - **Team**: sankhac , jaideeproy
 - **Repo**: [https://github.com/Akshay8870/bfsi-commsguard.git](https://github.com/Akshay8870/bfsi-commsguard.git)
 - **Description**: CommsGuard AI is a multi-agent reasoning system built on Microsoft Foundry to help BFSI organizations create compliant, high-quality social media content. The system orchestrates four specialized agents: a Planner that decomposes campaign objectives into structured tasks, a Writer that generates pla…
-- **Strengths**: Accuracy & Relevance: Foundry usage: azure ai foundry, microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: campai, Reasoning & Multi-step Thinking: ReAct signals: act. Self-reflection: self-reflection. Multi-step flow: multi-step, orchestrat, workflow. REPO NOT ACCESS
+- **Strengths**: Accuracy & Relevance: Foundry usage: microsoft foundry, foundry, azure ai foundry. Checklist: 100% met. Communication/content scenario: campai, Reasoning & Multi-step Thinking: ReAct signals: act. Self-reflection: self-reflection. Multi-step flow: workflow, orchestrat, multi-step. REPO NOT ACCESS
 - **Improvements**: User Experience & Presentation: Video demo available. No README (repo inaccessible). REPO NOT ACCESSIBLE — scores penalized, Consider strengthening Creativity & Originality (scored 6/10)
 - **Summary**: CommsGuard (reasoning-agents track, 63.0/100): CommsGuard AI is a multi-agent reasoning system built on Microsoft Foundry to help BFSI organizations create compliant, high-quality social media content. The system orchestrates four specialized agen
 
@@ -501,9 +501,9 @@ Alignment S
 - **Submitter**: [@Daboostr](https://github.com/Daboostr)
 - **Repo**: [https://github.com/daboostr/SEDemoAgent](https://github.com/daboostr/SEDemoAgent)
 - **Description**: My Agent will create demo leads in Dynamics 365 for FSI data model.  The agent can be customized to generate leads for any industry with a simple tweak to the prompt.
-- **Strengths**: Genuine Copilot Studio + Power Platform architecture, Real D365 FSI use case with detailed entity coverage, Importable Power Platform Solution
-- **Improvements**: No source code files (Power Platform) makes evaluation difficult, Could add customization documentation
-- **Summary**: Copilot Studio agent as Power Platform Solution generating realistic Financial Services demo data in D365 Sales/Dataverse, covering accounts, contacts, leads, and FSI entities.
+- **Strengths**: Genuine Copilot Studio + Power Platform architecture, Real D365 FSI use case, Importable Power Platform Solution
+- **Improvements**: No source code files (Power Platform), Could add customization documentation
+- **Summary**: Copilot Studio agent generating Financial Services demo data in D365 Sales/Dataverse.
 
 ### #26: [Bridgenote](https://github.com/microsoft/agentsleague-techconnect/issues/26)
 - **Track**: 🎨 Creative Apps
@@ -513,7 +513,7 @@ Alignment S
 - **Description**: BridgeNote — Project Description BridgeNote is a creative note‑transformation assistant designed for people who work across disconnected systems and constantly email themselves notes just to keep information in sync. Instead of juggling inboxes or manually reformatting content for OneNote or other t…
 - **Strengths**: Cross-system note transformation concept, 18 source files exist
 - **Improvements**: Add comprehensive README, Provide working demo, Increase development commits
-- **Summary**: Note transformation assistant for cross-system workflows. No README and only 2 commits make implementation quality unverifiable.
+- **Summary**: Note transformation assistant for cross-system workflows. No README and only 2 commits.
 
 ### #12: [Zava Content Studio — Social Media Content Agent](https://github.com/microsoft/agentsleague-techconnect/issues/12)
 - **Track**: 🧠 Reasoning Agents
@@ -522,8 +522,8 @@ Alignment S
 - **Team**: ssattiraju, ganac, hieunhums
 - **Repo**: [https://github.com/lordlinus/hackfest-fy26](https://github.com/lordlinus/hackfest-fy26)
 - **Description**: AI Content Studio — A multi-agent social media content creation system powered by Microsoft Agent Framework and Azure Durable Functions. Three specialized AI agents (Ideation, Creator, Reviewer) collaborate using Chain-of-Thought, ReAct, and Self-Reflection reasoning patterns to generate platform-op…
-- **Strengths**: Reasoning & Multi-step Thinking: CoT pattern: step-by-step reasoning, chain-of-thought, cot. ReAct signals: react, act. Self-reflection: self-reflection., Creativity & Originality: Innovation signals: custom. Technology stack: Core Platform:, Azure Functions - Serverless compute for hosting the appli
-- **Improvements**: Accuracy & Relevance: No explicit Foundry usage evidence. Checklist: 100% met. Communication/content scenario: content, marketing, social medi, User Experience & Presentation: Demo: screenshots. No README (repo inaccessible). REPO NOT ACCESSIBLE — scores penalized
+- **Strengths**: Reasoning & Multi-step Thinking: CoT pattern: cot, chain-of-thought, step-by-step reasoning. ReAct signals: act, react. Self-reflection: self-reflection., Creativity & Originality: Innovation signals: custom. Technology stack: Core Platform:, Azure Functions - Serverless compute for hosting the appli
+- **Improvements**: Accuracy & Relevance: No explicit Foundry usage evidence. Checklist: 100% met. Communication/content scenario: marketing, content, social medi, User Experience & Presentation: Demo: screenshots. No README (repo inaccessible). REPO NOT ACCESSIBLE — scores penalized
 - **Summary**: Zava Content Studio — Social Media Content Agent (reasoning-agents track, 58.5/100): AI Content Studio — A multi-agent social media content creation system powered by Microsoft Agent Framework and Azure Durable Functions. Three specialized AI agents (Ideation, Creator, Reviewer) colla
 
 ### #16: [FoundryReleaseScout](https://github.com/microsoft/agentsleague-techconnect/issues/16)
@@ -533,7 +533,7 @@ Alignment S
 - **Team**: jwallquist
 - **Repo**: [https://github.com/JW-Sthlm/jw-hackfest/](https://github.com/JW-Sthlm/jw-hackfest/)
 - **Description**: Enterprise AI Release Scouting Agent helps enterprise architects and partners stay current on Microsoft AI platform updates without marketing noise. The agent treats Microsoft Foundry blog posts as signals of change, then verifies each capability against authoritative Microsoft Learn documentation b…
-- **Strengths**: Accuracy & Relevance: Foundry usage: microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: content, marketing. Grou
+- **Strengths**: Accuracy & Relevance: Foundry usage: microsoft foundry, foundry. Checklist: 100% met. Communication/content scenario: marketing, content. Grou
 - **Improvements**: Creativity & Originality: Technology stack: Microsoft Foundry Agent Service – managed runtime to build, run, and govern enterprise AI agents, GPT‑, Technical Implementation: Code examples in README. NO SOURCE CODE in repo (4 files total)
 - **Summary**: FoundryReleaseScout (reasoning-agents track, 54.5/100): Enterprise AI Release Scouting Agent helps enterprise architects and partners stay current on Microsoft AI platform updates without marketing noise. The agent treats Microsoft Foundry blog posts as si
 
@@ -544,7 +544,7 @@ Alignment S
 - **Repo**: [https://github.com/billwhalenmsft/agents-league-deal-to-glory**](https://github.com/billwhalenmsft/agents-league-deal-to-glory**)
 - **Description**: Deal to Glory is a voice-first, multi-agent workflow that turns a seller's post-meeting sentence into a closed-loop CRM update, commission calculation, and manager recognition moment — all in under 5 seconds.  A seller says: "Just finished a call with Acme. Deal is now committed at 420K, closing mid…
 - **Strengths**: Reasoning & Multi-step Thinking: Reasoning patterns: . Multi-agent architecture: multi-agent, orchestrat. Error handling or recovery logic documented. RE
-- **Improvements**: UX & Presentation: Screenshots provided in demo section. No README available (repo private or inaccessible). REPO NOT ACCESSIBLE — scores p, Reliability & Safety: Security considerations: .env, credential. Error handling documented. No automated tests mentioned. Checklist confirms n
+- **Improvements**: UX & Presentation: Screenshots provided in demo section. No README available (repo private or inaccessible). REPO NOT ACCESSIBLE — scores p, Reliability & Safety: Security considerations: credential, .env. Error handling documented. No automated tests mentioned. Checklist confirms n
 - **Summary**: Deal to Glory (creative-apps track, 53.3/100): Deal to Glory is a voice-first, multi-agent workflow that turns a seller's post-meeting sentence into a closed-loop CRM update, commission calculation, and manager recognition moment — all in under 5 
 
 ### #44: [Corporate Bullshit Translator](https://github.com/microsoft/agentsleague-techconnect/issues/44)
@@ -554,8 +554,8 @@ Alignment S
 - **Repo**: [https://github.com/Aakanksha346/corporate-bullshit-translator](https://github.com/Aakanksha346/corporate-bullshit-translator)
 - **Description**: Corporate Bullshit Translator is an intelligent M365 Copilot agent that analyzes  meeting transcripts and corporate communications to identify vague business jargon  and translate it into clear, honest language.   The agent calculates a "Bullshit Score" (1-10) based on buzzword density and provides…
 - **Strengths**: Entertaining and relatable concept
-- **Improvements**: README is just one line, No source code files, No working demo evidence
-- **Summary**: M365 Copilot agent concept for translating corporate jargon, but lacks implementation evidence.
+- **Improvements**: README is just one line, No source code files, No working demo
+- **Summary**: M365 Copilot agent concept for translating corporate jargon, but lacks implementation.
 
 ### #59: [Dictation 4 Kids](https://github.com/microsoft/agentsleague-techconnect/issues/59)
 - **Track**: 🎨 Creative Apps
@@ -572,13 +572,13 @@ When I help my son prepare for dictation, he often asks the same questions m
 
 ### #24: [STEMProjectGenerator](https://github.com/microsoft/agentsleague-techconnect/issues/24)
 - **Track**: 🎨 Creative Apps
-- **Score**: 41.6/100
+- **Score**: 46.7/100
 - **Submitter**: [@getAlex](https://github.com/getAlex)
 - **Repo**: [https://github.com/getalex/STEMProjectGenerator](https://github.com/getalex/STEMProjectGenerator)
 - **Description**: A web solution to generate new STEM project ideas for kids.
 - **Strengths**: Accuracy & Relevance: MCP integration found: mcp server. Checklist: 100% requirements met. Minimal source: 2 files
-- **Improvements**: Reasoning & Multi-step Thinking: No explicit reasoning patterns or multi-step logic documented. Minimal source: 2 files, Creativity & Originality: Standard project concept. Minimal source: 2 files, UX & Presentation: No demo materials provided. No README available (repo private or inaccessible), Reliability & Safety: No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present
-- **Summary**: STEMProjectGenerator (creative-apps track, 41.6/100): A web solution to generate new STEM project ideas for kids.
+- **Improvements**: Reasoning & Multi-step Thinking: No explicit reasoning patterns or multi-step logic documented. Minimal source: 2 files, Creativity & Originality: Standard project concept. Minimal source: 2 files, UX & Presentation: Animated GIF demo provided. No README available (repo private or inaccessible), Reliability & Safety: No automated tests mentioned. Checklist confirms no hardcoded secrets. .gitignore present
+- **Summary**: STEMProjectGenerator (creative-apps track, 46.7/100): A web solution to generate new STEM project ideas for kids.
 
 ### #19: [My Awesome Architecture Executive Visualizer](https://github.com/microsoft/agentsleague-techconnect/issues/19)
 - **Track**: 🎨 Creative Apps
@@ -589,7 +589,7 @@ When I help my son prepare for dictation, he often asks the same questions m
 - **Description**: My agent can automatically generate PowerPoint slides from technical artifacts.
 - **Strengths**: Interesting auto-generation concept
 - **Improvements**: Make repository public, Add README, Provide demo
-- **Summary**: PowerPoint slide generator from technical artifacts. Repository private/inaccessible, making implementation unverifiable.
+- **Summary**: PowerPoint slide generator from technical artifacts. Repository inaccessible.
 
 ### #56: [Compliment my pet](https://github.com/microsoft/agentsleague-techconnect/issues/56)
 - **Track**: 💼 Enterprise Agents
@@ -599,7 +599,7 @@ When I help my son prepare for dictation, he often asks the same questions m
 - **Description**: >**AI doesn’t always have to be productive.   >Sometimes, it just needs to make people smile.**  **Compliment My Pet** is a feel‑good AI agent optimized for joy, not complexity. Its purpose is simple: boost people’s mood by letting them talk about what they love most — their pets.  Users can upload…
 - **Strengths**: Fun mood-boosting concept, Has README with setup instructions
 - **Improvements**: Add actual source code, Pivot to creative-apps track, Implement MCP integration
-- **Summary**: AI agent for pet compliments. Fun concept but 0 source files and minimal enterprise business value. Wrong track assignment (enterprise vs creative).
+- **Summary**: AI agent for pet compliments. 0 source files. Wrong track assignment (enterprise vs creative).
 
 ### #20: [Pokémon Memory Game](https://github.com/microsoft/agentsleague-techconnect/issues/20)
 - **Track**: 🎨 Creative Apps
@@ -619,7 +619,7 @@ When I help my son prepare for dictation, he often asks the same questions m
 - **Description**: An agent that reads the user's email inbox, summarizes emails, and identifies action items, prioritizing emails from customers list , low sentiment emails, and escalation emails for bugs and issues reported. This will help us to focus on what is most important/urgent mail to reply.
 - **Strengths**: Practical email management concept
 - **Improvements**: Add source code, Create M365 integration, Write comprehensive README
-- **Summary**: Email inbox summarization concept. Only 2 files with no source code - effectively a concept submission.
+- **Summary**: Email inbox summarization concept. Only 2 files with no source code.
 
 ### #10: [My Hackathon Project](https://github.com/microsoft/agentsleague-techconnect/issues/10)
 - **Track**: 🎨 Creative Apps
@@ -629,7 +629,7 @@ When I help my son prepare for dictation, he often asks the same questions m
 - **Description**: My Agent is just to get first prize for submission which actually does nothing
 - **Strengths**: Honest description
 - **Improvements**: Implement an actual project, Add source code, Define a clear use case
-- **Summary**: Self-described as doing nothing. Single file (README only, 13 chars). Joke entry.
+- **Summary**: Self-described as doing nothing. Single file (README only). Joke entry.
 
 ### #9999: Test Project
 - **Track**: 🎨 Creative Apps
