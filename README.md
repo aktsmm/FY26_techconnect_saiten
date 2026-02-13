@@ -459,6 +459,36 @@ cp data/scores.json.bak data/scores.json
 
 ---
 
+## Key Technologies Built by the Team
+
+This project was enabled by several open-source tools created by the same team:
+
+| Tool | Description | Repo |
+|------|-------------|------|
+| **Agent Skill Ninja** | VS Code extension for searching, installing, and managing Agent Skills (SKILL.md) for GitHub Copilot, Claude Code, and other AI coding assistants. Used to install the `agentic-workflow-guide` skill into this project. | [vscode-agent-skill-ninja](https://github.com/aktsmm/vscode-agent-skill-ninja) |
+| **Agentic Workflow Guide** | A comprehensive Agent Skill covering 5 workflow patterns, agent delegation, Handoffs, and Context Engineering. The design principles (SSOT, SRP, Fail Fast) and workflow patterns (Orchestrator-Workers, Evaluator-Optimizer) used in Saiten all come from this skill. | [Agent-Skills](https://github.com/aktsmm/Agent-Skills) |
+| **Copilot Browser Bridge** | VS Code extension + Chrome extension pair that bridges browser pages with GitHub Copilot / LLM for analysis and automation. | [copilot-browser-bridge-vscode](https://github.com/aktsmm/copilot-browser-bridge-vscode) / [copilot-browser-bridge](https://github.com/aktsmm/copilot-browser-bridge) |
+| **Copilot Scheduler** | VS Code extension to schedule automatic AI prompts with cron expressions. | [vscode-copilot-scheduler](https://github.com/aktsmm/vscode-copilot-scheduler) |
+
+### How Agent Skill Ninja Powers This Project
+
+```
+1. Install Agent Skill Ninja extension in VS Code
+2. Search for "agentic-workflow-guide" skill
+3. One-click install → SKILL.md + references/ + templates/ added to .github/skills/
+4. Copilot now has domain knowledge about workflow patterns & agent design
+5. Use that knowledge to design, review, and build the 6 Saiten agents
+```
+
+The `agentic-workflow-guide` skill provides:
+- **5 workflow pattern references** (Prompt Chaining, Routing, Parallelization, Orchestrator-Workers, Evaluator-Optimizer)
+- **Agent templates** with SRP, Gate, and Handoff patterns
+- **Design principles** (SSOT, Fail Fast, Feedback Loop, Human-in-the-Loop)
+- **Review checklist** for validating agent architecture
+- **Scaffold script** for generating new agent files
+
+---
+
 ## License
 
 MIT
