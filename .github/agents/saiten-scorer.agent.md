@@ -1,6 +1,6 @@
 ---
 name: saiten-scorer
-description: "Evaluation agent that scores submissions fairly based on track-specific rubrics"
+description: "AI qualitative review agent that adjusts baseline scores using evidence-based judgment"
 tools:
   - "saiten-mcp"
   - "read/readFile"
