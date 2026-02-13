@@ -11,7 +11,10 @@ tools:
 
 Validates whether scores produced by the scorer are rubric-aligned,
 evidence-backed, consistent within tracks, and free from systematic bias.
-Acts as a quality assurance layer with deep evidence inspection.
+Acts as a quality assurance layer in the Evaluator-Optimizer pattern.
+
+**This agent is called AFTER @saiten-scorer completes AI review.**
+It checks the FINAL scores (baseline + AI adjustments) for problems.
 
 ---
 
@@ -20,11 +23,10 @@ Acts as a quality assurance layer with deep evidence inspection.
 **SRP: Post-scoring review only. Does NOT score, collect data, or generate reports.**
 
 - Acts as the **Evaluator** in the Evaluator-Optimizer pattern
-- Reviews all scores holistically for consistency
-- **Validates evidence quality** (rejects generic justifications)
-- Detects rubric misalignment and statistical outliers
-- Checks for score clustering and differentiation failures
-- Verifies red flag cap enforcement
+- Reads data/scores.json and validates all scores holistically
+- Detects over/under-scoring, clustering, and bias
+- Returns PASS or FLAG with specific re-score recommendations
+- **Does NOT modify scores** — flags issues for @saiten-scorer to fix
 
 ---
 

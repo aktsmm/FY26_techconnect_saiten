@@ -82,73 +82,86 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
      "Collect all submissions. Return: valid_submissions list,
       flagged_submissions, errors, track_distribution."
    → Validate: at least 1 valid submission returned
+   → Output saved to data/collected_submissions.json
 
 4. [Gate] Collection Checkpoint
    → Report: "✅ {N} submissions collected ({track_distribution})"
    → If errors > 0: "⚠️ {M} submissions skipped"
 
-5. [Step] Delegate to @saiten-scorer (per-track batching)
-   → For each track in collected data:
-     MUST use #tool:agent with prompt:
-       "Score the following {track} submissions using the rubric.
-        IMPORTANT: Use evidence-anchored scoring — every criterion
-        score must cite specific evidence from the submission.
-        Start from a default of 5 and adjust based on evidence signals.
-        Check red flags and bonus signals from the rubric scoring_policy.
-        Do NOT use generic phrases like 'Comprehensive README'.
-        Submissions: {submission_details_json}
-        Return: scored results with criteria_scores, evidence,
-        confidence, red_flags_detected, bonus_signals_detected,
-        weighted_total, strengths, improvements, summary for each."
-   → Validate: all scores have weighted_total in [0, 100]
-   → Validate: evidence field is present and non-generic
+--- PHASE A: Mechanical Baseline (Orchestrator runs directly) ---
 
-5b. [Step] AI Qualitative Review (MANDATORY)
-   → After mechanical baseline scores are saved, delegate to
-     @saiten-scorer in **AI Review mode**:
-     "Review all baseline scores qualitatively.
+5. [Step] Run Baseline Script (Orchestrator executes directly)
+   → Use execute/runInTerminal to run:
+     `.venv/Scripts/python scripts/score_all.py`
+   → This produces mechanical baseline scores in data/scores.json
+   → Baseline uses: keyword matching, repo tree analysis,
+     checklist ratios, README analysis, demo detection
+   → This is a STARTING POINT — NOT the final score
+   → Report: "✅ Baseline scores generated for {N} submissions"
+
+--- PHASE B: AI Qualitative Review (Scorer sub-agent) ---
+
+6. [Step] Delegate to @saiten-scorer — AI Review (MANDATORY)
+   → The scorer reads baseline scores + submission data and applies
+     QUALITATIVE AI judgment that code cannot provide.
+   → Process in BATCHES of 5 submissions per sub-agent call:
+
+   Batch 1 (Issues with highest baseline scores — most likely to be over-scored):
+   → MUST use #tool:agent with prompt:
+     "AI REVIEW MODE: Review baseline scores for issues #{list}.
       Read data/scores.json and data/collected_submissions.json.
-      For each submission:
-      1. Read the project README and description carefully
-      2. Assess: Is the baseline score fair? Does the project
-         genuinely deserve its ranking position?
-      3. Identify over-scored submissions (keyword gaming,
-         template projects with buzzwords, empty submissions)
-      4. Identify under-scored submissions (quality projects
-         with unconventional structure or missing keywords)
-      5. Rewrite summaries to capture what makes each project
-         UNIQUE, not just what it IS
-      6. Apply adjustments via adjust_scores() with clear
-         ai_review_notes explaining each change"
-   → Validate: ai_reviewed flag set on adjusted submissions
 
-6. [Gate] Scoring Checkpoint
-   → Report: "✅ {N} submissions scored"
-   → If anomalous (all 10s or all 1s): warn user
-   → If evidence missing for any submission: warn user
+      For EACH submission:
+      1. Read the README and description — what does this project ACTUALLY do?
+      2. Is the baseline score FAIR? Check for:
+         - Over-scoring: keyword gaming, buzzwords without implementation
+         - Under-scoring: quality projects with unconventional structure
+         - Template projects: generic descriptions that scored high
+      3. Assess novelty: Is this genuinely creative or a tutorial wrapper?
+      4. Assess depth: Does the claimed architecture actually exist in code?
+      5. Apply adjust_scores() for any submission needing correction.
+         Include ai_review_notes explaining SPECIFIC reasons.
+      6. Rewrite summary to capture what makes this project UNIQUE.
+
+      Return: list of adjusted issue numbers with before/after scores."
+
+   Batch 2-N (remaining submissions, 5 at a time):
+   → Same prompt structure with next 5 issue numbers
+   → Continue until all submissions reviewed
+
+   → Gate: Verify ai_reviewed flag is set on adjusted submissions
+   → Report: "✅ AI review complete: {M} adjusted out of {N} total"
+
+--- PHASE C: Consistency Review (Reviewer sub-agent) ---
 
 7. [Step] Delegate to @saiten-reviewer (Evaluator-Optimizer)
    → MUST use #tool:agent with prompt:
-     "Review all scores in data/scores.json for:
-      1. Evidence quality (reject generic phrases)
-      2. Score clustering and differentiation
-      3. Red flag cap enforcement
-      4. Statistical outliers (> 2 StdDev from track mean)
-      5. Cross-submission comparison for similar scores
-      6. Bias detection (5 types)
-      Return review_status, evidence_quality_report,
-      score_clustering, flagged_submissions, bias_checks,
+     "Review all scores in data/scores.json for fairness and consistency.
+      1. Evidence quality: reject generic phrases, verify specificity
+      2. Score clustering: flag if >60% within 5 points in a track
+      3. Red flag cap enforcement: verify caps applied
+      4. Statistical outliers: flag > 2 StdDev from track mean
+      5. Cross-submission comparison: similar scores must have different evidence
+      6. Bias detection: issue order, track imbalance, README advantage
+      Return: review_status (PASS/FLAG), flagged_submissions,
       recommendations."
+
+--- PHASE C2: Re-score Loop (if FLAG) ---
+
    → If review_status == "FLAG":
      a. Report flagged submissions to user
-     b. Re-delegate flagged items to @saiten-scorer with specific guidance
-        Include reviewer's concern and suggested_action in re-score prompt
-     c. Re-run @saiten-reviewer (max 2 review cycles)
+     b. For each flagged submission, re-delegate to @saiten-scorer:
+        "#tool:agent AI REVIEW: Re-score #{issue_number}.
+         Reviewer concern: {concern}. Suggested action: {action}.
+         Apply adjust_scores() with corrections."
+     c. Re-delegate to @saiten-reviewer (max 2 review cycles)
    → If review_status == "PASS": proceed
 
 8. [Gate] Review Checkpoint
    → Report: "✅ Scores reviewed — {review_status}"
    → If 2 review cycles exhausted with remaining FLAGs: warn user, proceed
+
+--- PHASE D: Report Generation ---
 
 9. [Step] Delegate to @saiten-reporter
    → MUST use #tool:agent with prompt:
@@ -160,6 +173,8 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
     → Top 10 table with links and GitHub usernames
     → Track champions
     → Link to reports/ranking.md
+    → Summary: "Phase A baseline → Phase B AI review ({M} adjusted)
+      → Phase C consistency review ({status})"
 
 11. [Handoff] Offer comment posting
     → Show Handoff button: "💬 Post feedback comments to Top 10"

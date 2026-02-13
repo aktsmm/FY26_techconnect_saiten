@@ -28,7 +28,7 @@
 | Agent                                                        | File               | SRP Responsibility                              | MCP Tools                                   |
 | ------------------------------------------------------------ | ------------------ | ----------------------------------------------- | ------------------------------------------- |
 | [saiten-collector](.github/agents/saiten-collector.agent.md) | `saiten-collector` | Data collection & validation from GitHub Issues | `list_submissions`, `get_submission_detail` |
-| [saiten-scorer](.github/agents/saiten-scorer.agent.md)       | `saiten-scorer`    | Rubric-based scoring with quality gate          | `get_scoring_rubric`, `save_scores`         |
+| [saiten-scorer](.github/agents/saiten-scorer.agent.md)       | `saiten-scorer`    | AI qualitative review & score adjustment        | `get_scoring_rubric`, `adjust_scores`       |
 | [saiten-reviewer](.github/agents/saiten-reviewer.agent.md)   | `saiten-reviewer`  | Score consistency review & bias detection       | `get_scoring_rubric`, read scores           |
 | [saiten-reporter](.github/agents/saiten-reporter.agent.md)   | `saiten-reporter`  | Ranking report generation & presentation        | `generate_ranking_report`                   |
 | [saiten-commenter](.github/agents/saiten-commenter.agent.md) | `saiten-commenter` | GitHub Issue feedback comments (via Handoff)    | `gh issue comment`                          |
@@ -41,26 +41,47 @@
 User Request
     │
     ▼
-┌─────────┐     ┌───────────┐     ┌──────────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
-│ @saiten-orchestrator │──▶│ @collector │──▶│ score_all.py │──▶│ @scorer  │──▶│ @reviewer │──▶│ @reporter │
-│ (Route)  │     │ (Collect)  │     │ (Baseline)   │     │(AI Review)│     │(Validate) │     │ (Report)  │
-└─────────┘     └───────────┘     └──────────────┘     └──────────┘     └──────────┘     └──────────┘
-    │            Gate: data OK?  (mechanical)    (qualitative)    Gate: PASS?    Gate: OK?
-    ▼                                              ▲                    │
- Results ◄──────────────────────────────────────┘────────────┘
-    │                                Re-score if FLAG
-    ▼
- [Handoff Button: 💬 Post Feedback]
-    │
-    ▼
-┌───────────┐
-│ @commenter│  ← Human-in-the-Loop (user confirms before posting)
-│(Comment)  │
-└───────────┘
+┌──────────────────┐
+│ @orchestrator    │
+│ (Route + Control)│
+└────────┬─────────┘
+         │
+    ┌────▼────┐
+    │@collector│  Phase 0: Collect submissions from GitHub Issues
+    │(Collect) │  Gate: data OK?
+    └────┬────┘
+         │
+    ┌────▼──────────┐
+    │ score_all.py   │  Phase A: Mechanical baseline (orchestrator runs script)
+    │ (Python)       │  Keyword matching + repo tree analysis + checklist
+    └────┬──────────┘
+         │
+    ┌────▼────┐
+    │ @scorer  │  Phase B: AI qualitative review (Copilot reads submissions)
+    │(AI Review│  ★ THIS IS THE AI JUDGMENT STEP ★
+    │ 5/batch) │  Reads README/description → adjusts scores via adjust_scores()
+    └────┬────┘
+         │
+    ┌────▼─────┐
+    │@reviewer  │  Phase C: Consistency validation (Copilot checks fairness)
+    │(Validate) │  Outliers, clustering, bias detection
+    └────┬─────┘  Gate: PASS? → If FLAG, re-delegate to @scorer
+         │              ▲                    │
+         │              └────────────────────┘ (max 2 cycles)
+    ┌────▼─────┐
+    │@reporter  │  Phase D: Generate ranking report
+    │(Report)   │
+    └────┬─────┘
+         │
+    ┌────▼─────┐
+    │@commenter │  [Handoff] Human-in-the-Loop (user confirms)
+    │(Feedback) │
+    └──────────┘
 ```
 
 **Key: Two-Phase Scoring**
 
-- `score_all.py` = mechanical baseline (keyword matching, checklist ratios)
-- `@scorer` AI Review = Copilot agent reads submissions qualitatively,
-  judges novelty/depth/quality, adjusts scores via `adjust_scores()`
+- `score_all.py` = Phase A mechanical baseline (keyword matching, repo tree, checklist)
+- `@scorer` = Phase B AI Review — **Copilot agent** reads submissions qualitatively,
+  judges novelty/depth/quality, catches keyword gaming, adjusts via `adjust_scores()`
+- `@reviewer` = Phase C — **Copilot agent** validates score consistency and fairness
