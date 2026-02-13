@@ -108,6 +108,10 @@ async def save_scores(scores: list[dict]) -> dict[str, Any]:
             - track (str)
             - criteria_scores (dict[str, int]): per-criterion scores (1-10)
             - weighted_total (float): weighted total (0-100)
+            - evidence (dict[str, str]): per-criterion evidence citations
+            - confidence (str): 'high', 'medium', or 'low'
+            - red_flags_detected (list[str]): red flag signals found
+            - bonus_signals_detected (list[str]): bonus signals found
             - strengths (list[str])
             - improvements (list[str])
             - summary (str)
@@ -121,7 +125,40 @@ async def save_scores(scores: list[dict]) -> dict[str, Any]:
     store = _load_scores()
     existing = store.get("scores", [])
 
-    merged, updated_count = _merge_scores(existing, scores)
+    # --- Input Validation (Fail Fast) ---
+    validated: list[dict[str, Any]] = []
+    for i, s in enumerate(scores):
+        issue_num = s.get("issue_number")
+        if not isinstance(issue_num, int) or issue_num < 1:
+            raise ValueError(
+                f"scores[{i}]: issue_number must be a positive int, got {issue_num!r}"
+            )
+        if not s.get("project_name"):
+            raise ValueError(f"scores[{i}] (#{issue_num}): project_name is required")
+        if not s.get("track"):
+            raise ValueError(f"scores[{i}] (#{issue_num}): track is required")
+
+        total = s.get("weighted_total", -1)
+        if not isinstance(total, (int, float)) or not (0 <= total <= 100):
+            raise ValueError(
+                f"scores[{i}] (#{issue_num}): weighted_total must be 0-100, got {total}"
+            )
+
+        criteria = s.get("criteria_scores", {})
+        if not isinstance(criteria, dict):
+            raise ValueError(
+                f"scores[{i}] (#{issue_num}): criteria_scores must be a dict"
+            )
+        for crit_name, crit_val in criteria.items():
+            if not isinstance(crit_val, int) or not (1 <= crit_val <= 10):
+                raise ValueError(
+                    f"scores[{i}] (#{issue_num}): criteria '{crit_name}' "
+                    f"must be 1-10, got {crit_val}"
+                )
+
+        validated.append(s)
+
+    merged, updated_count = _merge_scores(existing, validated)
     new_count = len(scores) - updated_count
 
     store["scores"] = merged

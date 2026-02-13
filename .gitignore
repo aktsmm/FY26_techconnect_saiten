@@ -11,8 +11,19 @@ build/
 .vscode/*
 !.vscode/mcp.json
 
+# Secrets
+.env
+
 # Data (scores are generated, not tracked)
 # data/scores.json  # Uncomment to exclude scores from git
+
+# Output sessions
+output_sessions/
+
+# Test / Coverage
+htmlcov/
+.coverage
+.pytest_cache/
 
 # OS
 .DS_Store

@@ -1,5 +1,5 @@
 ---
-name: saiten
+name: saiten-orchestrator
 description: "Scoring orchestrator for Agents League @ TechConnect — routes intent, delegates to sub-agents, integrates results"
 tools:
   - "saiten-mcp"
@@ -13,7 +13,7 @@ handoffs:
     prompt: "Generate scoring feedback comments for the Top 10 submissions in scores.json. Show comments to user for confirmation, then post to GitHub Issues."
 ---
 
-# 🏆 Saiten — Scoring Orchestrator
+# 🏆 Saiten Orchestrator — Scoring Agent
 
 Scoring orchestrator for the Agents League @ TechConnect hackathon.
 Delegates work to 5 specialized sub-agents and controls the overall
@@ -25,7 +25,7 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
-│ @saiten (Orchestrator)                                               │
+│ @saiten-orchestrator (Orchestrator)                                  │
 │  Intent Routing → Delegation → Result Integration → User Report      │
 │                                                                      │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐            │
@@ -47,13 +47,13 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 
 ## Sub-Agent Roster
 
-| Agent | File | SRP Responsibility | MCP Tools |
-|-------|------|--------------------|-----------|
-| `saiten-collector` | `.github/agents/saiten-collector.agent.md` | Data collection & validation | `list_submissions`, `get_submission_detail` |
-| `saiten-scorer` | `.github/agents/saiten-scorer.agent.md` | Rubric-based evaluation | `get_scoring_rubric`, `save_scores` |
-| `saiten-reviewer` | `.github/agents/saiten-reviewer.agent.md` | Score consistency review | `get_scoring_rubric`, read scores |
-| `saiten-reporter` | `.github/agents/saiten-reporter.agent.md` | Ranking report generation | `generate_ranking_report` |
-| `saiten-commenter` | `.github/agents/saiten-commenter.agent.md` | GitHub Issue feedback (Handoff) | `gh issue comment` |
+| Agent              | File                                       | SRP Responsibility              | MCP Tools                                   |
+| ------------------ | ------------------------------------------ | ------------------------------- | ------------------------------------------- |
+| `saiten-collector` | `.github/agents/saiten-collector.agent.md` | Data collection & validation    | `list_submissions`, `get_submission_detail` |
+| `saiten-scorer`    | `.github/agents/saiten-scorer.agent.md`    | Rubric-based evaluation         | `get_scoring_rubric`, `save_scores`         |
+| `saiten-reviewer`  | `.github/agents/saiten-reviewer.agent.md`  | Score consistency review        | `get_scoring_rubric`, read scores           |
+| `saiten-reporter`  | `.github/agents/saiten-reporter.agent.md`  | Ranking report generation       | `generate_ranking_report`                   |
+| `saiten-commenter` | `.github/agents/saiten-commenter.agent.md` | GitHub Issue feedback (Handoff) | `gh issue comment`                          |
 
 ---
 
@@ -68,7 +68,7 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 
 ## Workflow
 
-### UC-01: Full Scoring (`@saiten score all`)
+### UC-01: Full Scoring (`@saiten-orchestrator score all`)
 
 ```
 1. [Routing] Parse user intent → UC-01
@@ -91,23 +91,39 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
    → For each track in collected data:
      MUST use #tool:agent with prompt:
        "Score the following {track} submissions using the rubric.
+        IMPORTANT: Use evidence-anchored scoring — every criterion
+        score must cite specific evidence from the submission.
+        Start from a default of 5 and adjust based on evidence signals.
+        Check red flags and bonus signals from the rubric scoring_policy.
+        Do NOT use generic phrases like 'Comprehensive README'.
         Submissions: {submission_details_json}
-        Return: scored results with criteria_scores, weighted_total,
-        strengths, improvements, summary for each."
+        Return: scored results with criteria_scores, evidence,
+        confidence, red_flags_detected, bonus_signals_detected,
+        weighted_total, strengths, improvements, summary for each."
    → Validate: all scores have weighted_total in [0, 100]
+   → Validate: evidence field is present and non-generic
 
 6. [Gate] Scoring Checkpoint
    → Report: "✅ {N} submissions scored"
    → If anomalous (all 10s or all 1s): warn user
+   → If evidence missing for any submission: warn user
 
 7. [Step] Delegate to @saiten-reviewer (Evaluator-Optimizer)
    → MUST use #tool:agent with prompt:
-     "Review all scores in data/scores.json for consistency,
-      outliers (> 2 StdDev from track mean), rubric alignment,
-      and bias. Return review_status, flagged_submissions, bias_checks."
+     "Review all scores in data/scores.json for:
+      1. Evidence quality (reject generic phrases)
+      2. Score clustering and differentiation
+      3. Red flag cap enforcement
+      4. Statistical outliers (> 2 StdDev from track mean)
+      5. Cross-submission comparison for similar scores
+      6. Bias detection (5 types)
+      Return review_status, evidence_quality_report,
+      score_clustering, flagged_submissions, bias_checks,
+      recommendations."
    → If review_status == "FLAG":
      a. Report flagged submissions to user
      b. Re-delegate flagged items to @saiten-scorer with specific guidance
+        Include reviewer's concern and suggested_action in re-score prompt
      c. Re-run @saiten-reviewer (max 2 review cycles)
    → If review_status == "PASS": proceed
 
@@ -131,7 +147,7 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
     → User clicks → transitions to @saiten-commenter
 ```
 
-### UC-02: Single Scoring (`@saiten score #48`)
+### UC-02: Single Scoring (`@saiten-orchestrator score #48`)
 
 ```
 1. [Routing] Parse issue number from user input
@@ -153,7 +169,7 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 6. [Output] Show score breakdown to user
 ```
 
-### UC-03: Report Only (`@saiten ranking` / `@saiten report`)
+### UC-03: Report Only (`@saiten-orchestrator ranking` / `@saiten-orchestrator report`)
 
 ```
 1. [Routing] Parse intent → report generation only
@@ -166,14 +182,14 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 4. [Handoff] Offer comment posting
 ```
 
-### UC-04: Re-score (`@saiten rescore #48`)
+### UC-04: Re-score (`@saiten-orchestrator rescore #48`)
 
 ```
 1. Same as UC-02 (save_scores overwrites — idempotent)
 2. Show score delta if previous score exists
 ```
 
-### UC-05: Show Rubric (`@saiten show rubric for Creative`)
+### UC-05: Show Rubric (`@saiten-orchestrator show rubric for Creative`)
 
 ```
 1. [Routing] Parse track name
@@ -181,7 +197,7 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 3. Present formatted rubric to user
 ```
 
-### UC-06: Review Only (`@saiten review scores`)
+### UC-06: Review Only (`@saiten-orchestrator review scores`)
 
 ```
 1. [Routing] Parse intent → review only
@@ -196,26 +212,26 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 
 ## Intent Routing Table
 
-| User Input Pattern | Route To |
-|--------------------|----------|
-| `score all`, `evaluate all` | UC-01 |
-| `score #N`, `evaluate #N` | UC-02 |
-| `ranking`, `report`, `generate report` | UC-03 |
-| `rescore #N`, `re-evaluate #N` | UC-04 |
-| `rubric`, `show rubric`, `criteria` | UC-05 |
-| `review`, `review scores`, `validate` | UC-06 |
+| User Input Pattern                     | Route To |
+| -------------------------------------- | -------- |
+| `score all`, `evaluate all`            | UC-01    |
+| `score #N`, `evaluate #N`              | UC-02    |
+| `ranking`, `report`, `generate report` | UC-03    |
+| `rescore #N`, `re-evaluate #N`         | UC-04    |
+| `rubric`, `show rubric`, `criteria`    | UC-05    |
+| `review`, `review scores`, `validate`  | UC-06    |
 
 ---
 
 ## Error Handling
 
-| Error | Action |
-|-------|--------|
-| MCP server not running | Report and STOP (Fail Fast) |
-| Sub-agent returns empty | Retry once, then report to user |
-| Score out of range | Reject and re-delegate to scorer |
+| Error                      | Action                                   |
+| -------------------------- | ---------------------------------------- |
+| MCP server not running     | Report and STOP (Fail Fast)              |
+| Sub-agent returns empty    | Retry once, then report to user          |
+| Score out of range         | Reject and re-delegate to scorer         |
 | Collection partial failure | Continue with valid data, report skipped |
-| Review FLAG after 2 cycles | Warn user, proceed with current scores |
+| Review FLAG after 2 cycles | Warn user, proceed with current scores   |
 
 ---
 

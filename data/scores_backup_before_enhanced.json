@@ -1,0 +1,1041 @@
+{
+  "metadata": {
+    "last_updated": "2026-02-12T23:34:45.230505+00:00",
+    "version": "1.0",
+    "total_submissions": 0,
+    "scored_count": 43
+  },
+  "scores": [
+    {
+      "issue_number": 27,
+      "project_name": "TrendSurf",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 9,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 10
+      },
+      "weighted_total": 91.5,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (24 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "TrendSurf is a reasoning agents submission scoring 91.5/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 49,
+      "project_name": "EasyExpenseAI",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 90.0,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (37 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "EasyExpenseAI is a creative apps submission scoring 90.0/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 12,
+      "project_name": "Zava Content Studio — Social Media Content Agent",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 9,
+        "User Experience & Presentation": 7,
+        "Technical Implementation": 9
+      },
+      "weighted_total": 87.0,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "Rich technology stack (30 technologies)",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible"
+      ],
+      "summary": "Zava Content Studio — Social Media Content Agent is a reasoning agents submission scoring 87.0/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 32,
+      "project_name": "SovereignFit",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 8,
+        "Creativity & Originality": 8,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 86.1,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (8 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "SovereignFit is a creative apps submission scoring 86.1/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 42,
+      "project_name": "Zava Smart Assistant",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 85.6,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (9 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Zava Smart Assistant is a creative apps submission scoring 85.6/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 48,
+      "project_name": "CommsGuard",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 9,
+        "User Experience & Presentation": 7,
+        "Technical Implementation": 8
+      },
+      "weighted_total": 85.5,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "Rich technology stack (11 technologies)",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible"
+      ],
+      "summary": "CommsGuard is a reasoning agents submission scoring 85.5/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 38,
+      "project_name": "Zavatravel",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 6,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 10
+      },
+      "weighted_total": 85.5,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (22 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Zavatravel is a reasoning agents submission scoring 85.5/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 35,
+      "project_name": "techconnect-policy-compliance-checker",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 8,
+        "Creativity & Originality": 8,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 9
+      },
+      "weighted_total": 85.5,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [],
+      "summary": "techconnect-policy-compliance-checker is a reasoning agents submission scoring 85.5/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 13,
+      "project_name": "SE Agent",
+      "track": "enterprise-agents",
+      "criteria_scores": {
+        "Technical Implementation": 7,
+        "Business Value": 9,
+        "Innovation & Creativity": 9
+      },
+      "weighted_total": 83.4,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Technical Implementation"
+      ],
+      "improvements": [],
+      "summary": "SE Agent is a enterprise agents submission scoring 83.4/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 34,
+      "project_name": "LearnIQ",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 82.2,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (7 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "LearnIQ is a creative apps submission scoring 82.2/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 15,
+      "project_name": "Skills Hub",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 81.7,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (9 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Skills Hub is a creative apps submission scoring 81.7/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 47,
+      "project_name": "Semantic Kernel and AutoGen to MAF Modernizer",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 5,
+        "User Experience & Presentation": 8,
+        "Technical Implementation": 9
+      },
+      "weighted_total": 80.5,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (10 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Semantic Kernel and AutoGen to MAF Modernizer is a reasoning agents submission scoring 80.5/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 39,
+      "project_name": "CodeIntel",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 77.8,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (5 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "CodeIntel is a creative apps submission scoring 77.8/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 18,
+      "project_name": "My Proposal Develop",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 5,
+        "User Experience & Presentation": 9,
+        "Technical Implementation": 9
+      },
+      "weighted_total": 77.0,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [],
+      "summary": "My Proposal Develop is a reasoning agents submission scoring 77.0/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 44,
+      "project_name": "Corporate Bullshit Translator",
+      "track": "enterprise-agents",
+      "criteria_scores": {
+        "Technical Implementation": 9,
+        "Business Value": 8,
+        "Innovation & Creativity": 6
+      },
+      "weighted_total": 76.5,
+      "strengths": [
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Technical Implementation",
+        "Strong Business Value"
+      ],
+      "improvements": [
+        "No demo materials provided"
+      ],
+      "summary": "Corporate Bullshit Translator is a enterprise agents submission scoring 76.5/100. Key strengths: Public repository available, All submission checklist items completed. Areas for improvement: No demo materials provided.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 43,
+      "project_name": "Nimbus Content Agent",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 8,
+        "Creativity & Originality": 5,
+        "User Experience & Presentation": 8,
+        "Technical Implementation": 8
+      },
+      "weighted_total": 76.5,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (7 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Nimbus Content Agent is a reasoning agents submission scoring 76.5/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 23,
+      "project_name": "repo-analyzer",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 6,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 76.1,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [],
+      "summary": "repo-analyzer is a creative apps submission scoring 76.1/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 31,
+      "project_name": "Threat Incident Swarm Commander",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 9,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 4
+      },
+      "weighted_total": 75.6,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (5 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [
+        "Weak Reliability & Safety"
+      ],
+      "summary": "Threat Incident Swarm Commander is a creative apps submission scoring 75.6/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. Areas for improvement: Weak Reliability & Safety.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 37,
+      "project_name": "Making money by poop",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 6,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 9
+      },
+      "weighted_total": 73.9,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [],
+      "summary": "Making money by poop is a creative apps submission scoring 73.9/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 26,
+      "project_name": "Bridgenote",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 8,
+        "Creativity & Originality": 8,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 5
+      },
+      "weighted_total": 73.9,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "Rich technology stack (9 technologies)",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible"
+      ],
+      "summary": "Bridgenote is a creative apps submission scoring 73.9/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 21,
+      "project_name": "Deal to Glory",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 8,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 5
+      },
+      "weighted_total": 73.3,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "Rich technology stack (9 technologies)",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible"
+      ],
+      "summary": "Deal to Glory is a creative apps submission scoring 73.3/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 33,
+      "project_name": "BeatMyPrompt",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 7
+      },
+      "weighted_total": 72.8,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (15 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "BeatMyPrompt is a creative apps submission scoring 72.8/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 22,
+      "project_name": "DailySync",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 3,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 8
+      },
+      "weighted_total": 71.1,
+      "strengths": [
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (9 technologies)",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "No demo materials provided",
+        "Weak Reasoning & Multi-step Thinking"
+      ],
+      "summary": "DailySync is a creative apps submission scoring 71.1/100. Key strengths: Comprehensive README documentation, Public repository available. Areas for improvement: No demo materials provided, Weak Reasoning & Multi-step Thinking.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 16,
+      "project_name": "FoundryReleaseScout",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 6,
+        "User Experience & Presentation": 8,
+        "Technical Implementation": 4
+      },
+      "weighted_total": 70.0,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (6 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [
+        "Weak Technical Implementation"
+      ],
+      "summary": "FoundryReleaseScout is a reasoning agents submission scoring 70.0/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. Areas for improvement: Weak Technical Implementation.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 41,
+      "project_name": "Architect Agent",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 7
+      },
+      "weighted_total": 69.5,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (16 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Architect Agent is a creative apps submission scoring 69.5/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 9999,
+      "project_name": "Test Project",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 7,
+        "Reasoning & Multi-step Thinking": 6,
+        "Creativity & Originality": 8,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 6
+      },
+      "weighted_total": 67.8,
+      "strengths": [
+        "Good test coverage",
+        "Clean code"
+      ],
+      "improvements": [
+        "Needs better docs"
+      ],
+      "summary": "A solid test project.",
+      "scored_at": "2026-02-12T23:34:45.230505+00:00"
+    },
+    {
+      "issue_number": 40,
+      "project_name": "AI Project Recap Storyboard",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 7,
+        "Creativity & Originality": 5,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 5
+      },
+      "weighted_total": 66.1,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance",
+        "Strong Reasoning & Multi-step Thinking"
+      ],
+      "improvements": [],
+      "summary": "AI Project Recap Storyboard is a creative apps submission scoring 66.1/100. Key strengths: Demo video or screenshots provided, Public repository available. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 25,
+      "project_name": "Team Risk Analyzer",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 5,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 5
+      },
+      "weighted_total": 65.6,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (5 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Team Risk Analyzer is a creative apps submission scoring 65.6/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 29,
+      "project_name": "Upgrade Sage",
+      "track": "reasoning-agents",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 4,
+        "Creativity & Originality": 8,
+        "User Experience & Presentation": 7,
+        "Technical Implementation": 4
+      },
+      "weighted_total": 65.0,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "Rich technology stack (5 technologies)",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Technical Implementation"
+      ],
+      "summary": "Upgrade Sage is a reasoning agents submission scoring 65.0/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: Weak Reasoning & Multi-step Thinking, Weak Technical Implementation.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 45,
+      "project_name": "Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape.",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 4,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 63.9,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "Rich technology stack (9 technologies)",
+        "All submission checklist items completed"
+      ],
+      "improvements": [
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Reliability & Safety"
+      ],
+      "summary": "Prompt Escape - The AI Escape Room  Craft the right prompts. Solve the puzzles. Escape. is a creative apps submission scoring 63.9/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. Areas for improvement: Weak Reasoning & Multi-step Thinking, Weak Reliability & Safety.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 46,
+      "project_name": "PowerPoint Reviewer Agent",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 4,
+        "Creativity & Originality": 7,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 5
+      },
+      "weighted_total": 62.8,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance",
+        "Strong Creativity & Originality"
+      ],
+      "improvements": [
+        "Weak Reasoning & Multi-step Thinking"
+      ],
+      "summary": "PowerPoint Reviewer Agent is a creative apps submission scoring 62.8/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: Weak Reasoning & Multi-step Thinking.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 20,
+      "project_name": "Pokémon Memory Game",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 9,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 62.2,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "Rich technology stack (9 technologies)",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible",
+        "Weak Reliability & Safety"
+      ],
+      "summary": "Pokémon Memory Game is a creative apps submission scoring 62.2/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible, Weak Reliability & Safety.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 14,
+      "project_name": "Windows Cortex",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 4,
+        "Creativity & Originality": 5,
+        "UX & Presentation": 9,
+        "Reliability & Safety": 4
+      },
+      "weighted_total": 61.1,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Reliability & Safety"
+      ],
+      "summary": "Windows Cortex is a creative apps submission scoring 61.1/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. Areas for improvement: Weak Reasoning & Multi-step Thinking, Weak Reliability & Safety.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 11,
+      "project_name": "Hybrid DNS Copilot",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 4,
+        "Creativity & Originality": 6,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 4
+      },
+      "weighted_total": 59.5,
+      "strengths": [
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance",
+        "Strong UX & Presentation"
+      ],
+      "improvements": [
+        "No demo materials provided",
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Reliability & Safety"
+      ],
+      "summary": "Hybrid DNS Copilot is a creative apps submission scoring 59.5/100. Key strengths: Comprehensive README documentation, Public repository available. Areas for improvement: No demo materials provided, Weak Reasoning & Multi-step Thinking.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 28,
+      "project_name": "creative 404",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 3,
+        "Creativity & Originality": 6,
+        "UX & Presentation": 8,
+        "Reliability & Safety": 5
+      },
+      "weighted_total": 58.9,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Comprehensive README documentation",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance"
+      ],
+      "improvements": [
+        "Weak Reasoning & Multi-step Thinking"
+      ],
+      "summary": "creative 404 is a creative apps submission scoring 58.9/100. Key strengths: Demo video or screenshots provided, Comprehensive README documentation. Areas for improvement: Weak Reasoning & Multi-step Thinking.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 30,
+      "project_name": "PolicyShield",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 6,
+        "Reasoning & Multi-step Thinking": 5,
+        "Creativity & Originality": 4,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 7
+      },
+      "weighted_total": 58.3,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "Rich technology stack (5 technologies)",
+        "All submission checklist items completed",
+        "Strong UX & Presentation"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible",
+        "Weak Creativity & Originality"
+      ],
+      "summary": "PolicyShield is a creative apps submission scoring 58.3/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible, Weak Creativity & Originality.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 50,
+      "project_name": "Email Summarizer",
+      "track": "enterprise-agents",
+      "criteria_scores": {
+        "Technical Implementation": 6,
+        "Business Value": 5,
+        "Innovation & Creativity": 5
+      },
+      "weighted_total": 53.3,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "All submission checklist items completed"
+      ],
+      "improvements": [],
+      "summary": "Email Summarizer is a enterprise agents submission scoring 53.3/100. Key strengths: Demo video or screenshots provided, Public repository available. ",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 19,
+      "project_name": "My Awesome Architecture Executive Visualizer",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 9,
+        "Reasoning & Multi-step Thinking": 3,
+        "Creativity & Originality": 5,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 53.3,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance",
+        "Strong UX & Presentation"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible",
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Reliability & Safety"
+      ],
+      "summary": "My Awesome Architecture Executive Visualizer is a creative apps submission scoring 53.3/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible, Weak Reasoning & Multi-step Thinking.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 24,
+      "project_name": "STEMProjectGenerator",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 8,
+        "Reasoning & Multi-step Thinking": 4,
+        "Creativity & Originality": 3,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 50.0,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong Accuracy & Relevance",
+        "Strong UX & Presentation"
+      ],
+      "improvements": [
+        "No README found or repository inaccessible",
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Creativity & Originality"
+      ],
+      "summary": "STEMProjectGenerator is a creative apps submission scoring 50.0/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: No README found or repository inaccessible, Weak Reasoning & Multi-step Thinking.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 36,
+      "project_name": "AgentRob",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 6,
+        "Reasoning & Multi-step Thinking": 3,
+        "Creativity & Originality": 6,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 48.4,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong UX & Presentation"
+      ],
+      "improvements": [
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Reliability & Safety"
+      ],
+      "summary": "AgentRob is a creative apps submission scoring 48.4/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: Weak Reasoning & Multi-step Thinking, Weak Reliability & Safety.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 10,
+      "project_name": "My Hackathon Project",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 6,
+        "Reasoning & Multi-step Thinking": 3,
+        "Creativity & Originality": 4,
+        "UX & Presentation": 7,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 45.0,
+      "strengths": [
+        "Demo video or screenshots provided",
+        "Public repository available",
+        "All submission checklist items completed",
+        "Strong UX & Presentation"
+      ],
+      "improvements": [
+        "Weak Reasoning & Multi-step Thinking",
+        "Weak Creativity & Originality"
+      ],
+      "summary": "My Hackathon Project is a creative apps submission scoring 45.0/100. Key strengths: Demo video or screenshots provided, Public repository available. Areas for improvement: Weak Reasoning & Multi-step Thinking, Weak Creativity & Originality.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 51,
+      "project_name": "Biz-Ops Calendar Agent - Track 3: Enterprise Agents",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 2,
+        "Reasoning & Multi-step Thinking": 3,
+        "Creativity & Originality": 3,
+        "UX & Presentation": 3,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 27.8,
+      "strengths": [],
+      "improvements": [
+        "No demo materials provided",
+        "No README found or repository inaccessible",
+        "No repository URL provided",
+        "Weak Accuracy & Relevance",
+        "Weak Reasoning & Multi-step Thinking"
+      ],
+      "summary": "Biz-Ops Calendar Agent - Track 3: Enterprise Agents is a creative apps submission scoring 27.8/100. Areas for improvement: No demo materials provided, No README found or repository inaccessible.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    },
+    {
+      "issue_number": 17,
+      "project_name": "Its magic",
+      "track": "creative-apps",
+      "criteria_scores": {
+        "Accuracy & Relevance": 2,
+        "Reasoning & Multi-step Thinking": 3,
+        "Creativity & Originality": 3,
+        "UX & Presentation": 3,
+        "Reliability & Safety": 3
+      },
+      "weighted_total": 27.8,
+      "strengths": [],
+      "improvements": [
+        "No demo materials provided",
+        "No README found or repository inaccessible",
+        "No repository URL provided",
+        "Weak Accuracy & Relevance",
+        "Weak Reasoning & Multi-step Thinking"
+      ],
+      "summary": "Its magic is a creative apps submission scoring 27.8/100. Areas for improvement: No demo materials provided, No README found or repository inaccessible.",
+      "scored_at": "2026-02-12T23:17:03.149968+00:00"
+    }
+  ]
+}

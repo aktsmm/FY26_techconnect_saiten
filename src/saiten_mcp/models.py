@@ -78,13 +78,36 @@ class CriteriaScore(BaseModel):
 
 
 class SubmissionScore(BaseModel):
-    """Scoring result for a single submission."""
+    """Scoring result for a single submission.
+
+    Enhanced with evidence-anchored scoring fields:
+    - evidence: per-criterion evidence citations
+    - confidence: scorer's confidence level
+    - red_flags_detected: red flag signals found
+    - bonus_signals_detected: bonus signals found
+    """
 
     issue_number: int
     project_name: str
     track: str
     criteria_scores: dict[str, int]
     weighted_total: float = Field(ge=0.0, le=100.0)
+    evidence: dict[str, str] = Field(
+        default_factory=dict,
+        description="Per-criterion evidence citations from submission content",
+    )
+    confidence: str = Field(
+        default="medium",
+        description="Scorer confidence: 'high', 'medium', or 'low'",
+    )
+    red_flags_detected: list[str] = Field(
+        default_factory=list,
+        description="Red flag signals detected during scoring",
+    )
+    bonus_signals_detected: list[str] = Field(
+        default_factory=list,
+        description="Bonus signals detected during scoring",
+    )
     strengths: list[str]
     improvements: list[str]
     summary: str

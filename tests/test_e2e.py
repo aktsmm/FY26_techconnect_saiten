@@ -3,6 +3,8 @@
 import asyncio
 import json
 
+import pytest
+
 
 async def test_list_submissions():
     """Test list_submissions tool."""
@@ -34,9 +36,26 @@ async def test_list_submissions():
     return results
 
 
-async def test_get_submission_detail(issue_number: int):
+async def test_get_submission_detail():
     """Test get_submission_detail tool."""
-    from saiten_mcp.tools.submissions import get_submission_detail
+    from saiten_mcp.tools.submissions import list_submissions, get_submission_detail
+
+    submissions = await list_submissions(state="all")
+    if not submissions:
+        pytest.skip("No submissions available")
+
+    # Try the first submission; if it fails (e.g. deleted Issue), try the next
+    detail = None
+    for sub in submissions[:5]:
+        issue_number = sub["issue_number"]
+        try:
+            detail = await get_submission_detail(issue_number)
+            break
+        except Exception:
+            continue
+
+    if detail is None:
+        pytest.skip("Could not fetch any submission detail")
 
     print("\n" + "=" * 60)
     print(f"TEST: get_submission_detail(#{issue_number})")

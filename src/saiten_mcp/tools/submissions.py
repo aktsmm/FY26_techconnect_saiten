@@ -13,7 +13,7 @@ import logging
 import re
 from typing import Any
 
-from saiten_mcp.server import mcp
+from saiten_mcp.server import mcp, rate_limiter
 
 logger = logging.getLogger(__name__)
 
@@ -59,20 +59,62 @@ SECTION_PARSERS: dict[str, str] = {
 # ---------------------------------------------------------------------------
 # gh CLI helpers
 # ---------------------------------------------------------------------------
-async def _run_gh(*args: str) -> str:
-    """Execute a gh command and return stdout. Raises an exception on failure (Fail Fast)."""
-    proc = await asyncio.create_subprocess_exec(
-        "gh", *args,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    stdout, stderr = await proc.communicate()
-    if proc.returncode != 0:
-        err_msg = stderr.decode().strip() if stderr else "unknown error"
-        raise RuntimeError(
-            f"gh command failed (exit={proc.returncode}): gh {' '.join(args)}\n{err_msg}"
-        )
-    return stdout.decode()
+_GH_MAX_RETRIES = 3
+_GH_RETRY_DELAY_BASE = 1.0  # seconds, exponential backoff
+
+
+async def _run_gh(*args: str, max_retries: int = _GH_MAX_RETRIES) -> str:
+    """Execute a gh command and return stdout.
+
+    Implements exponential backoff retry for transient failures
+    (network timeouts, rate limits). Raises on persistent failure (Fail Fast).
+    """
+    last_error: Exception | None = None
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                "gh", *args,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+            stdout, stderr = await proc.communicate()
+
+            if proc.returncode == 0:
+                return stdout.decode()
+
+            err_msg = stderr.decode().strip() if stderr else "unknown error"
+
+            # Retry on rate limit (HTTP 403/429) or server error (5xx)
+            is_retryable = any(
+                hint in err_msg.lower()
+                for hint in ["rate limit", "429", "500", "502", "503", "504", "timeout"]
+            )
+
+            if is_retryable and attempt < max_retries:
+                delay = _GH_RETRY_DELAY_BASE * (2 ** (attempt - 1))
+                logger.warning(
+                    "gh command failed (attempt %d/%d), retrying in %.1fs: %s",
+                    attempt, max_retries, delay, err_msg[:100],
+                )
+                await asyncio.sleep(delay)
+                last_error = RuntimeError(
+                    f"gh command failed (exit={proc.returncode}): gh {' '.join(args)}\n{err_msg}"
+                )
+                continue
+
+            # Non-retryable error → fail fast
+            raise RuntimeError(
+                f"gh command failed (exit={proc.returncode}): gh {' '.join(args)}\n{err_msg}"
+            )
+
+        except FileNotFoundError:
+            raise RuntimeError(
+                "gh CLI not found. Install from https://cli.github.com/ and run `gh auth login`."
+            )
+
+    # All retries exhausted
+    raise last_error or RuntimeError(f"gh command failed after {max_retries} retries")
 
 
 # ---------------------------------------------------------------------------
@@ -283,6 +325,8 @@ async def list_submissions(
     Raises:
         RuntimeError: When gh command execution fails.
     """
+    rate_limiter.check("list_submissions")
+
     # jq filter: extract only required fields
     jq_filter = (
         "[.[] | {number, title, body, labels: [.labels[].name], created_at}]"
@@ -373,6 +417,8 @@ async def get_submission_detail(issue_number: int) -> dict:
     Raises:
         RuntimeError: When gh command execution fails.
     """
+    rate_limiter.check("get_submission_detail")
+
     raw = await _run_gh(
         "api", f"repos/{REPO}/issues/{issue_number}",
     )
