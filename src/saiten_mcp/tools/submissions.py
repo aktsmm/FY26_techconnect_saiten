@@ -11,6 +11,7 @@ import base64
 import json
 import logging
 import re
+import time
 from typing import Any
 
 from saiten_mcp.server import mcp, rate_limiter
@@ -61,6 +62,7 @@ SECTION_PARSERS: dict[str, str] = {
 # ---------------------------------------------------------------------------
 _GH_MAX_RETRIES = 3
 _GH_RETRY_DELAY_BASE = 1.0  # seconds, exponential backoff
+_GH_COMMAND_TIMEOUT = 45.0  # seconds per gh command
 
 
 async def _run_gh(*args: str, max_retries: int = _GH_MAX_RETRIES) -> str:
@@ -73,14 +75,42 @@ async def _run_gh(*args: str, max_retries: int = _GH_MAX_RETRIES) -> str:
 
     for attempt in range(1, max_retries + 1):
         try:
+            started_at = time.perf_counter()
             proc = await asyncio.create_subprocess_exec(
                 "gh", *args,
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
-            stdout, stderr = await proc.communicate()
+            try:
+                stdout, stderr = await asyncio.wait_for(
+                    proc.communicate(), timeout=_GH_COMMAND_TIMEOUT
+                )
+            except asyncio.TimeoutError:
+                proc.kill()
+                await proc.communicate()
+                err_msg = (
+                    f"gh command timed out after {_GH_COMMAND_TIMEOUT:.0f}s: "
+                    f"gh {' '.join(args)}"
+                )
+                if attempt < max_retries:
+                    delay = _GH_RETRY_DELAY_BASE * (2 ** (attempt - 1))
+                    logger.warning(
+                        "gh command timeout (attempt %d/%d), retrying in %.1fs",
+                        attempt, max_retries, delay,
+                    )
+                    await asyncio.sleep(delay)
+                    last_error = RuntimeError(err_msg)
+                    continue
+                raise RuntimeError(err_msg)
 
             if proc.returncode == 0:
+                elapsed = time.perf_counter() - started_at
+                if elapsed >= 2.0:
+                    logger.info(
+                        "gh command slow call: %.2fs (gh %s)",
+                        elapsed,
+                        " ".join(args[:4]),
+                    )
                 return stdout.decode()
 
             err_msg = stderr.decode().strip() if stderr else "unknown error"
@@ -536,14 +566,26 @@ async def list_submissions(
             continue
 
         try:
+            body = issue.get("body") or ""
+            sections = _parse_sections(body) if body else {}
+
+            project_name = parse_text(sections.get("Project Name", ""))
+            if not project_name or project_name == "_No response_":
+                project_name = issue.get("title", "")
+
+            repo_url = parse_url(sections.get("Repository URL", ""))
+            has_demo, _ = parse_demo(
+                sections.get("Demo Video or Screenshots", "")
+            )
+
             entry = {
                 "issue_number": issue_number,
                 "title": issue.get("title", ""),
                 "track": detected_track,
-                "project_name": _extract_project_name(issue),
-                "repo_url": _extract_repo_url(issue),
+                "project_name": project_name,
+                "repo_url": repo_url,
                 "created_at": issue.get("created_at", ""),
-                "has_demo": _extract_has_demo(issue),
+                "has_demo": has_demo,
             }
             results.append(entry)
         except Exception:

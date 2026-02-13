@@ -412,6 +412,34 @@ async def run_scoring_pipeline():
     from saiten_mcp.tools.submissions import list_submissions, get_submission_detail
     from saiten_mcp.tools.scores import save_scores
     from saiten_mcp.tools.reports import generate_ranking_report
+    from saiten_mcp.server import rate_limiter
+
+    # Batch scoring calls get_submission_detail many times in a short burst.
+    # Raise the per-minute allowance to avoid false-positive local throttling.
+    rate_limiter.max_calls = max(rate_limiter.max_calls, 150)
+
+    async def get_detail_with_retry(issue_num: int, max_attempts: int = 3) -> dict[str, Any]:
+        """Fetch submission detail with retry when local rate limiter is hit."""
+        for attempt in range(1, max_attempts + 1):
+            try:
+                return await get_submission_detail(issue_num)
+            except ValueError as exc:
+                msg = str(exc)
+                is_rate_limited = "Rate limit exceeded for 'get_submission_detail'" in msg
+                if is_rate_limited and attempt < max_attempts:
+                    wait_seconds = 61
+                    logger.warning(
+                        "    Rate-limited on #%d; waiting %ds before retry (%d/%d)",
+                        issue_num,
+                        wait_seconds,
+                        attempt,
+                        max_attempts,
+                    )
+                    await asyncio.sleep(wait_seconds)
+                    continue
+                raise
+
+        raise RuntimeError(f"Failed to fetch detail after retries: #{issue_num}")
 
     # 1. Fetch all submissions
     logger.info("=" * 60)
@@ -441,7 +469,7 @@ async def run_scoring_pipeline():
         logger.info(f"  [{i:2d}/{len(submissions)}] #{issue_num} ({track}) {project}")
 
         try:
-            detail = await get_submission_detail(issue_num)
+            detail = await get_detail_with_retry(issue_num)
             # Use actual track from detail (may differ from list)
             actual_track = detail.get("track", track)
             evaluator = EVALUATORS.get(actual_track, _evaluate_unknown_track)

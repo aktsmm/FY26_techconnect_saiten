@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import shutil
 from datetime import datetime, timezone
 from typing import Any
@@ -56,10 +57,23 @@ def _load_scores() -> dict[str, Any]:
 
 
 def _save_scores(store: dict[str, Any]) -> None:
-    """Write store to scores.json."""
+    """Write store to scores.json atomically."""
     SCORES_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(SCORES_FILE, "w", encoding="utf-8") as f:
-        json.dump(store, f, ensure_ascii=False, indent=2)
+    tmp_file = SCORES_FILE.with_suffix(".json.tmp")
+
+    try:
+        with open(tmp_file, "w", encoding="utf-8") as f:
+            json.dump(store, f, ensure_ascii=False, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+
+        os.replace(tmp_file, SCORES_FILE)
+    finally:
+        if tmp_file.exists():
+            try:
+                tmp_file.unlink()
+            except OSError:
+                pass
 
 
 def _merge_scores(

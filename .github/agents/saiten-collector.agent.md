@@ -2,7 +2,7 @@
 name: saiten-collector
 description: "Data collection agent that fetches and validates submission data from GitHub Issues"
 tools:
-  - "saiten-mcp"
+  - "saiten-mcp/*"
   - "todo"
 ---
 

@@ -2,7 +2,7 @@
 name: saiten-reviewer
 description: "Score review agent that validates fairness and consistency of scoring results"
 tools:
-  - "saiten-mcp"
+  - "saiten-mcp/*"
   - "read/readFile"
   - "todo"
 ---

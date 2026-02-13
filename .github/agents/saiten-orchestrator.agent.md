@@ -2,7 +2,7 @@
 name: saiten-orchestrator
 description: "Scoring orchestrator for Agents League @ TechConnect — routes intent, delegates to sub-agents, integrates results"
 tools:
-  - "saiten-mcp"
+  - "saiten-mcp/*"
   - "read/readFile"
   - "execute/runInTerminal"
   - "todo"

@@ -2,7 +2,7 @@
 name: saiten-reporter
 description: "Report agent that generates ranking reports from scoring results"
 tools:
-  - "saiten-mcp"
+  - "saiten-mcp/*"
   - "read/readFile"
   - "todo"
 ---
