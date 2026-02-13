@@ -63,14 +63,9 @@ It checks the FINAL scores (baseline + AI adjustments) for problems.
       - REJECT generic patterns (see banned phrases below)
 
    b. Banned Phrase Detection:
-      Flag scores containing these generic phrases:
-      - "Comprehensive README"
-      - "Demo provided" / "Demo video or screenshots provided"
-      - "Rich technology stack (N technologies)"
-      - "All submission checklist items completed"
-      - "Public repository available"
-      - "Strong [criterion name]"
-      Any score with >2 banned phrases -> FLAG for re-scoring
+      Flag scores containing generic phrases.
+      (See @saiten-scorer Anti-Patterns table for the full banned list.)
+      Any score with >2 generic phrases -> FLAG for re-scoring
 
    c. Evidence-Score Alignment:
       - Score 8+ -> evidence MUST cite specific technical details
@@ -150,70 +145,25 @@ It checks the FINAL scores (baseline + AI adjustments) for problems.
 
 ## Review Output Format
 
+The orchestrator consumes these fields:
+
 ```json
 {
-  "review_status": "FLAG",
-  "track_stats": {
-    "creative-apps": {
-      "mean": 68.5, "median": 71.0, "stddev": 12.3, "count": 27,
-      "score_range": [42.0, 90.0],
-      "differentiation": "adequate"
-    },
-    "reasoning-agents": {
-      "mean": 79.2, "median": 82.0, "stddev": 8.1, "count": 10,
-      "score_range": [65.0, 91.5],
-      "differentiation": "insufficient"
-    }
-  },
-  "evidence_quality_report": {
-    "total_reviewed": 43,
-    "evidence_present": 15,
-    "evidence_missing": 28,
-    "generic_evidence_detected": 35,
-    "banned_phrases_found": {
-      "Comprehensive README documentation": 28,
-      "Demo video or screenshots provided": 30,
-      "Rich technology stack": 22,
-      "All submission checklist items completed": 25
-    }
-  },
-  "score_clustering": {
-    "creative-apps": {
-      "clustered": true,
-      "cluster_range": [77.0, 90.0],
-      "uniform_criteria": ["Accuracy & Relevance"]
-    }
-  },
+  "review_status": "PASS | FLAG",
   "flagged_submissions": [
     {
       "issue_number": 42,
       "current_score": 85.6,
-      "concern": "Score 2+ StdDev above track mean. Evidence is generic (3 banned phrases). No improvements listed.",
-      "evidence_quality": "fail",
-      "suggested_action": "Re-score with evidence-anchored evaluation. Require specific feature citations."
-    },
-    {
-      "issue_number": 49,
-      "current_score": 90.0,
-      "concern": "All criteria scored 9. Uniform scoring pattern. Evidence uses template phrases.",
-      "evidence_quality": "fail",
-      "suggested_action": "Re-score with differentiation. Unlikely all criteria are equally strong."
+      "concern": "<specific problem description>",
+      "suggested_action": "<what scorer should fix>"
     }
   ],
-  "bias_checks": {
-    "issue_order_bias": false,
-    "track_imbalance": true,
-    "readme_advantage_bias": true,
-    "technology_count_bias": true,
-    "demo_format_bias": false
-  },
-  "recommendations": [
-    "28 of 43 submissions lack per-criterion evidence. Re-scoring recommended for all.",
-    "Score differentiation is insufficient in reasoning-agents track (StdDev 8.1).",
-    "Technology count appears to correlate with score. Review for bias."
-  ]
+  "recommendations": ["<systemic issue 1>", "<systemic issue 2>"]
 }
 ```
+
+Additional fields (for detailed logging, not required by orchestrator):
+`track_stats`, `evidence_quality_report`, `score_clustering`, `bias_checks`.
 
 ---
 
@@ -227,14 +177,9 @@ It checks the FINAL scores (baseline + AI adjustments) for problems.
 
 ## Done Criteria
 
-- [ ] Track-level statistics calculated
-- [ ] Evidence quality inspection completed for ALL submissions
-- [ ] Banned phrase detection completed
-- [ ] Score clustering analysis completed
-- [ ] Outlier submissions identified (> 2 StdDev)
-- [ ] Cross-submission comparison done for similar scores
-- [ ] Rubric consistency verified (including red flag/bonus signal enforcement)
-- [ ] Summary quality checked
-- [ ] Bias checks completed (5 bias types)
+- [ ] All submissions reviewed for evidence quality and score consistency
+- [ ] Statistical outliers identified (> 2 StdDev from track mean)
+- [ ] Score clustering analysis completed per track
+- [ ] Bias checks completed (5 types)
 - [ ] Review report generated with PASS or FLAG status
-- [ ] Recommendations provided for systemic issues
+- [ ] Flagged submissions include specific concern and suggested_action

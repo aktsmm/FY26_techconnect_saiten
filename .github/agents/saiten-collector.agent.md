@@ -56,7 +56,8 @@ and validates that all required fields are present for scoring.
      d. Update todo list for progress
    → [Gate] Parse failure → skip, add to error list
 
-4. [Output] Return structured data:
+4. [Output] Return structured data AND save to file:
+   - Save to data/collected_submissions.json (SSOT for submission data)
    - valid_submissions: list of complete submission details
    - flagged_submissions: list with missing data warnings
    - errors: list of failed Issue numbers
@@ -99,5 +100,6 @@ and validates that all required fields are present for scoring.
 
 - [ ] All submissions fetched without unhandled errors
 - [ ] Each submission validated with completeness flags
+- [ ] Data saved to data/collected_submissions.json
 - [ ] Track distribution reported
 - [ ] Error list provided for skipped issues

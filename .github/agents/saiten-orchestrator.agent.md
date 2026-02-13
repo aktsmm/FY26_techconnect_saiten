@@ -4,7 +4,6 @@ description: "Scoring orchestrator for Agents League @ TechConnect — routes in
 tools:
   - "saiten-mcp"
   - "read/readFile"
-  - "edit/editFiles"
   - "execute/runInTerminal"
   - "todo"
 handoffs:
@@ -21,39 +20,25 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 
 ---
 
-## Architecture: Orchestrator-Workers + Prompt Chaining + Evaluator-Optimizer
+## Architecture
 
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│ @saiten-orchestrator (Orchestrator)                                  │
-│  Intent Routing → Delegation → Result Integration → User Report      │
-│                                                                      │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐            │
-│  │📥collector│─▶│📊 scorer │─▶│🔍reviewer│─▶│📋reporter│            │
-│  │ Collect   │  │ Evaluate │  │ Validate │  │ Report   │            │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘            │
-│    Gate: OK?     Gate: OK?   Gate: PASS?     Gate: OK?              │
-│                       ▲           │                                  │
-│                       └───────────┘                                  │
-│                       Re-score if FLAG                                │
-│                                                      ┌──────────┐   │
-│                                         [Handoff] ──▶│💬commenter│  │
-│                                                      │ Feedback  │   │
-│                                                      └──────────┘   │
-└──────────────────────────────────────────────────────────────────────┘
-```
+> See **AGENTS.md → Workflow Patterns** for the full architecture diagram.
+> Phases: Collect → Baseline (script) → AI Review (@scorer) → Validate (@reviewer) → Report
 
 ---
 
 ## Sub-Agent Roster
 
-| Agent              | File                                       | SRP Responsibility              | MCP Tools                                   |
-| ------------------ | ------------------------------------------ | ------------------------------- | ------------------------------------------- |
-| `saiten-collector` | `.github/agents/saiten-collector.agent.md` | Data collection & validation    | `list_submissions`, `get_submission_detail` |
-| `saiten-scorer`    | `.github/agents/saiten-scorer.agent.md`    | Rubric-based evaluation         | `get_scoring_rubric`, `save_scores`         |
-| `saiten-reviewer`  | `.github/agents/saiten-reviewer.agent.md`  | Score consistency review        | `get_scoring_rubric`, read scores           |
-| `saiten-reporter`  | `.github/agents/saiten-reporter.agent.md`  | Ranking report generation       | `generate_ranking_report`                   |
-| `saiten-commenter` | `.github/agents/saiten-commenter.agent.md` | GitHub Issue feedback (Handoff) | `gh issue comment`                          |
+> **SSOT**: See AGENTS.md for the canonical agent table.
+> Below is kept minimal for quick reference only.
+
+| Agent              | SRP Responsibility                          |
+| ------------------ | ------------------------------------------- |
+| `saiten-collector` | Data collection & validation                |
+| `saiten-scorer`    | AI qualitative review & score adjustment    |
+| `saiten-reviewer`  | Score consistency review & bias detection   |
+| `saiten-reporter`  | Ranking report generation & presentation    |
+| `saiten-commenter` | GitHub Issue feedback comments (via Handoff)|
 
 ---
 
@@ -181,65 +166,39 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
     → User clicks → transitions to @saiten-commenter
 ```
 
-### UC-02: Single Scoring (`@saiten-orchestrator score #48`)
+### UC-02: Single / Re-score (`score #N` / `rescore #N`)
 
 ```
 1. [Routing] Parse issue number from user input
-
-2. [Step] Delegate to @saiten-collector
-   → "Collect submission #48. Validate data completeness."
-
-3. [Step] Delegate to @saiten-scorer
-   → "Score submission #48 using its track rubric.
-      Submission data: {detail_json}"
-
-4. [Step] Delegate to @saiten-reviewer
-   → "Review score for #48 against track statistics.
-      Check rubric alignment."
-
-5. [Step] Delegate to @saiten-reporter
-   → "Regenerate ranking report."
-
-6. [Output] Show score breakdown to user
+2. [Step] Delegate to @saiten-collector → collect #{N}
+3. [Step] Run baseline: `.venv/Scripts/python scripts/score_all.py`
+   (scores all, but only #{N} is new/updated — idempotent)
+4. [Step] Delegate to @saiten-scorer → AI review #{N} only
+5. [Step] Delegate to @saiten-reviewer → review #{N} vs track stats
+6. [Step] Delegate to @saiten-reporter → regenerate report
+7. [Output] Show score breakdown (if rescore: show delta)
 ```
 
-### UC-03: Report Only (`@saiten-orchestrator ranking` / `@saiten-orchestrator report`)
+### UC-03: Report Only (`ranking` / `report`)
 
 ```
-1. [Routing] Parse intent → report generation only
-
-2. [Step] Delegate to @saiten-reporter
-   → "Generate ranking report with top_n=10."
-
-3. [Output] Present Top 10 table and report path
-
-4. [Handoff] Offer comment posting
+1. Delegate to @saiten-reporter → generate_ranking_report(top_n=10)
+2. Present Top 10 table and report path
+3. [Handoff] Offer comment posting
 ```
 
-### UC-04: Re-score (`@saiten-orchestrator rescore #48`)
+### UC-04: Show Rubric (`show rubric for Creative`)
 
 ```
-1. Same as UC-02 (save_scores overwrites — idempotent)
-2. Show score delta if previous score exists
+1. Call get_scoring_rubric(track) directly (simple query)
+2. Present formatted rubric to user
 ```
 
-### UC-05: Show Rubric (`@saiten-orchestrator show rubric for Creative`)
+### UC-05: Review Only (`review scores`)
 
 ```
-1. [Routing] Parse track name
-2. Call get_scoring_rubric(track) directly (simple query, no sub-agent needed)
-3. Present formatted rubric to user
-```
-
-### UC-06: Review Only (`@saiten-orchestrator review scores`)
-
-```
-1. [Routing] Parse intent → review only
-
-2. [Step] Delegate to @saiten-reviewer
-   → "Review all scores for consistency and bias."
-
-3. [Output] Present review report to user
+1. Delegate to @saiten-reviewer → review all scores
+2. Present review report to user
 ```
 
 ---
@@ -250,10 +209,10 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
 | -------------------------------------- | -------- |
 | `score all`, `evaluate all`            | UC-01    |
 | `score #N`, `evaluate #N`              | UC-02    |
+| `rescore #N`, `re-evaluate #N`         | UC-02    |
 | `ranking`, `report`, `generate report` | UC-03    |
-| `rescore #N`, `re-evaluate #N`         | UC-04    |
-| `rubric`, `show rubric`, `criteria`    | UC-05    |
-| `review`, `review scores`, `validate`  | UC-06    |
+| `rubric`, `show rubric`, `criteria`    | UC-04    |
+| `review`, `review scores`, `validate`  | UC-05    |
 
 ---
 
