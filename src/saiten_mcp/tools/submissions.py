@@ -266,6 +266,167 @@ async def _fetch_readme(repo_url: str | None) -> str | None:
         return None
 
 
+async def fetch_repo_tree(repo_url: str | None) -> dict[str, Any] | None:
+    """Fetch repository metadata and file tree for scoring analysis.
+
+    Returns a dict with:
+      - file_count: total number of files
+      - dir_count: total number of directories
+      - source_files: list of source code file paths
+      - test_files: list of test file paths
+      - config_files: list of config/build files
+      - has_gitignore: bool
+      - has_env_example: bool
+      - has_dockerfile: bool
+      - has_ci: bool (GitHub Actions or similar)
+      - has_tests_dir: bool
+      - languages: dict of detected languages by extension
+      - total_source_files: int (non-config, non-asset source files)
+      - commit_count: int (approximate from default branch)
+    Returns None on failure.
+    """
+    if not repo_url:
+        return None
+
+    match = re.match(r"https?://github\.com/([^/]+)/([^/\s?#]+)", repo_url)
+    if not match:
+        return None
+
+    owner, repo = match.group(1), match.group(2).rstrip("/")
+
+    try:
+        # Fetch repo metadata (default branch, size, etc.)
+        meta_raw = await _run_gh(
+            "api", f"repos/{owner}/{repo}",
+            "--jq", "{default_branch: .default_branch, size: .size, language: .language, forks: .forks_count, stars: .stargazers_count}",
+        )
+        meta = json.loads(meta_raw)
+        default_branch = meta.get("default_branch", "main")
+
+        # Fetch file tree (recursive)
+        tree_raw = await _run_gh(
+            "api", f"repos/{owner}/{repo}/git/trees/{default_branch}?recursive=1",
+            "--jq", "[.tree[] | {path: .path, type: .type, size: .size}]",
+        )
+        tree = json.loads(tree_raw)
+
+        # Classify files
+        source_exts = {".py", ".js", ".ts", ".jsx", ".tsx", ".cs", ".java", ".go",
+                       ".rb", ".rs", ".cpp", ".c", ".h", ".swift", ".kt", ".scala",
+                       ".r", ".jl", ".php", ".lua", ".dart", ".vue", ".svelte"}
+        config_names = {"package.json", "pyproject.toml", "setup.py", "setup.cfg",
+                        "cargo.toml", "go.mod", "pom.xml", "build.gradle",
+                        "tsconfig.json", "webpack.config.js", "vite.config.ts",
+                        ".eslintrc", "jest.config.js", "requirements.txt",
+                        "dockerfile", "docker-compose.yml", "makefile"}
+        test_patterns = ["test_", "_test.", ".test.", "spec.", "__tests__", "/tests/", "/test/"]
+        ci_patterns = [".github/workflows/", ".azure-pipelines", "jenkinsfile", ".circleci"]
+
+        source_files = []
+        test_files = []
+        config_files = []
+        all_files = []
+        dirs = set()
+        languages: dict[str, int] = {}
+
+        has_gitignore = False
+        has_env_example = False
+        has_dockerfile = False
+        has_ci = False
+        has_tests_dir = False
+
+        for item in tree:
+            path = item.get("path", "")
+            item_type = item.get("type", "")
+            path_lower = path.lower()
+
+            if item_type == "tree":
+                dirs.add(path)
+                if path_lower in ("tests", "test", "__tests__", "spec"):
+                    has_tests_dir = True
+                continue
+
+            all_files.append(path)
+
+            # Check special files
+            basename = path.rsplit("/", 1)[-1].lower()
+            if basename == ".gitignore":
+                has_gitignore = True
+            if basename in (".env.example", ".env.sample", ".env.template"):
+                has_env_example = True
+            if basename in ("dockerfile", "docker-compose.yml", "docker-compose.yaml"):
+                has_dockerfile = True
+            if any(p in path_lower for p in ci_patterns):
+                has_ci = True
+
+            # Classify by extension
+            ext = "." + basename.rsplit(".", 1)[-1] if "." in basename else ""
+            if basename.lower() in config_names:
+                config_files.append(path)
+            elif any(p in path_lower for p in test_patterns):
+                test_files.append(path)
+                if ext in source_exts:
+                    languages[ext] = languages.get(ext, 0) + 1
+            elif ext in source_exts:
+                source_files.append(path)
+                languages[ext] = languages.get(ext, 0) + 1
+
+        # Fetch commit count (approximate)
+        commit_count = 0
+        try:
+            # Try Link header first (works for repos with > 1 page of commits)
+            commits_raw = await _run_gh(
+                "api", f"repos/{owner}/{repo}/commits?per_page=1",
+                "--include",
+            )
+            for line in commits_raw.splitlines():
+                if "last" in line.lower() and "page=" in line:
+                    page_match = re.search(r'page=(\d+)>;\s*rel="last"', line)
+                    if page_match:
+                        commit_count = int(page_match.group(1))
+                        break
+            # If no Link header (small repo), count commits directly
+            if commit_count == 0:
+                count_raw = await _run_gh(
+                    "api", f"repos/{owner}/{repo}/commits?per_page=100",
+                    "--jq", "length",
+                )
+                commit_count = int(count_raw.strip()) if count_raw.strip().isdigit() else 1
+        except Exception:
+            commit_count = 0
+
+        result = {
+            "file_count": len(all_files),
+            "dir_count": len(dirs),
+            "source_files": source_files[:100],  # cap for sanity
+            "test_files": test_files[:50],
+            "config_files": config_files[:20],
+            "has_gitignore": has_gitignore,
+            "has_env_example": has_env_example,
+            "has_dockerfile": has_dockerfile,
+            "has_ci": has_ci,
+            "has_tests_dir": has_tests_dir,
+            "languages": languages,
+            "total_source_files": len(source_files),
+            "total_test_files": len(test_files),
+            "total_files": len(all_files),
+            "commit_count": commit_count,
+            "repo_size_kb": meta.get("size", 0),
+            "primary_language": meta.get("language", ""),
+        }
+
+        logger.info(
+            "fetch_repo_tree: %s/%s — %d files, %d source, %d tests, %d commits",
+            owner, repo, len(all_files), len(source_files),
+            len(test_files), commit_count,
+        )
+        return result
+
+    except Exception:
+        logger.warning("Failed to fetch repo tree: %s/%s", owner, repo, exc_info=True)
+        return None
+
+
 # ---------------------------------------------------------------------------
 # Project name extraction helper
 # ---------------------------------------------------------------------------

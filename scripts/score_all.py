@@ -115,17 +115,23 @@ def _has_multi_agent(text: str) -> bool:
 
 
 def _demo_quality(sub: dict) -> str:
-    """'video', 'screenshots', 'url', 'none'"""
+    """Detect demo type: 'video', 'screenshots', 'url', 'gif', 'none'."""
     demo = (sub.get("demo_description") or "").lower()
-    if not sub.get("has_demo"):
-        return "none"
-    if any(kw in demo for kw in ["video", "youtube", "loom", ".mp4"]):
+    demo_url = (sub.get("demo_url") or "").lower()
+    combined = demo + " " + demo_url
+
+    # Check gif (common in hackathons)
+    if ".gif" in combined:
+        return "gif"
+    if any(kw in combined for kw in ["video", "youtube", "loom", ".mp4", ".mov"]):
         return "video"
-    if any(kw in demo for kw in ["http", "deploy", "live", "hosted"]):
+    if any(kw in combined for kw in ["deploy", "live", "hosted", "azurewebsites", "vercel", "netlify"]):
         return "url"
-    if any(kw in demo for kw in ["screenshot", "img", "image", "<img"]):
+    if any(kw in combined for kw in ["screenshot", "img", "image", "<img", "png", "jpg"]):
         return "screenshots"
-    return "screenshots"  # has_demo=True but unclassified
+    if sub.get("has_demo"):
+        return "screenshots"  # has_demo=True but unclassified
+    return "none"
 
 
 def _all_text(sub: dict) -> str:
@@ -143,18 +149,166 @@ def _all_text(sub: dict) -> str:
 
 
 def _checklist_ratio(sub: dict) -> float:
-    cl = sub.get("submission_checklist") or {}
-    if not cl:
-        return 0.0
-    checked = sum(1 for v in cl.values() if v)
-    return checked / len(cl)
+    """Calculate checklist completion ratio. Handles both dict and list formats."""
+    cl = sub.get("submission_checklist")
+    if isinstance(cl, dict) and cl:
+        checked = sum(1 for v in cl.values() if v)
+        return checked / len(cl)
+    # Also check checklist_items (list of strings = all checked)
+    cl_list = sub.get("checklist_items")
+    if isinstance(cl_list, list) and cl_list:
+        return 1.0  # list format means all items are checked
+    return 0.0
+
+
+# --------------------------------------------------------------------------
+# Repository analysis signals
+# --------------------------------------------------------------------------
+
+def _apply_repo_signals(
+    criteria_scores: dict[str, int],
+    evidence: dict[str, str],
+    repo_tree: dict | None,
+    sub: dict,
+) -> tuple[dict[str, int], dict[str, str], list[str], list[str]]:
+    """Adjust scores based on actual repository content analysis.
+
+    This is the key function that verifies claims made in Issue/README
+    against the actual repository file structure.
+
+    Returns (adjusted_criteria_scores, adjusted_evidence, red_flags, bonus_signals).
+    """
+    red_flags = []
+    bonus_signals = []
+
+    if repo_tree is None:
+        # No repo data — penalize all criteria
+        red_flags.append("Repository inaccessible or private")
+        for crit in criteria_scores:
+            criteria_scores[crit] = max(1, criteria_scores[crit] - 2)
+            evidence[crit] = evidence.get(crit, "") + ". REPO NOT ACCESSIBLE — scores penalized"
+        return criteria_scores, evidence, red_flags, bonus_signals
+
+    src_count = repo_tree.get("total_source_files", 0)
+    test_count = repo_tree.get("total_test_files", 0)
+    total_files = repo_tree.get("total_files", 0)
+    commit_count = repo_tree.get("commit_count", 0)
+    has_tests_dir = repo_tree.get("has_tests_dir", False)
+    has_ci = repo_tree.get("has_ci", False)
+    has_gitignore = repo_tree.get("has_gitignore", False)
+    has_env_example = repo_tree.get("has_env_example", False)
+    has_dockerfile = repo_tree.get("has_dockerfile", False)
+    languages = repo_tree.get("languages", {})
+
+    # --- Empty/minimal repo detection ---
+    if src_count == 0:
+        red_flags.append(f"No source code files found in repo ({total_files} total files)")
+        # Heavily penalize: claims not backed by code
+        for crit in criteria_scores:
+            criteria_scores[crit] = max(1, criteria_scores[crit] - 3)
+            evidence[crit] = evidence.get(crit, "") + f". NO SOURCE CODE in repo ({total_files} files total)"
+        return criteria_scores, evidence, red_flags, bonus_signals
+
+    if src_count <= 3:
+        red_flags.append(f"Minimal source code: only {src_count} source files")
+        # Moderate penalty for very thin repos
+        for crit in ["Accuracy & Relevance", "Creativity & Originality",
+                     "Technical Implementation", "Reasoning & Multi-step Thinking"]:
+            if crit in criteria_scores:
+                criteria_scores[crit] = max(1, criteria_scores[crit] - 1)
+                evidence[crit] = evidence.get(crit, "") + f". Minimal source: {src_count} files"
+
+    # --- Source code depth signals ---
+    repo_info = f"Repo: {src_count} source, {test_count} test, {total_files} total files, {commit_count} commits"
+
+    # Reward substantial codebases
+    if src_count >= 20:
+        bonus_signals.append(f"Substantial codebase ({src_count} source files)")
+        # Boost implementation-related criteria
+        for crit in ["Accuracy & Relevance", "Technical Implementation"]:
+            if crit in criteria_scores and criteria_scores[crit] < 10:
+                criteria_scores[crit] = min(10, criteria_scores[crit] + 1)
+                evidence[crit] = evidence.get(crit, "") + f". {repo_info}"
+    elif src_count >= 10:
+        for crit in ["Accuracy & Relevance", "Technical Implementation"]:
+            if crit in criteria_scores:
+                evidence[crit] = evidence.get(crit, "") + f". {repo_info}"
+    elif src_count < 5:
+        for crit in ["Accuracy & Relevance", "Technical Implementation"]:
+            if crit in criteria_scores and criteria_scores[crit] > 7:
+                criteria_scores[crit] = max(5, criteria_scores[crit] - 1)
+                evidence[crit] = evidence.get(crit, "") + f". Limited code: {repo_info}"
+
+    # --- Test verification ---
+    # If README/description claims tests but no test files exist, penalize
+    all_text = _all_text(sub).lower()
+    claims_tests = _has_tests(all_text)
+    if claims_tests and test_count == 0 and not has_tests_dir:
+        red_flags.append("Claims testing but no test files found in repo")
+        for crit in ["Reliability & Safety"]:
+            if crit in criteria_scores:
+                criteria_scores[crit] = max(1, criteria_scores[crit] - 2)
+                evidence[crit] = evidence.get(crit, "") + ". Claims tests but 0 test files in repo"
+    elif test_count >= 5:
+        bonus_signals.append(f"Verified: {test_count} test files in repo")
+        for crit in ["Reliability & Safety"]:
+            if crit in criteria_scores and criteria_scores[crit] < 10:
+                criteria_scores[crit] = min(10, criteria_scores[crit] + 1)
+                evidence[crit] = evidence.get(crit, "") + f". Verified {test_count} test files"
+    elif test_count > 0:
+        for crit in ["Reliability & Safety"]:
+            if crit in criteria_scores:
+                evidence[crit] = evidence.get(crit, "") + f". {test_count} test files found"
+
+    # --- CI/CD verification ---
+    if has_ci:
+        bonus_signals.append("CI/CD pipeline configured")
+        for crit in ["Reliability & Safety"]:
+            if crit in criteria_scores and criteria_scores[crit] < 10:
+                criteria_scores[crit] = min(10, criteria_scores[crit] + 1)
+                evidence[crit] = evidence.get(crit, "") + ". CI/CD pipeline found"
+
+    # --- Security signals from actual files ---
+    if has_gitignore:
+        for crit in ["Reliability & Safety"]:
+            if crit in criteria_scores:
+                evidence[crit] = evidence.get(crit, "") + ". .gitignore present"
+    if has_env_example:
+        bonus_signals.append(".env.example provided for secure config")
+
+    # --- Multi-language / complexity ---
+    if len(languages) >= 3:
+        bonus_signals.append(f"Multi-language project ({', '.join(languages.keys())})")
+        for crit in ["Creativity & Originality", "Innovation & Creativity"]:
+            if crit in criteria_scores:
+                evidence[crit] = evidence.get(crit, "") + f". Multi-language: {', '.join(languages.keys())}"
+
+    # --- Commit depth ---
+    if commit_count >= 20:
+        bonus_signals.append(f"Active development ({commit_count} commits)")
+    elif commit_count <= 3:
+        red_flags.append(f"Very few commits ({commit_count}) — may be template or rushed")
+        for crit in ["Creativity & Originality", "Innovation & Creativity"]:
+            if crit in criteria_scores and criteria_scores[crit] > 5:
+                criteria_scores[crit] = max(3, criteria_scores[crit] - 1)
+                evidence[crit] = evidence.get(crit, "") + f". Only {commit_count} commits"
+
+    # --- Dockerfile bonus ---
+    if has_dockerfile:
+        bonus_signals.append("Containerized (Dockerfile found)")
+
+    # Clamp all scores
+    for crit in criteria_scores:
+        criteria_scores[crit] = max(1, min(10, criteria_scores[crit]))
+
+    return criteria_scores, evidence, red_flags, bonus_signals
 
 
 # --------------------------------------------------------------------------
 # Track-specific scorers
 # --------------------------------------------------------------------------
 
-def score_creative_apps(sub: dict, rubric: dict) -> dict:
+def score_creative_apps(sub: dict, rubric: dict, repo_tree: dict | None = None) -> dict:
     readme = sub.get("readme_content") or ""
     all_text = _all_text(sub)
     desc = sub.get("description") or ""
@@ -353,12 +507,21 @@ def score_creative_apps(sub: dict, rubric: dict) -> dict:
     weights = {"Accuracy & Relevance": 0.222, "Reasoning & Multi-step Thinking": 0.222,
                "Creativity & Originality": 0.167, "UX & Presentation": 0.167,
                "Reliability & Safety": 0.222}
+
+    # Apply repo analysis signals
+    criteria_scores, evidence, repo_red_flags, repo_bonus = _apply_repo_signals(
+        criteria_scores, evidence, repo_tree, sub
+    )
+    # Recalculate weighted total after repo adjustments
     weighted_total = round(sum(criteria_scores[c] * weights[c] for c in criteria_scores) * 10, 1)
 
-    return _build_result(sub, criteria_scores, evidence, weights, weighted_total)
+    result = _build_result(sub, criteria_scores, evidence, weights, weighted_total)
+    result["red_flags_detected"].extend(repo_red_flags)
+    result["bonus_signals_detected"].extend(repo_bonus)
+    return result
 
 
-def score_reasoning_agents(sub: dict, rubric: dict) -> dict:
+def score_reasoning_agents(sub: dict, rubric: dict, repo_tree: dict | None = None) -> dict:
     readme = sub.get("readme_content") or ""
     all_text = _all_text(sub)
     desc = sub.get("description") or ""
@@ -547,12 +710,21 @@ def score_reasoning_agents(sub: dict, rubric: dict) -> dict:
     weights = {"Accuracy & Relevance": 0.25, "Reasoning & Multi-step Thinking": 0.25,
                "Creativity & Originality": 0.20, "User Experience & Presentation": 0.15,
                "Technical Implementation": 0.15}
+
+    # Apply repo analysis signals
+    criteria_scores, evidence, repo_red_flags, repo_bonus = _apply_repo_signals(
+        criteria_scores, evidence, repo_tree, sub
+    )
+    # Recalculate weighted total after repo adjustments
     weighted_total = round(sum(criteria_scores[c] * weights[c] for c in criteria_scores) * 10, 1)
 
-    return _build_result(sub, criteria_scores, evidence, weights, weighted_total)
+    result = _build_result(sub, criteria_scores, evidence, weights, weighted_total)
+    result["red_flags_detected"].extend(repo_red_flags)
+    result["bonus_signals_detected"].extend(repo_bonus)
+    return result
 
 
-def score_enterprise_agents(sub: dict, rubric: dict) -> dict:
+def score_enterprise_agents(sub: dict, rubric: dict, repo_tree: dict | None = None) -> dict:
     readme = sub.get("readme_content") or ""
     all_text = _all_text(sub)
     desc = sub.get("description") or ""
@@ -657,9 +829,18 @@ def score_enterprise_agents(sub: dict, rubric: dict) -> dict:
         "Innovation & Creativity": inno_evidence,
     }
     weights = {"Technical Implementation": 0.33, "Business Value": 0.33, "Innovation & Creativity": 0.34}
+
+    # Apply repo analysis signals
+    criteria_scores, evidence_map, repo_red_flags, repo_bonus = _apply_repo_signals(
+        criteria_scores, evidence_map, repo_tree, sub
+    )
+    # Recalculate weighted total after repo adjustments
     weighted_total = round(sum(criteria_scores[c] * weights[c] for c in criteria_scores) * 10, 1)
 
-    return _build_result(sub, criteria_scores, evidence_map, weights, weighted_total)
+    result = _build_result(sub, criteria_scores, evidence_map, weights, weighted_total)
+    result["red_flags_detected"].extend(repo_red_flags)
+    result["bonus_signals_detected"].extend(repo_bonus)
+    return result
 
 
 def _build_result(sub: dict, criteria_scores: dict, evidence: dict, weights: dict, weighted_total: float) -> dict:
@@ -748,7 +929,35 @@ async def main():
         rubrics[track] = await get_scoring_rubric(track)
         print(f"Loaded rubric: {track} ({len(rubrics[track]['criteria'])} criteria)")
 
-    # Score each submission
+    # Import repo tree fetcher
+    from saiten_mcp.tools.submissions import fetch_repo_tree
+
+    # Fetch repo trees for all submissions (with rate limiting)
+    print("\nFetching repository trees for code analysis...")
+    repo_trees: dict[int, dict | None] = {}
+    for sub in submissions:
+        issue_num = sub.get("issue_number", 0)
+        repo_url = sub.get("repo_url")
+        if repo_url:
+            try:
+                tree = await fetch_repo_tree(repo_url)
+                repo_trees[issue_num] = tree
+                if tree:
+                    src = tree.get("total_source_files", 0)
+                    tst = tree.get("total_test_files", 0)
+                    commits = tree.get("commit_count", 0)
+                    print(f"  #{issue_num}: {src} source, {tst} test, {commits} commits")
+                else:
+                    print(f"  #{issue_num}: repo inaccessible")
+            except Exception as exc:
+                print(f"  #{issue_num}: fetch error: {exc}")
+                repo_trees[issue_num] = None
+        else:
+            print(f"  #{issue_num}: no repo URL")
+            repo_trees[issue_num] = None
+
+    # Score each submission with repo analysis
+    print("\nScoring submissions with repo analysis...")
     all_scores = []
     for sub in submissions:
         track = sub.get("track", "unknown")
@@ -757,9 +966,13 @@ async def main():
             print(f"SKIP: #{sub['issue_number']} ({sub.get('project_name')}) - unknown track: {track}")
             continue
 
-        result = scorer(sub, rubrics[track])
+        issue_num = sub.get("issue_number", 0)
+        tree = repo_trees.get(issue_num)
+        result = scorer(sub, rubrics[track], repo_tree=tree)
         all_scores.append(result)
-        print(f"SCORED: #{result['issue_number']} {result['project_name']} ({track}) = {result['weighted_total']}")
+        flags = result.get("red_flags_detected", [])
+        flag_str = f" [FLAGS: {', '.join(flags[:2])}]" if flags else ""
+        print(f"SCORED: #{result['issue_number']} {result['project_name']} ({track}) = {result['weighted_total']}{flag_str}")
 
     # Save all scores
     print(f"\nSaving {len(all_scores)} scores...")
