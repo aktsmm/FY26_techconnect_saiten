@@ -8,6 +8,17 @@ A multi-agent system that automatically scores all Agents League @ TechConnect h
 
 Designed with **Orchestrator-Workers + Prompt Chaining + Evaluator-Optimizer** patterns, 6 Copilot custom agents autonomously collect GitHub Issue submissions, evaluate them against track-specific rubrics, validate scoring consistency, and generate reports via an MCP (Model Context Protocol) server.
 
+### Two-Phase Scoring
+
+Scoring uses a **mechanical baseline + AI qualitative review** pipeline:
+
+| Phase                  | What                   | How                                                                                                | Judges                                                                                        |
+| ---------------------- | ---------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| **Phase A: Baseline**  | `scripts/score_all.py` | Keyword matching, checklist ratios, README section counts, demo detection                          | "Does the README mention MCP?" "How many checklist items are checked?"                        |
+| **Phase B: AI Review** | `@saiten-scorer` agent | Copilot reads each submission, assesses quality holistically, adjusts scores via `adjust_scores()` | "Is this genuinely novel or a tutorial wrapper?" "Does implementation depth match the score?" |
+
+The baseline is fast and deterministic but shallow. The AI review adds the qualitative depth that only comes from actually reading and understanding each project.
+
 ---
 
 ## Agent Workflow
@@ -26,6 +37,7 @@ Designed with **Orchestrator-Workers + Prompt Chaining + Evaluator-Optimizer** p
 - **Evaluator-Optimizer Loop**: Reviewer detects 5 bias types (central tendency, halo effect, leniency, range restriction, anchoring) → FLAGs → Scorer re-evaluates with specific guidance → max 2 cycles
 - **Gate-based Error Recovery**: Each workflow step has a validation gate; failures trigger graceful degradation (skip + warn) rather than hard stops
 - **Evidence-Anchored Scoring**: Rubrics define explicit `evidence_signals` (positive/negative) per criterion; scorers must cite signals from actual submission content
+- **Two-Phase Scoring**: Mechanical baseline extracts signals deterministically; Copilot agent then reviews qualitatively and adjusts scores with rationale via `adjust_scores()`
 
 ### Reliability Features
 
@@ -103,13 +115,19 @@ flowchart TD
 
     C1 --> C2 --> C3
     C3 --> Gate2
-    Gate2 -->|OK| Scorer
+    Gate2 -->|OK| Baseline
     Gate2 -->|"⚠️ Skip"| Integrate
 
+    subgraph Baseline["⚙️ Mechanical Baseline"]
+        B1["score_all.py\nKeyword matching\nChecklist ratios"]
+    end
+
+    B1 --> Scorer
     S1 --> S2 --> S3
     S3 -->|PASS| S4
     S3 -->|"FAIL: Re-evaluate"| S2
-    S4 --> Gate3
+    S4 --> S5["adjust_scores()\nAI Qualitative Review"]
+    S5 --> Gate3
     Gate3 -->|OK| Reviewer
 
     V1 --> V2 --> V3 --> V4
@@ -141,14 +159,14 @@ flowchart TD
 
 ### Agent Roster
 
-| Agent                     | Role             | SRP Responsibility                              | MCP Tools                                   |
-| ------------------------- | ---------------- | ----------------------------------------------- | ------------------------------------------- |
-| 🏆 `@saiten-orchestrator` | **Orchestrator** | Intent routing, delegation, result integration  | — (delegates all)                           |
-| 📥 `@saiten-collector`    | **Worker**       | GitHub Issue data collection & validation       | `list_submissions`, `get_submission_detail` |
-| 📊 `@saiten-scorer`       | **Worker**       | Rubric-based evaluation with quality gate       | `get_scoring_rubric`, `save_scores`         |
-| 🔍 `@saiten-reviewer`     | **Evaluator**    | Score consistency review & bias detection       | `get_scoring_rubric`, read scores           |
-| 📋 `@saiten-reporter`     | **Worker**       | Ranking report generation & trend analysis      | `generate_ranking_report`                   |
-| 💬 `@saiten-commenter`    | **Handoff**      | GitHub Issue feedback comments (user-confirmed) | `gh issue comment`                          |
+| Agent                     | Role             | SRP Responsibility                                          | MCP Tools                                            |
+| ------------------------- | ---------------- | ----------------------------------------------------------- | ---------------------------------------------------- |
+| 🏆 `@saiten-orchestrator` | **Orchestrator** | Intent routing, delegation, result integration              | — (delegates all)                                    |
+| 📥 `@saiten-collector`    | **Worker**       | GitHub Issue data collection & validation                   | `list_submissions`, `get_submission_detail`          |
+| 📊 `@saiten-scorer`       | **Worker**       | Two-phase scoring: baseline signals + AI qualitative review | `get_scoring_rubric`, `save_scores`, `adjust_scores` |
+| 🔍 `@saiten-reviewer`     | **Evaluator**    | Score consistency review & bias detection                   | `get_scoring_rubric`, read scores                    |
+| 📋 `@saiten-reporter`     | **Worker**       | Ranking report generation & trend analysis                  | `generate_ranking_report`                            |
+| 💬 `@saiten-commenter`    | **Handoff**      | GitHub Issue feedback comments (user-confirmed)             | `gh issue comment`                                   |
 
 ### Design Principles Applied
 
@@ -186,6 +204,7 @@ flowchart TD
 │  │  ├ get_submission_detail() ← gh CLI → GitHub       │  │
 │  │  ├ get_scoring_rubric()   ← YAML files             │  │
 │  │  ├ save_scores()          → data/scores.json       │  │
+│  │  ├ adjust_scores()        → data/scores.json       │  │
 │  │  └ generate_ranking_report() → reports/*.md        │  │
 │  └────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────┘
@@ -248,14 +267,14 @@ cp .env.example .env
 
 Type the following in the VS Code chat panel:
 
-| Command                                         | Description               | Agents Used                              |
-| ----------------------------------------------- | ------------------------- | ---------------------------------------- |
-| `@saiten-orchestrator score all`                | Score all submissions     | collector → scorer → reviewer → reporter |
-| `@saiten-orchestrator score #48`                | Score a single submission | collector → scorer → reviewer → reporter |
-| `@saiten-orchestrator ranking`                  | Generate ranking report   | reporter only                            |
-| `@saiten-orchestrator rescore #48`              | Re-score a submission     | collector → scorer → reviewer → reporter |
-| `@saiten-orchestrator show rubric for Creative` | Display scoring rubric    | Direct response (MCP)                    |
-| `@saiten-orchestrator review scores`            | Review score consistency  | reviewer only                            |
+| Command                                         | Description               | Agents Used                                              |
+| ----------------------------------------------- | ------------------------- | -------------------------------------------------------- |
+| `@saiten-orchestrator score all`                | Score all submissions     | collector → baseline → scorer (AI) → reviewer → reporter |
+| `@saiten-orchestrator score #48`                | Score a single submission | collector → scorer → reviewer → reporter                 |
+| `@saiten-orchestrator ranking`                  | Generate ranking report   | reporter only                                            |
+| `@saiten-orchestrator rescore #48`              | Re-score a submission     | collector → scorer → reviewer → reporter                 |
+| `@saiten-orchestrator show rubric for Creative` | Display scoring rubric    | Direct response (MCP)                                    |
+| `@saiten-orchestrator review scores`            | Review score consistency  | reviewer only                                            |
 
 ---
 
@@ -276,7 +295,7 @@ FY26_techconnect_saiten/
 │   └── tools/
 │       ├── submissions.py            # list_submissions, get_submission_detail
 │       ├── rubrics.py                # get_scoring_rubric
-│       ├── scores.py                 # save_scores
+│       ├── scores.py                 # save_scores, adjust_scores
 │       └── reports.py                # generate_ranking_report
 ├── data/
 │   ├── rubrics/                      # Track-specific scoring rubrics (YAML)
@@ -284,7 +303,8 @@ FY26_techconnect_saiten/
 ├── reports/
 │   └── ranking.md                    # Auto-generated ranking report
 ├── scripts/
-│   └── run_scoring.py                # CLI scoring pipeline
+│   ├── score_all.py                  # Phase A: Mechanical baseline scoring
+│   └── run_scoring.py                # CLI scoring pipeline (legacy)
 ├── tests/
 │   ├── conftest.py                   # Shared test fixtures
 │   ├── test_models.py                # Pydantic model validation tests
@@ -328,7 +348,7 @@ python -m pytest tests/ -m e2e -v
 | `test_rubrics.py`     | 20      | Rubric YAML integrity, weights, scoring policy, evidence signals |
 | `test_scores.py`      | 9       | Score persistence, idempotency, input validation, sorting        |
 | `test_reports.py`     | 8       | Markdown report generation, empty/missing data edge cases        |
-| `test_reliability.py` | 10      | Retry logic, rate limiting, error handling, gh CLI resilience     |
+| `test_reliability.py` | 10      | Retry logic, rate limiting, error handling, gh CLI resilience    |
 | `test_e2e.py`         | 5       | End-to-end MCP tool calls with live GitHub data                  |
 | **Total**             | **110** | **88% code coverage**                                            |
 
@@ -426,16 +446,16 @@ cp data/scores.json.bak data/scores.json
 
 ## Tech Stack
 
-| Layer                  | Technology                                                                            |
-| ---------------------- | ------------------------------------------------------------------------------------- |
-| **Agent Framework**    | VS Code Copilot Custom Agent (`.agent.md`) — Orchestrator-Workers pattern               |
-| **MCP Server**         | Python 3.10+ / FastMCP (stdio transport)                                                |
-| **Package Manager**    | uv                                                                                      |
-| **GitHub Integration** | gh CLI / GitHub REST API with **exponential backoff retry** and **rate limiting**        |
-| **Data Models**        | Pydantic v2 with **boundary validation** (scores 1-10, weighted_total 0-100)            |
-| **Data Storage**       | JSON (scores) / YAML (rubrics) / Markdown (reports) with **backup & recovery**          |
-| **Testing**            | pytest + pytest-cov — **110 tests, 88% coverage**                                       |
-| **Error Handling**     | Retry with backoff, rate limiting, input validation, corrupted file recovery             |
+| Layer                  | Technology                                                                        |
+| ---------------------- | --------------------------------------------------------------------------------- |
+| **Agent Framework**    | VS Code Copilot Custom Agent (`.agent.md`) — Orchestrator-Workers pattern         |
+| **MCP Server**         | Python 3.10+ / FastMCP (stdio transport)                                          |
+| **Package Manager**    | uv                                                                                |
+| **GitHub Integration** | gh CLI / GitHub REST API with **exponential backoff retry** and **rate limiting** |
+| **Data Models**        | Pydantic v2 with **boundary validation** (scores 1-10, weighted_total 0-100)      |
+| **Data Storage**       | JSON (scores) / YAML (rubrics) / Markdown (reports) with **backup & recovery**    |
+| **Testing**            | pytest + pytest-cov — **110 tests, 88% coverage**                                 |
+| **Error Handling**     | Retry with backoff, rate limiting, input validation, corrupted file recovery      |
 
 ---
 

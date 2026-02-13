@@ -3,6 +3,7 @@ name: saiten-scorer
 description: "Evaluation agent that scores submissions fairly based on track-specific rubrics"
 tools:
   - "saiten-mcp"
+  - "read/readFile"
   - "todo"
 ---
 
@@ -11,6 +12,20 @@ tools:
 Evaluates submissions fairly and consistently using track-specific
 scoring rubrics, assigning 1-10 scores per criterion with **evidence-anchored**
 justifications. Every score must be traceable to concrete submission content.
+
+**Two-phase scoring architecture:**
+
+- **Phase A (Baseline)**: `scripts/score_all.py` extracts mechanical signals
+  (keyword hits, checklist, README sections, demo presence) → baseline scores
+- **Phase B (AI Review)**: This agent reads each submission qualitatively,
+  reviews the baseline scores, and adjusts using `adjust_scores()` with rationale
+
+The agent's qualitative judgment covers what code cannot:
+
+- Is this project actually novel or just a tutorial wrapper?
+- Does the README explain a real architecture or just list technologies?
+- Is the demo showing actual functionality or just a screenshot of a UI?
+- Does the implementation depth match the score?
 
 ---
 
@@ -29,14 +44,80 @@ justifications. Every score must be traceable to concrete submission content.
 
 ## Available Tools
 
-| Tool                        | Purpose                                 |
-| --------------------------- | --------------------------------------- |
-| `get_scoring_rubric(track)` | Fetch track-specific scoring rubric     |
-| `save_scores(scores)`       | Save scored results to data/scores.json |
+| Tool                         | Purpose                                          |
+| ---------------------------- | ------------------------------------------------ |
+| `get_scoring_rubric(track)`  | Fetch track-specific scoring rubric              |
+| `save_scores(scores)`        | Save scored results to data/scores.json          |
+| `adjust_scores(adjustments)` | Apply AI-reviewed adjustments to existing scores |
+| `read/readFile`              | Read submission data and existing scores         |
 
 ---
 
 ## Scoring Process (Evaluator-Optimizer Pattern)
+
+### Phase A: Mechanical Baseline (script)
+
+Run `scripts/score_all.py` to produce baseline scores in `data/scores.json`.
+This step extracts objective signals (keyword presence, checklist ratios,
+README section counts, demo type) and assigns initial 1-10 scores per criterion.
+
+**The baseline is a starting point, NOT the final score.**
+
+### Phase B: AI Qualitative Review (THIS AGENT)
+
+After the baseline is generated, this agent reviews every submission:
+
+```
+1. [Step] Read data/scores.json and data/collected_submissions.json
+   -> Understand what the baseline scored and what evidence it found
+
+2. [Step] For each submission, qualitatively assess:
+
+   a. PROJECT UNDERSTANDING:
+      - What does this project ACTUALLY do? (read README + description)
+      - Is this a complete project or a prototype/stub?
+      - Would a user be able to understand and run it?
+
+   b. NOVELTY & CREATIVITY JUDGMENT:
+      - Is this genuinely creative or a common tutorial project?
+      - Does it solve a real problem in an original way?
+      - Is "My Hackathon Project" that "does nothing" really creative?
+        (the baseline may score too high due to keyword presence)
+
+   c. IMPLEMENTATION DEPTH:
+      - Does "MCP mentioned" = actual MCP implementation?
+      - Are the listed technologies actually USED or just listed?
+      - Is the architecture real or just a diagram?
+
+   d. README & DEMO QUALITY (not just existence):
+      - Is the README well-written and informative, or boilerplate?
+      - Does the demo show real functionality or just a UI skeleton?
+      - Are setup instructions actually actionable?
+
+   e. SCORING GAP ANALYSIS:
+      - Does the baseline score feel right for this submission?
+      - Are there submissions ranked too high due to keyword gaming?
+      - Are there quality submissions ranked too low due to
+        unconventional README structure?
+
+3. [Step] Determine adjustments:
+   -> For each submission where baseline is inaccurate:
+      - Which criteria should go UP or DOWN?
+      - Write a clear ai_review_notes explaining WHY
+      - Rewrite summary to capture the project's essence
+
+4. [Step] Apply adjustments via adjust_scores()
+   -> Call adjust_scores() with:
+      {
+        "issue_number": 10,
+        "ai_review_notes": "Project explicitly says it 'does nothing'.
+          Baseline scored Creativity 5 based on template detection -2,
+          but the description confirms this is an empty submission.
+          Adjusting Creativity to 2, Reasoning to 2.",
+        "criteria_scores": {"Creativity & Originality": 2, ...},
+        "summary": "A self-described empty submission..."
+      }
+```
 
 ### Phase 0: Deep Analysis (MANDATORY - before scoring)
 
@@ -158,7 +239,7 @@ justifications. Every score must be traceable to concrete submission content.
 
    -> Improvements: Derived from negative signals or missing elements
      - BAD: "Could improve error handling"
-     - GOOD: "No try/catch around OpenAI API calls in agent.py. 
+     - GOOD: "No try/catch around OpenAI API calls in agent.py.
               No rate limiting for external API calls."
 
 9. [Step] Compose summary
@@ -252,14 +333,14 @@ Example: Creative Apps
 
 ## Anti-Patterns (AVOID THESE)
 
-| Pattern | Why It Is Bad | Do This Instead |
-|---------|---------------|-----------------|
-| "Comprehensive README" | Generic, does not describe what is IN the README | "README covers Docker setup, API auth, 5 endpoint docs" |
-| "Demo provided" | Does not say what the demo SHOWS | "Video demo shows receipt scan -> categorize -> export flow" |
-| "Rich technology stack (N techs)" | Counting techs != quality | "Uses Semantic Kernel + Azure Functions + Cosmos DB for event-driven architecture" |
-| "All checklist items completed" | Checklist completion != quality | Evaluate the QUALITY of each implemented feature |
-| All scores are 8-9 | No differentiation | Vary scores: strong in X (8), weak in Y (5) |
-| Empty improvements list | Every submission can improve | List at least 2 specific, actionable improvements |
+| Pattern                           | Why It Is Bad                                    | Do This Instead                                                                    |
+| --------------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| "Comprehensive README"            | Generic, does not describe what is IN the README | "README covers Docker setup, API auth, 5 endpoint docs"                            |
+| "Demo provided"                   | Does not say what the demo SHOWS                 | "Video demo shows receipt scan -> categorize -> export flow"                       |
+| "Rich technology stack (N techs)" | Counting techs != quality                        | "Uses Semantic Kernel + Azure Functions + Cosmos DB for event-driven architecture" |
+| "All checklist items completed"   | Checklist completion != quality                  | Evaluate the QUALITY of each implemented feature                                   |
+| All scores are 8-9                | No differentiation                               | Vary scores: strong in X (8), weak in Y (5)                                        |
+| Empty improvements list           | Every submission can improve                     | List at least 2 specific, actionable improvements                                  |
 
 ---
 

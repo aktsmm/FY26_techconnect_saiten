@@ -41,13 +41,13 @@
 User Request
     │
     ▼
-┌─────────┐     ┌───────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
-│ @saiten-orchestrator │────▶│ @collector│────▶│ @scorer  │────▶│ @reviewer│────▶│ @reporter│
-│ (Route)  │     │ (Collect) │     │(Evaluate)│     │(Validate)│     │ (Report) │
-└─────────┘     └───────────┘     └──────────┘     └──────────┘     └──────────┘
-    │            Gate: data OK?    Gate: OK?    ▲   Gate: PASS?      Gate: OK?
-    ▼                                          │       │
- Results ◄─────────────────────────────────────┘───────┘
+┌─────────┐     ┌───────────┐     ┌──────────────┐     ┌──────────┐     ┌──────────┐     ┌──────────┐
+│ @saiten-orchestrator │──▶│ @collector │──▶│ score_all.py │──▶│ @scorer  │──▶│ @reviewer │──▶│ @reporter │
+│ (Route)  │     │ (Collect)  │     │ (Baseline)   │     │(AI Review)│     │(Validate) │     │ (Report)  │
+└─────────┘     └───────────┘     └──────────────┘     └──────────┘     └──────────┘     └──────────┘
+    │            Gate: data OK?  (mechanical)    (qualitative)    Gate: PASS?    Gate: OK?
+    ▼                                              ▲                    │
+ Results ◄──────────────────────────────────────┘────────────┘
     │                                Re-score if FLAG
     ▼
  [Handoff Button: 💬 Post Feedback]
@@ -58,3 +58,9 @@ User Request
 │(Comment)  │
 └───────────┘
 ```
+
+**Key: Two-Phase Scoring**
+
+- `score_all.py` = mechanical baseline (keyword matching, checklist ratios)
+- `@scorer` AI Review = Copilot agent reads submissions qualitatively,
+  judges novelty/depth/quality, adjusts scores via `adjust_scores()`

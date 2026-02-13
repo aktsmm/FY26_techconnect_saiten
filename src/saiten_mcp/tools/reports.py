@@ -16,6 +16,7 @@ from saiten_mcp.server import mcp, DATA_DIR, REPORTS_DIR
 logger = logging.getLogger(__name__)
 
 SCORES_FILE = DATA_DIR / "scores.json"
+SUBMISSIONS_FILE = DATA_DIR / "collected_submissions.json"
 
 TRACK_EMOJI: dict[str, str] = {
     "creative-apps": "🎨",
@@ -50,6 +51,57 @@ def _load_scores() -> dict[str, Any]:
     return data
 
 
+def _load_submissions_lookup() -> dict[int, dict[str, Any]]:
+    """Load collected_submissions.json and build an issue_number→submission dict."""
+    if not SUBMISSIONS_FILE.exists():
+        logger.warning("collected_submissions.json not found: %s", SUBMISSIONS_FILE)
+        return {}
+
+    try:
+        with open(SUBMISSIONS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError) as exc:
+        logger.error("Failed to load collected_submissions.json: %s", exc)
+        return {}
+
+    submissions = data.get("submissions", []) if isinstance(data, dict) else []
+    return {s["issue_number"]: s for s in submissions if "issue_number" in s}
+
+
+def _truncate(text: str, max_len: int = 200) -> str:
+    """Truncate text to max_len chars, adding ellipsis if needed."""
+    if not text:
+        return ""
+    text = text.replace("\n", " ").strip()
+    if len(text) <= max_len:
+        return text
+    return text[:max_len].rstrip() + "…"
+
+
+def _strip_at(username: str) -> str:
+    """Strip leading '@' from a GitHub username if present."""
+    return username.lstrip("@") if username else ""
+
+
+def _build_submitter_cell(
+    gh_user: str,
+    submissions_lookup: dict[int, dict[str, Any]],
+    issue_number: int | str | None = None,
+) -> str:
+    """Build a Submitter cell with GitHub link and team aliases."""
+    gh_user = _strip_at(gh_user)
+    if not gh_user:
+        return "—"
+    cell = f"[@{gh_user}](https://github.com/{gh_user})"
+    # Add team aliases from collected_submissions
+    if issue_number:
+        sub = submissions_lookup.get(int(issue_number), {})
+        team = sub.get("team_members") or ""
+        if team:
+            cell += f" ({team})"
+    return cell
+
+
 def _fmt_score(score: float | int) -> str:
     """Format a score to 1 decimal place."""
     return f"{float(score):.1f}"
@@ -59,8 +111,11 @@ def _build_ranking_md(
     scores: list[dict[str, Any]],
     metadata: dict[str, Any],
     top_n: int,
+    submissions_lookup: dict[int, dict[str, Any]] | None = None,
 ) -> str:
     """Build a Markdown ranking report."""
+    if submissions_lookup is None:
+        submissions_lookup = {}
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     scored_count = metadata.get("scored_count", len(scores))
     total_submissions = metadata.get("total_submissions", len(scores))
@@ -87,13 +142,13 @@ def _build_ranking_md(
         track = entry.get("track", "")
         emoji = TRACK_EMOJI.get(track, "")
         score = _fmt_score(entry.get("weighted_total", 0))
-        gh_user = entry.get("github_username") or ""
         issue_num = entry.get("issue_number", "")
         issue_url = entry.get("issue_url") or ""
+        gh_user = entry.get("github_username") or ""
         # Link project name to Issue
         name_linked = f"[{name}]({issue_url})" if issue_url else name
-        # Link GitHub username
-        user_linked = f"[@{gh_user}](https://github.com/{gh_user})" if gh_user else "—"
+        # Submitter with aliases
+        user_linked = _build_submitter_cell(gh_user, submissions_lookup, issue_num)
         lines.append(f"| {rank} | {name_linked} | {emoji} | {user_linked} | {score} |")
     lines.append("")
     lines.append("---")
@@ -116,9 +171,10 @@ def _build_ranking_md(
             name = entry.get("project_name", "N/A")
             score = _fmt_score(entry.get("weighted_total", 0))
             issue_url = entry.get("issue_url") or ""
+            issue_num = entry.get("issue_number", "")
             gh_user = entry.get("github_username") or ""
             name_linked = f"[{name}]({issue_url})" if issue_url else name
-            user_linked = f"[@{gh_user}](https://github.com/{gh_user})" if gh_user else "—"
+            user_linked = _build_submitter_cell(gh_user, submissions_lookup, issue_num)
             lines.append(f"| {rank} | {name_linked} | {user_linked} | {score} |")
 
         lines.append("")
@@ -129,8 +185,8 @@ def _build_ranking_md(
     # --- Full Score List ---
     lines.append("## 📊 All Submissions")
     lines.append("")
-    lines.append("| # | Issue | Project | Track | Submitter | Score | Scored At |")
-    lines.append("|---|-------|---------|-------|-----------|-------|-----------|")
+    lines.append("| # | Issue | Project | Track | Submitter | Repo | Score | Scored At |")
+    lines.append("|---|-------|---------|-------|-----------|------|-------|-----------|")
 
     for idx, entry in enumerate(scores, start=1):
         issue = entry.get("issue_number", "")
@@ -141,7 +197,7 @@ def _build_ranking_md(
         issue_url = entry.get("issue_url") or ""
         gh_user = entry.get("github_username") or ""
         name_linked = f"[{name}]({issue_url})" if issue_url else name
-        user_linked = f"[@{gh_user}](https://github.com/{gh_user})" if gh_user else "—"
+        user_linked = _build_submitter_cell(gh_user, submissions_lookup, issue)
         scored_at = entry.get("scored_at", "")
         if scored_at:
             try:
@@ -149,7 +205,11 @@ def _build_ranking_md(
                 scored_at = dt.strftime("%Y-%m-%d")
             except (ValueError, TypeError):
                 pass
-        lines.append(f"| {idx} | [#{issue}]({issue_url}) | {name_linked} | {emoji} | {user_linked} | {score} | {scored_at} |")
+        # Repo link from collected_submissions
+        sub = submissions_lookup.get(int(issue), {}) if issue else {}
+        repo_url = sub.get("repo_url") or ""
+        repo_linked = f"[repo]({repo_url})" if repo_url else "—"
+        lines.append(f"| {idx} | [#{issue}]({issue_url}) | {name_linked} | {emoji} | {user_linked} | {repo_linked} | {score} | {scored_at} |")
 
     lines.append("")
     lines.append("---")
@@ -166,6 +226,7 @@ def _build_ranking_md(
         emoji = TRACK_EMOJI.get(track, "")
         display = TRACK_DISPLAY.get(track, track)
         score = _fmt_score(entry.get("weighted_total", 0))
+        issue_url = entry.get("issue_url") or ""
 
         strengths_list: list[str] = entry.get("strengths", [])
         improvements_list: list[str] = entry.get("improvements", [])
@@ -174,9 +235,29 @@ def _build_ranking_md(
         strengths = ", ".join(strengths_list) if strengths_list else "—"
         improvements = ", ".join(improvements_list) if improvements_list else "—"
 
-        lines.append(f"### #{issue}: {name}")
+        # Enrich with collected_submissions data
+        sub = submissions_lookup.get(int(issue), {}) if issue else {}
+        repo_url = sub.get("repo_url") or ""
+        team_members = sub.get("team_members") or ""
+        description = sub.get("description") or ""
+        gh_user_raw = entry.get("github_username") or sub.get("github_username") or ""
+        gh_user = _strip_at(gh_user_raw)
+
+        name_linked = f"[{name}]({issue_url})" if issue_url else name
+        lines.append(f"### #{issue}: {name_linked}")
         lines.append(f"- **Track**: {emoji} {display}")
         lines.append(f"- **Score**: {score}/100")
+        if gh_user:
+            submitter_line = f"[@{gh_user}](https://github.com/{gh_user})"
+            if team_members:
+                submitter_line += f" ({team_members})"
+            lines.append(f"- **Submitter**: {submitter_line}")
+        if team_members:
+            lines.append(f"- **Team**: {team_members}")
+        if repo_url:
+            lines.append(f"- **Repo**: [{repo_url}]({repo_url})")
+        if description:
+            lines.append(f"- **Description**: {_truncate(description, 300)}")
         lines.append(f"- **Strengths**: {strengths}")
         lines.append(f"- **Improvements**: {improvements}")
         lines.append(f"- **Summary**: {summary}")
@@ -211,8 +292,11 @@ async def generate_ranking_report(
     # Sort by weighted_total descending (insurance: already sorted on save)
     scores.sort(key=lambda x: x.get("weighted_total", 0), reverse=True)
 
+    # Load collected_submissions for enrichment
+    submissions_lookup = _load_submissions_lookup()
+
     # Generate Markdown
-    md_content = _build_ranking_md(scores, metadata, top_n)
+    md_content = _build_ranking_md(scores, metadata, top_n, submissions_lookup)
 
     # Write to file
     report_path = REPORTS_DIR / "ranking.md"

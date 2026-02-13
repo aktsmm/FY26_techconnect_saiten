@@ -1,4 +1,12 @@
-"""Score all submissions using evidence-anchored evaluation.
+"""Baseline signal extraction and mechanical scoring.
+
+Phase A of the two-phase scoring pipeline:
+  Phase A (this script): Mechanical baseline — keyword matching,
+    checklist ratios, README section counts, demo presence detection.
+    Produces a STARTING POINT, not the final score.
+  Phase B (saiten-scorer agent): AI qualitative review — the Copilot
+    agent reads each submission, judges quality holistically, and
+    adjusts scores via adjust_scores() with rationale.
 
 Follows the saiten-scorer protocol:
 - Phase 0: Deep Analysis
@@ -7,9 +15,16 @@ Follows the saiten-scorer protocol:
 """
 
 import asyncio
+import io
 import json
 import re
 import sys
+
+# Ensure stdout handles Unicode on Windows (cp932 cannot encode some chars)
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout = io.TextIOWrapper(
+        sys.stdout.buffer, encoding="utf-8", errors="replace"
+    )
 from typing import Any
 
 sys.path.insert(0, "src")

@@ -181,3 +181,148 @@ async def save_scores(scores: list[dict]) -> dict[str, Any]:
         len(merged),
     )
     return result
+
+
+@mcp.tool()
+async def adjust_scores(
+    adjustments: list[dict],
+) -> dict[str, Any]:
+    """Apply qualitative AI-reviewed adjustments to existing scores.
+
+    Used by the scoring agent AFTER mechanical baseline scoring.
+    The agent reads each submission's content, reviews the baseline
+    scores, and applies qualitative adjustments with justification.
+
+    Each adjustment can modify criteria_scores, summary, strengths,
+    improvements, and/or weighted_total. Fields not provided are
+    kept as-is from the existing score.
+
+    Args:
+        adjustments: List of adjustment dicts. Each must contain:
+            - issue_number (int): the submission to adjust
+            - ai_review_notes (str): agent's qualitative assessment
+            And optionally any of:
+            - criteria_scores (dict[str, int]): adjusted per-criterion scores
+            - weighted_total (float): adjusted total (auto-recalculated if
+              criteria_scores changed and weighted_total not provided)
+            - summary (str): improved qualitative summary
+            - strengths (list[str]): refined strengths
+            - improvements (list[str]): refined improvements
+            - confidence (str): updated confidence level
+
+    Returns:
+        Summary dict (adjusted_count, skipped, details).
+    """
+    store = _load_scores()
+    existing = store.get("scores", [])
+    score_map: dict[int, dict[str, Any]] = {
+        s["issue_number"]: s for s in existing
+    }
+
+    adjusted_count = 0
+    skipped: list[dict[str, Any]] = []
+    details: list[dict[str, Any]] = []
+
+    for adj in adjustments:
+        issue_num = adj.get("issue_number")
+        if not isinstance(issue_num, int) or issue_num not in score_map:
+            skipped.append({
+                "issue_number": issue_num,
+                "reason": "Not found in existing scores",
+            })
+            continue
+
+        entry = score_map[issue_num]
+        old_total = entry.get("weighted_total", 0)
+        changes: list[str] = []
+
+        # Apply criteria_scores adjustments
+        if "criteria_scores" in adj:
+            new_criteria = adj["criteria_scores"]
+            old_criteria = entry.get("criteria_scores", {})
+            for crit, val in new_criteria.items():
+                if not isinstance(val, int) or not (1 <= val <= 10):
+                    skipped.append({
+                        "issue_number": issue_num,
+                        "reason": f"Invalid score for {crit}: {val}",
+                    })
+                    continue
+                if old_criteria.get(crit) != val:
+                    changes.append(
+                        f"{crit}: {old_criteria.get(crit, '?')} -> {val}"
+                    )
+            entry["criteria_scores"].update(new_criteria)
+
+        # Recalculate weighted_total if criteria changed but total not given
+        if "criteria_scores" in adj and "weighted_total" not in adj:
+            track = entry.get("track", "")
+            if track in ("creative-apps", "reasoning-agents"):
+                weights = {
+                    "Accuracy & Relevance": 0.222,
+                    "Reasoning & Multi-step Thinking": 0.222,
+                    "Creativity & Originality": 0.167,
+                    "UX & Presentation": 0.167,
+                    "Reliability & Safety": 0.222,
+                }
+            elif track == "enterprise-agents":
+                weights = {
+                    "Technical Implementation": 0.33,
+                    "Business Value": 0.33,
+                    "Innovation & Creativity": 0.34,
+                }
+            else:
+                weights = {}
+
+            if weights:
+                cs = entry["criteria_scores"]
+                total = round(
+                    sum(cs.get(c, 5) * w for c, w in weights.items()) * 10,
+                    1,
+                )
+                entry["weighted_total"] = total
+                changes.append(f"weighted_total: {old_total} -> {total}")
+
+        # Apply explicit weighted_total
+        if "weighted_total" in adj:
+            new_total = adj["weighted_total"]
+            if isinstance(new_total, (int, float)) and 0 <= new_total <= 100:
+                entry["weighted_total"] = round(float(new_total), 1)
+                changes.append(f"weighted_total: {old_total} -> {new_total}")
+
+        # Apply qualitative fields
+        for field in ("summary", "strengths", "improvements", "confidence"):
+            if field in adj:
+                entry[field] = adj[field]
+                changes.append(f"{field} updated")
+
+        # Store AI review notes
+        review_notes = adj.get("ai_review_notes", "")
+        if review_notes:
+            entry["ai_review_notes"] = review_notes
+            entry["ai_reviewed"] = True
+
+        if changes:
+            adjusted_count += 1
+            details.append({
+                "issue_number": issue_num,
+                "project_name": entry.get("project_name", ""),
+                "changes": changes,
+                "new_total": entry.get("weighted_total"),
+            })
+
+    # Re-sort and save
+    store["scores"] = sorted(
+        score_map.values(),
+        key=lambda x: x.get("weighted_total", 0),
+        reverse=True,
+    )
+    store["metadata"]["last_updated"] = datetime.now(timezone.utc).isoformat()
+    _save_scores(store)
+
+    logger.info("adjust_scores: adjusted=%d, skipped=%d", adjusted_count, len(skipped))
+
+    return {
+        "adjusted_count": adjusted_count,
+        "skipped": skipped,
+        "details": details,
+    }

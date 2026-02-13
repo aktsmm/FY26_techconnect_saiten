@@ -103,6 +103,25 @@ workflow: Collect → Score → Review → Report → [Handoff] Comment.
    → Validate: all scores have weighted_total in [0, 100]
    → Validate: evidence field is present and non-generic
 
+5b. [Step] AI Qualitative Review (MANDATORY)
+   → After mechanical baseline scores are saved, delegate to
+     @saiten-scorer in **AI Review mode**:
+     "Review all baseline scores qualitatively.
+      Read data/scores.json and data/collected_submissions.json.
+      For each submission:
+      1. Read the project README and description carefully
+      2. Assess: Is the baseline score fair? Does the project
+         genuinely deserve its ranking position?
+      3. Identify over-scored submissions (keyword gaming,
+         template projects with buzzwords, empty submissions)
+      4. Identify under-scored submissions (quality projects
+         with unconventional structure or missing keywords)
+      5. Rewrite summaries to capture what makes each project
+         UNIQUE, not just what it IS
+      6. Apply adjustments via adjust_scores() with clear
+         ai_review_notes explaining each change"
+   → Validate: ai_reviewed flag set on adjusted submissions
+
 6. [Gate] Scoring Checkpoint
    → Report: "✅ {N} submissions scored"
    → If anomalous (all 10s or all 1s): warn user
