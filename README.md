@@ -489,5 +489,5 @@ The `agentic-workflow-guide` skill provides:
 ---
 
 ## License
+CC BY-NC-SA 4.0 — see [LICENSE](LICENSE).
 
-MIT
